@@ -10,13 +10,14 @@ window.SITE = {
     short: "NITK & AIU",
     name: "AI in Higher Education",
     eyebrow: "Jointly organised South Zone Conference",
+    heroLine: "Jointly Organise South Zone Conference on",
     nitkLogo: "assets/logos/nitk-crest.png",
     aiuLogo: "assets/logos/aiu-mark.png",
   },
 
   event: {
     title:
-      "Strategic Integration of Artificial Intelligence in Higher Education",
+      "Strategic Integration of Artificial Intelligence (AI) in Higher Education",
     subtitle: "Opportunities and Implications",
     date: "18 September 2026",
     day: "Friday",
@@ -26,128 +27,110 @@ window.SITE = {
   },
 
   registration: {
-    url: "https://forms.gle/QPVo4YW914ZMDg359",
+    url: "https://forms.gle/9rFFwF7PahXsXrtEA",
     deadline: "20 August 2026",
+    confirmationDate: "29 August 2026",
     label: "Register to attend",
+    qr: "assets/images/qr-code-registration.png",
+    notes: [
+      "Registration is free, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",
+      "Last Date for the Registration: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 29.08.2026 (Friday).",
+    ],
   },
 
   brochure: {
-    url: "assets/brochures/conference-brochure.jpeg",
-    sponsorshipUrl: "assets/brochures/sponsorship-brochure.jpeg",
+    url: "assets/brochures/Brochure.pdf",
+    sponsorshipUrl: "assets/brochures/Brochure.pdf",
   },
 
   navigation: [
     { label: "Home", href: "index.html" },
-    { label: "About", href: "index.html#about" },
-    { label: "Themes", href: "index.html#themes" },
-    { label: "Speakers", href: "index.html#speakers" },
+    { label: "Schedule", href: "schedule.html" },
     { label: "Sponsors", href: "sponsors.html" },
     { label: "Sponsorship", href: "sponsorship.html" },
     { label: "Committees", href: "committees.html" },
   ],
 
   about: {
-    heading: "A shared forum for AI-led higher education",
+    heading: "About the Conference",
     paragraphs: [
-      "The conference brings together academicians, administrators, industry experts and other stakeholders to deliberate on the strategic integration of Artificial Intelligence in higher education.",
-      "Technical sessions will capture key observations and recommendations for submission to the Association of Indian Universities, while creating space for dialogue, best-practice sharing and collaboration.",
+      "The conference aims to provide a vibrant platform for academicians, administrators, industry experts, and other stakeholders to deliberate on the strategic integration of AI in higher education. It seeks to encourage speakers and delegates to share best practices adopted in their institutions, industries, and professional careers, aligned with the conference's themes.",
+      "The key observations, recommendations, and outcomes from each technical session's deliberations will be documented and consolidated as the conference's official outcome. The recommendations emerging from the conference will be submitted to the Association of Indian Universities (AIU) for consideration and possible further action, as appropriate.",
+      "The conference, therefore, serves as an important platform for sharing best practices, and collectively shaping the future of AI-driven transformation in higher education in India.",
     ],
   },
 
   institutions: {
     nitk: {
+      heading: "About NITK, Surathkal",
       shortName: "NITK, Surathkal",
       name: "National Institute of Technology Karnataka, Surathkal",
-      description:
-        "Established in 1960, NITK is a top-ranked engineering institute and an Institute of National Importance located on the Arabian Sea coast near Mangaluru.",
+      paragraphs: [
+        "National Institute of Technology Karnataka (NITK), Surathkal was established in 1960 as Karnataka Regional Engineering College (KREC). NITK is a top-ranked engineering institute in the state, ranked among the top 20 in India (NIRF, 2025) and 120th among universities in Southern Asia (QS, 2024).",
+        "There are 14 departments in the Institute, offering 40 different academic programs, which lead to various degrees including B.Tech., M.Tech., M.Sc., M.B.A., and Ph.D. All the UG programs and most of the PG programs are accredited by the NBA, New Delhi. At present, 7,000 students are enrolled in NITK; one in four is a girl student.",
+      ],
       url: "https://www.nitk.ac.in/",
       logo: "assets/logos/nitk-crest.png",
+      qr: "assets/images/qr-code-nitk.png",
     },
     aiu: {
+      heading: "About AIU, New Delhi",
       shortName: "AIU, New Delhi",
       name: "Association of Indian Universities",
-      description:
-        "AIU is the apex higher-education association representing Indian and international universities and promoting cooperation in teaching, research and academic exchange.",
+      paragraphs: [
+        "Association of Indian Universities (AIU), the world's largest and one of the premier apex higher education institutions in the country, established in 1925, is a research-based policy advisory institution to the Government of India in the fields of Higher Education, Sports, Culture, and Internationalisation.",
+        "At present, it has a membership of 1088 universities, including 19 international universities. Since its inception, it has been playing a vital role in shaping Indian higher education. As an apex institution, it facilitates cooperation and coordination among Indian universities, liaises between universities and the Government, and with national and international bodies of higher education in other countries, on matters of interest.",
+        "AIU has successfully traversed this long journey of 99 years, growing continuously in strength and stature, carrying forward the legacy and glory of Indian Higher Education. Dr. Sarvepalli Radhakrishnan, Dr. Zakir Hussain, and Dr. Syama Prasad Mukherjee are among the stalwarts who served AIU as its presidents.",
+      ],
       url: "https://aiu.ac.in/",
       logo: "assets/logos/aiu-mark.png",
+      qr: "assets/images/qr-code-aiu.png",
     },
   },
-
-  highlights: [
-    {
-      icon: "people",
-      value: "~100",
-      title: "Delegates",
-      text: "From AIU member universities, including IIT and NIT institutions across South India.",
-    },
-    {
-      icon: "academic",
-      value: "Leadership",
-      title: "Higher education leaders",
-      text: "Vice Chancellors, Directors, Registrars, Deans, faculty, industry experts and decision-makers.",
-    },
-    {
-      icon: "mic",
-      value: "Ideas",
-      title: "Panel discussions",
-      text: "Focused sessions and keynote talks led by eminent delegates.",
-    },
-    {
-      icon: "network",
-      value: "Connect",
-      title: "Collaboration",
-      text: "Networking opportunities among AIU member universities.",
-    },
-    {
-      icon: "spark",
-      value: "Future",
-      title: "AI showcase",
-      text: "Innovative AI solutions and educational technologies.",
-    },
-  ],
 
   themes: [
     {
       number: "01",
       icon: "book",
       title: "AI-enabled teaching and learning",
-      description:
-        "Reimagining pedagogy, learning support and student outcomes through responsible AI.",
     },
     {
       number: "02",
       icon: "path",
       title: "Curriculum transformation and future skills",
-      description:
-        "Preparing programmes and learners for rapidly changing professional contexts.",
     },
     {
       number: "03",
       icon: "flask",
       title: "AI in research and innovation",
-      description:
-        "Accelerating discovery and supporting meaningful interdisciplinary research.",
     },
     {
       number: "04",
       icon: "building",
-      title: "Institutional governance and data-driven decisions",
-      description:
-        "Using evidence and automation to strengthen transparent institutional processes.",
+      title: "Institutional governance and data-driven decision-making",
     },
     {
       number: "05",
       icon: "balance",
-      title: "Ethical, social and equity dimensions of AI",
-      description:
-        "Addressing fairness, access, accountability and the human impact of AI adoption.",
+      title: "Ethical, social, and equity dimensions of AI",
     },
   ],
 
-  // Add confirmed speakers here. The section remains hidden while this list is empty.
-  // Example:
-  // { name: "Dr. Example Name", role: "Keynote Speaker", organisation: "University", photo: "assets/photos/example.jpg" }
-  speakers: [],
+  schedule: {
+    pageHero: {
+      eyebrow: "Programme",
+      title: "Schedule",
+      text: "Technical session speakers and the conference programme for 18 September 2026.",
+    },
+    speakersHeading: "Technical Session Speakers",
+    speakers: [
+      { name: "Prof. KVG" },
+      { name: "Prof. Ananatnarayan" },
+      { name: "Prof. G. Ram Mohan Reddy" },
+    ],
+    programmeHeading: "Programme Schedule",
+    programmeNote: "Under Construction",
+  },
 
   coordinators: [
     {
@@ -190,67 +173,53 @@ window.SITE = {
   committees: [
     {
       icon: "book",
-      name: "Technical Sessions Committee",
-      description:
-        "Responsible for inviting select speakers, organising talks and coordinating technical sessions.",
+      name: "Technical Session Committee",
       lead: "Prof. Annappa B.",
-      members: [
-        "Dr. Mohit P. Tahliani",
-        "Dr. Jidesh P.",
-        "Dr. Dinesh Naik",
-      ],
-      email: "annappa@nitk.edu.in",
-      phone: "0824-2473426",
+      members: ["Dr. Mohit P. Tahiliani"],
+      email: "",
+      phone: "",
     },
     {
       icon: "bed",
       name: "Accommodation Committee",
-      description:
-        "Managing guest boarding, local stays and support arrangements for delegates.",
-      lead: "Prof. Pushparaj Shetty D.",
-      members: ["Dr. Abhilash M. H."],
-      email: "pushparaj@nitk.edu.in",
-      phone: "0824-2473427",
+      lead: "",
+      members: [],
+      email: "",
+      phone: "",
     },
     {
       icon: "bus",
       name: "Transportation Committee",
-      description:
-        "Coordinating travel support, local transport and arrival assistance.",
       lead: "Dr. B. R. Chandavarkar",
-      members: ["Dr. Shridhar Sanshi"],
+      title: "Assoc. Prof. & HOD, Department of CSE, NITK, Surathkal",
+      members: [],
       email: "brc@nitk.edu.in",
-      phone: "0824-2473428",
+      phone: "0824-2473408",
     },
     {
       icon: "food",
       name: "Catering Committee",
-      description:
-        "Overseeing delegate meals, refreshments and food-service coordination.",
-      lead: "Dr. Anand Kumar M.",
-      members: ["Dr. Manjanana B."],
-      email: "anandkumar@nitk.edu.in",
-      phone: "0824-2473439",
+      lead: "",
+      members: [],
+      email: "",
+      phone: "",
     },
     {
       icon: "people",
       name: "Ceremonies Committee",
-      description:
-        "Planning inaugural and valedictory functions, protocol and ceremonial proceedings.",
-      lead: "Dr. Jeny Rajan",
-      members: ["Dr. Saumya Hegde"],
-      email: "jenyrajan@nitk.edu.in",
-      phone: "0824-2473440",
+      lead: "",
+      members: [],
+      email: "",
+      phone: "",
     },
   ],
 
-  // Showcase partners and sponsors. Replace mock entries with confirmed sponsors.
+  // Showcase partners and sponsors. Replace entries when sponsors are confirmed.
   sponsorsPage: {
     heading: "Our Partners & Sponsors",
     introduction:
-      "Driving the strategic integration of Artificial Intelligence in Higher Education. We extend our deepest gratitude to the visionary organisations making this global discourse possible.",
-    sampleNotice:
-      "Sample sponsor profiles are shown below for layout preview. Confirmed sponsors will replace these entries.",
+      "Partners supporting the South Zone Conference on the strategic integration of Artificial Intelligence in Higher Education.",
+    sampleNotice: "Sponsors to be announced.",
     organizersHeading: "Primary Organizers",
     organizers: [
       {
@@ -276,109 +245,17 @@ window.SITE = {
     },
   },
 
-  // Mock companies for layout preview — replace with real sponsors when confirmed.
+  // Confirmed sponsors only. Empty tiers stay hidden on the sponsors page.
   sponsors: {
-    platinum: [
-      {
-        name: "TechCorp Global",
-        tagline: "Enterprise AI for academic institutions",
-        description:
-          "TechCorp Global partners with universities to deploy responsible AI platforms for teaching, research workflows and campus operations across South Asia.",
-        url: "https://example.com/techcorp-global",
-        logo: "",
-        image: "",
-        video: "",
-        mediaAlt: "TechCorp Global campus technology showcase",
-      },
-      {
-        name: "Innovate AI Labs",
-        tagline: "Research-grade AI tooling",
-        description:
-          "Innovate AI Labs builds applied research environments that help higher-education teams prototype curriculum tools, assessment support and interdisciplinary AI projects.",
-        url: "https://example.com/innovate-ai-labs",
-        logo: "",
-        image: "",
-        video: "",
-        mediaAlt: "Innovate AI Labs research workspace",
-      },
-      {
-        name: "FutureEd Systems",
-        tagline: "Connected learning infrastructure",
-        description:
-          "FutureEd Systems designs secure learning platforms and analytics that help institutions modernise delivery while keeping equity, privacy and academic integrity central.",
-        url: "https://example.com/futureed-systems",
-        logo: "",
-        image: "",
-        video: "",
-        mediaAlt: "FutureEd Systems connected learning network",
-      },
-    ],
-    gold: [
-      {
-        name: "EduTech Solutions",
-        tagline: "Digital learning platforms",
-        url: "https://example.com/edutech-solutions",
-        logo: "",
-      },
-      {
-        name: "Neural Networks Inc",
-        tagline: "AI model services",
-        url: "https://example.com/neural-networks-inc",
-        logo: "",
-      },
-      {
-        name: "Cognitive Cloud",
-        tagline: "Campus cloud & analytics",
-        url: "https://example.com/cognitive-cloud",
-        logo: "",
-      },
-      {
-        name: "Academic Press",
-        tagline: "Scholarly publishing",
-        url: "https://example.com/academic-press",
-        logo: "",
-      },
-    ],
-    silver: [
-      {
-        name: "CampusLink Softwares",
-        tagline: "Student engagement tools",
-        url: "https://example.com/campuslink",
-        logo: "",
-      },
-      {
-        name: "BrightPath Analytics",
-        tagline: "Institutional insights",
-        url: "https://example.com/brightpath",
-        logo: "",
-      },
-      {
-        name: "ScholarNet India",
-        tagline: "Academic networking",
-        url: "https://example.com/scholarnet",
-        logo: "",
-      },
-    ],
-    associate: [
-      {
-        name: "LearnForge Studio",
-        tagline: "Instructional design",
-        url: "https://example.com/learnforge",
-        logo: "",
-      },
-      {
-        name: "DataBridge Labs",
-        tagline: "Secure data exchange",
-        url: "https://example.com/databridge",
-        logo: "",
-      },
-    ],
+    platinum: [],
+    gold: [],
+    silver: [],
+    associate: [],
   },
 
   sponsorship: {
-    heading: "Partner with the future of AI in higher education",
-    introduction:
-      "Support a focused gathering of university leaders, educators, researchers and technology partners.",
+    heading: "Sponsorship Categories and Benefits",
+    introduction: "",
     pageHero: {
       eyebrow: "Sponsorship opportunities",
       title: "Sponsorship Opportunities",
@@ -412,7 +289,7 @@ window.SITE = {
     },
     contact: {
       name: "Dr. B. R. Chandavarkar",
-      email: "brc@nitk.edu.in",
+      email: "head.cs@nitk.edu.in",
       phone: "0824-2473408",
     },
   },

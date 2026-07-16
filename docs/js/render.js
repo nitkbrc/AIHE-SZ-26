@@ -76,6 +76,7 @@
     if (page === "sponsors" && item.href === "sponsors.html") return true;
     if (page === "sponsorship" && item.href === "sponsorship.html") return true;
     if (page === "committees" && item.href === "committees.html") return true;
+    if (page === "schedule" && item.href === "schedule.html") return true;
     if (page === "home" && (item.href === "index.html" || item.href === "#top")) {
       return true;
     }
@@ -135,7 +136,6 @@
 
   function renderHeader() {
     const links = data.navigation
-      .filter((item) => !item.href.includes("#speakers") || data.speakers.length)
       .map((item) => {
         const active = isNavActive(item);
         return `<a class="site-nav__link${active ? " is-active" : ""}" href="${h(pageHref(item.href))}"${active ? ' aria-current="page"' : ""}>${h(item.label)}</a>`;
@@ -183,15 +183,29 @@
   }
 
   function renderHero() {
+    const nitkName = data.institutions.nitk.name;
+    const aiuName = `${data.institutions.aiu.name} (AIU)`;
     setHtml(
       "#hero-content",
       `<div class="hero__image" style="background-image:url('${h(data.event.heroImage)}')" role="img" aria-label="${h(data.event.heroAlt)}"></div>
        <div class="hero__veil" aria-hidden="true"></div>
        <div class="shell hero__inner">
+        <div class="hero__top reveal">
+          <img class="hero__logo" src="${h(data.brand.nitkLogo)}" alt="NITK">
+          <div class="hero__intro">
+            <div class="hero__institutes">
+              <p>${h(nitkName)}</p>
+              <p>${h(aiuName)}</p>
+            </div>
+            <p class="eyebrow eyebrow--light">${h(data.brand.heroLine)}</p>
+          </div>
+          <img class="hero__logo" src="${h(data.brand.aiuLogo)}" alt="AIU">
+        </div>
         <div class="hero__copy reveal">
-          <p class="eyebrow eyebrow--light">${h(data.brand.eyebrow)}</p>
-          <h1><span class="hero__brand">${h(data.brand.short)} Conference</span>${h(data.event.title)}</h1>
-          <p class="hero__subtitle">${h(data.event.subtitle)}</p>
+          <h1>
+            <span class="hero__title-line">${h(data.event.title)} :</span>
+            <span class="hero__title-line hero__title-line--secondary">${h(data.event.subtitle)}</span>
+          </h1>
           <div class="event-meta">
             <span>${icon("calendar")}${h(data.event.date)} · ${h(data.event.day)}</span>
             <span>${icon("pin")}${h(data.event.venue)}</span>
@@ -206,82 +220,92 @@
   }
 
   function renderAbout() {
-    const institutions = Object.values(data.institutions)
-      .map(
-        (item) =>
-          `<a class="institution" href="${h(item.url)}" target="_blank" rel="noopener">
-            <img src="${h(item.logo)}" alt="">
-            <span><strong>${h(item.shortName)}</strong><small>${h(item.description)}</small></span>
-            ${icon("arrow")}
-          </a>`,
-      )
-      .join("");
     setHtml(
       "#about-content",
-      `<div class="section-heading reveal"><p class="eyebrow">About the conference</p><h2>${h(data.about.heading)}</h2></div>
-       <div class="about__grid">
-        <div class="about__copy reveal">${data.about.paragraphs.map((text) => `<p>${h(text)}</p>`).join("")}</div>
-        <div class="institutions reveal">${institutions}</div>
-       </div>`,
+      `<div class="section-heading reveal"><p class="eyebrow">${h(data.brand.eyebrow)}</p><h2>${h(data.about.heading)}</h2></div>
+       <div class="about__copy reveal">${data.about.paragraphs.map((text) => `<p>${h(text)}</p>`).join("")}</div>`,
     );
   }
 
-  function renderHighlights() {
+  function renderInstitutionBlock(key, selector) {
+    const item = data.institutions[key];
+    if (!item) return;
+    const paragraphs = (item.paragraphs || [])
+      .map((text) => `<p>${h(text)}</p>`)
+      .join("");
     setHtml(
-      "#highlights-content",
-      `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">Conference highlights</p>
-        <h2>One day. Shared perspectives. Practical direction.</h2>
-      </div>
-      <div class="highlights">${data.highlights
-        .map(
-          (item) =>
-            `<article class="highlight reveal">
-              <span class="highlight__icon">${icon(item.icon)}</span>
-              <span class="highlight__value">${h(item.value)}</span>
-              <h3>${h(item.title)}</h3><p>${h(item.text)}</p>
-            </article>`,
-        )
-        .join("")}</div>`,
+      selector,
+      `<article class="institution-block reveal">
+        <div class="institution-block__copy">
+          <div class="section-heading">
+            <p class="eyebrow">Organising institution</p>
+            <h2>${h(item.heading)}</h2>
+          </div>
+          <div class="institution-block__body">${paragraphs}</div>
+          <a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
+        </div>
+        <div class="institution-block__media">
+          <a class="institution-block__qr" href="${h(item.url)}" target="_blank" rel="noopener">
+            <img src="${h(item.qr)}" alt="QR code for ${h(item.shortName)} website">
+            <span>Scan for website</span>
+          </a>
+        </div>
+      </article>`,
     );
+  }
+
+  function renderInstitutions() {
+    renderInstitutionBlock("nitk", "#nitk-content");
+    renderInstitutionBlock("aiu", "#aiu-content");
   }
 
   function renderThemes() {
     setHtml(
       "#themes-content",
-      `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">Conference themes</p>
-        <h2>Five lenses on AI transformation</h2>
-        <p>Exploring the intellectual, institutional and human dimensions of AI in higher education.</p>
+      `<div class="section-heading reveal">
+        <h2>Themes of the Conference</h2>
       </div>
-      <div class="themes">${data.themes
-        .map(
-          (theme) =>
-            `<article class="theme reveal">
-              <div class="theme__top"><span class="theme__number">${h(theme.number)}</span><span class="theme__icon">${icon(theme.icon)}</span></div>
-              <h3>${h(theme.title)}</h3><p>${h(theme.description)}</p>
-            </article>`,
-        )
-        .join("")}</div>`,
+      <ul class="themes-list reveal">${data.themes
+        .map((theme) => `<li>${h(theme.title)}</li>`)
+        .join("")}</ul>`,
     );
   }
 
-  function renderSpeakers() {
-    const section = $("#speakers");
-    if (!section) return;
-    if (!data.speakers.length) {
-      section.hidden = true;
-      return;
-    }
+  function renderSchedulePage() {
+    const schedule = data.schedule;
+    const hero = schedule.pageHero;
     setHtml(
-      "#speakers-content",
-      `<div class="section-heading section-heading--center reveal"><p class="eyebrow">Featured speakers</p><h2>Voices shaping higher education</h2></div>
-       <div class="speakers-grid">${data.speakers
-         .map(
-           (speaker) =>
-             `<article class="speaker reveal">${avatar(speaker)}<h3>${h(speaker.name)}</h3><p class="speaker__role">${h(speaker.role)}</p><p>${h(speaker.organisation)}</p></article>`,
-         )
-         .join("")}</div>`,
+      "#schedule-hero-content",
+      `<div class="page-hero__copy reveal">
+        <p class="eyebrow eyebrow--light">${h(hero.eyebrow)}</p>
+        <h1>${h(hero.title)}</h1>
+        <p>${h(hero.text)}</p>
+      </div>`,
+    );
+
+    setHtml(
+      "#schedule-speakers-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">Speakers</p>
+        <h2>${h(schedule.speakersHeading)}</h2>
+      </div>
+      <div class="speakers-grid">${schedule.speakers
+        .map(
+          (speaker) =>
+            `<article class="speaker reveal">${avatar(speaker)}<h3>${h(speaker.name)}</h3></article>`,
+        )
+        .join("")}</div>`,
+    );
+
+    setHtml(
+      "#schedule-programme-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">Agenda</p>
+        <h2>${h(schedule.programmeHeading)}</h2>
+      </div>
+      <div class="schedule-programme reveal">
+        <p class="schedule-programme__note">${h(schedule.programmeNote)}</p>
+      </div>`,
     );
   }
 
@@ -309,8 +333,7 @@
     setHtml(
       "#sponsorship-content",
       `<div class="sponsorship__intro">
-        <div class="section-heading reveal"><p class="eyebrow">Sponsorship categories</p><h2>${h(data.sponsorship.heading)}</h2></div>
-        <p class="reveal">${h(data.sponsorship.introduction)}</p>
+        <div class="section-heading reveal"><h2>${h(data.sponsorship.heading)}</h2></div>
       </div>
       <div class="table-wrap reveal" tabindex="0" aria-label="Sponsorship categories and benefits">
         <table class="sponsorship-table"><thead><tr><th scope="col">Benefits</th>${heads}</tr></thead><tbody>${rows}</tbody></table>
@@ -449,45 +472,76 @@
   }
 
   function renderRegistration() {
+    const notes = (data.registration.notes || [])
+      .map(
+        (note, index) =>
+          `<li><span class="registration-band__index">${index + 1}.</span><span>${h(note)}</span></li>`,
+      )
+      .join("");
     setHtml(
       "#registration-content",
-      `<div class="registration-band__copy reveal">
-        <p class="eyebrow eyebrow--light">Registration closes ${h(data.registration.deadline)}</p>
-        <h2>Ready to join the conversation?</h2>
-        <p>Reserve your place at the South Zone Conference on AI in Higher Education.</p>
+      `<div class="registration-band__main reveal">
+        <h2>Registration</h2>
+        <ol class="registration-band__list">${notes}</ol>
       </div>
-      <a class="button button--gold reveal" href="${h(data.registration.url)}" target="_blank" rel="noopener">${h(data.registration.label)} ${icon("arrow")}</a>`,
+      <aside class="registration-band__aside reveal">
+        <div class="registration-band__card">
+          <p class="registration-band__label">To Register</p>
+          <a class="registration-band__qr" href="${h(data.registration.url)}" target="_blank" rel="noopener">
+            <img src="${h(data.registration.qr)}" alt="QR code to register for the conference">
+          </a>
+          <a class="button button--gold registration-band__link" href="${h(data.registration.url)}" target="_blank" rel="noopener">${h(data.registration.label)} ${icon("arrow")}</a>
+        </div>
+        <p class="registration-band__brochure">
+          Brochure:
+          <a href="${h(data.brochure.url)}" target="_blank" rel="noopener">Download brochure</a>
+        </p>
+      </aside>`,
     );
   }
 
   function renderCommitteePage() {
     setHtml(
       "#committee-hero-content",
-      `<div class="committee-hero__copy reveal">
+      `<img class="committee-hero__logo reveal" src="${h(data.brand.nitkLogo)}" alt="NITK">
+      <div class="committee-hero__copy reveal">
         <p class="eyebrow eyebrow--light">${h(data.brand.eyebrow)}</p>
-        <h1>Organization <span>&amp;</span> Committees</h1>
-        <p>Meet the faculty teams coordinating the programme, hospitality, transport and conference experience.</p>
+        <h1>Committees</h1>
+        <p>Faculty teams coordinating the South Zone Conference programme and arrangements.</p>
       </div>
-      <div class="committee-hero__marks reveal" aria-hidden="true"><img src="${h(data.brand.nitkLogo)}" alt=""><span>×</span><img src="${h(data.brand.aiuLogo)}" alt=""></div>`,
+      <img class="committee-hero__logo reveal" src="${h(data.brand.aiuLogo)}" alt="AIU">`,
     );
 
     setHtml(
       "#committees-list",
       data.committees
-        .map(
-          (committee) =>
-            `<article class="committee-card reveal">
+        .map((committee) => {
+          const people = [];
+          if (committee.lead) people.push(`<strong>${h(committee.lead)}</strong>`);
+          if (committee.title) people.push(`<span>${h(committee.title)}</span>`);
+          (committee.members || []).forEach((member) => {
+            people.push(`<span>${h(member)}</span>`);
+          });
+          const contact = [];
+          if (committee.email) {
+            contact.push(
+              `<a href="mailto:${h(committee.email)}">${icon("mail")}<span>${h(committee.email)}</span></a>`,
+            );
+          }
+          if (committee.phone) {
+            contact.push(
+              `<a href="tel:${h(committee.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(committee.phone)}</span></a>`,
+            );
+          }
+          return `<article class="committee-card reveal">
               <span class="committee-card__icon">${icon(committee.icon)}</span>
               <div class="committee-card__body">
-                <h3>${h(committee.name)}</h3><p>${h(committee.description)}</p>
-                <div class="committee-card__people"><strong>${h(committee.lead)}</strong>${committee.members.map((member) => `<span>${h(member)}</span>`).join("")}</div>
+                <h3>${h(committee.name)}</h3>
+                ${people.length ? `<div class="committee-card__people">${people.join("")}</div>` : ""}
               </div>
-              <div class="committee-card__contact">
-                <a href="mailto:${h(committee.email)}">${icon("mail")}<span>${h(committee.email)}</span></a>
-                <a href="tel:${h(committee.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(committee.phone)}</span></a>
-              </div>
-            </article>`,
-        )
+              ${contact.length ? `<div class="committee-card__contact">${contact.join("")}</div>` : ""}
+            </article>`;
+        })
         .join(""),
     );
 
@@ -502,10 +556,10 @@
     );
 
     const institutions = Object.values(data.institutions)
-      .map(
-        (item) =>
-          `<article class="sidebar-block"><img src="${h(item.logo)}" alt=""><div><h3>About ${h(item.shortName)}</h3><p>${h(item.description)}</p><a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Learn more ${icon("arrow")}</a></div></article>`,
-      )
+      .map((item) => {
+        const summary = (item.paragraphs || []).join(" ");
+        return `<article class="sidebar-block"><img src="${h(item.logo)}" alt=""><div><h3>About ${h(item.shortName)}</h3><p>${h(summary)}</p><a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Learn more ${icon("arrow")}</a></div></article>`;
+      })
       .join("");
     setHtml(
       "#committee-sidebar",
@@ -519,10 +573,11 @@
   if (page === "home") {
     renderHero();
     renderAbout();
-    renderHighlights();
     renderThemes();
-    renderSpeakers();
+    renderInstitutions();
     renderRegistration();
+  } else if (page === "schedule") {
+    renderSchedulePage();
   } else if (page === "sponsors") {
     renderSponsorsPage();
   } else if (page === "sponsorship") {
