@@ -1,75 +1,47 @@
-# AIHE-SZ-26
+# South Zone Conference on AI in Higher Education
 
-Static website for the NITK & AIU South Zone Conference on AI in Higher
-Education, 18 September 2026.
+**Strategic Integration of Artificial Intelligence in Higher Education: Opportunities and Implications**
 
-## Preview locally
+Jointly organised by the [National Institute of Technology Karnataka (NITK), Surathkal](https://www.nitk.ac.in/) and the [Association of Indian Universities (AIU)](https://aiu.ac.in/).
 
-The website has no build step. Run a small local server from the repository
-root:
+| | |
+| --- | --- |
+| **Date** | 18 September 2026 (Friday) |
+| **Venue** | LHC-C Seminar Hall, NITK, Surathkal |
+| **Registration deadline** | 20 August 2026 |
 
-```bash
-python3 -m http.server 8000 --directory docs
-```
+**[Register to attend](https://forms.gle/QPVo4YW914ZMDg359)** · **[Conference website](https://nitkbrc.github.io/AIHE-SZ-26/)**
 
-Open `http://localhost:8000`.
+## About the conference
 
-## Editing conference content
+The conference brings together academicians, administrators, industry experts and other stakeholders to deliberate on the strategic integration of Artificial Intelligence in higher education. It offers a shared forum for dialogue, best-practice sharing and collaboration, with observations and recommendations intended for submission to the Association of Indian Universities.
 
-Most routine updates are made in one file:
+## Conference themes
 
-```text
-docs/js/content.js
-```
+1. AI-enabled teaching and learning
+2. Curriculum transformation and future skills
+3. AI in research and innovation
+4. Institutional governance and data-driven decision-making
+5. Ethical, social and equity dimensions of AI
 
-The `window.SITE` object contains:
+## Highlights
 
-- Event title, date, venue and registration link
-- Navigation and brochure links
-- About text, institutions, highlights and themes
-- Speakers and their photographs
-- Coordinators and organizing committees
-- Sponsorship tiers, benefits, payment and contact details
-- Footer and assistance details
+- About 100 delegates from AIU member universities, including IIT and NIT institutions across South India
+- Participation of Vice Chancellors, Directors, Registrars, Deans, faculty, industry experts and decision-makers
+- Panel discussions and keynote talks by eminent delegates
+- Networking and collaboration among AIU member universities
+- Showcase of innovative AI solutions and educational technologies
 
-### Add or update a speaker
+## Organisers
 
-1. Place the photograph in `docs/assets/photos/`.
-2. Add an entry to the `speakers` array in `docs/js/content.js`:
+**National Institute of Technology Karnataka, Surathkal**  
+An Institute of National Importance established in 1960, located on the Arabian Sea coast near Mangaluru.
 
-```js
-{
-  name: "Dr. Speaker Name",
-  role: "Keynote Speaker",
-  organisation: "University or organisation",
-  photo: "assets/photos/speaker-name.jpg",
-}
-```
+**Association of Indian Universities**  
+The apex higher-education association representing Indian and international universities and promoting cooperation in teaching, research and academic exchange.
 
-The Speakers section is automatically hidden while the array is empty and
-appears as soon as a speaker is added.
+## Contact
 
-### Update a coordinator photograph
+For registration and conference queries, write to the organising team via the [conference website](https://nitkbrc.github.io/AIHE-SZ-26/) or contact the coordinators listed there.
 
-Place the image in `docs/assets/photos/`, then set the person's `photo` value:
-
-```js
-photo: "assets/photos/coordinator-name.jpg",
-```
-
-An initials-based placeholder is shown when the value is empty.
-
-## GitHub Pages
-
-The site is deployed from the `docs/` folder by GitHub Actions on every push to
-`main` (see `.github/workflows/deploy-pages.yml`).
-
-1. Open repository **Settings → Pages**.
-2. Under **Build and deployment → Source**, choose **GitHub Actions**.
-3. Push to `main` (or run the workflow manually from the Actions tab).
-
-The live site will be available at:
-
-```text
-https://nitkbrc.github.io/AIHE-SZ-26/
-```
+Sponsorship enquiries: Dr. B. R. Chandavarkar — [brc@nitk.edu.in](mailto:brc@nitk.edu.in) · 0824-2473408
