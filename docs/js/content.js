@@ -37,11 +37,12 @@ window.SITE = {
   },
 
   navigation: [
-    { label: "Home", href: "#top" },
-    { label: "About", href: "#about" },
-    { label: "Themes", href: "#themes" },
-    { label: "Speakers", href: "#speakers" },
-    { label: "Sponsorship", href: "#sponsorship" },
+    { label: "Home", href: "index.html" },
+    { label: "About", href: "index.html#about" },
+    { label: "Themes", href: "index.html#themes" },
+    { label: "Speakers", href: "index.html#speakers" },
+    { label: "Sponsors", href: "sponsors.html" },
+    { label: "Sponsorship", href: "sponsorship.html" },
     { label: "Committees", href: "committees.html" },
   ],
 
@@ -243,10 +244,146 @@ window.SITE = {
     },
   ],
 
+  // Showcase partners and sponsors. Replace mock entries with confirmed sponsors.
+  sponsorsPage: {
+    heading: "Our Partners & Sponsors",
+    introduction:
+      "Driving the strategic integration of Artificial Intelligence in Higher Education. We extend our deepest gratitude to the visionary organisations making this global discourse possible.",
+    sampleNotice:
+      "Sample sponsor profiles are shown below for layout preview. Confirmed sponsors will replace these entries.",
+    organizersHeading: "Primary Organizers",
+    organizers: [
+      {
+        name: "NITK Surathkal",
+        role: "Host Institution",
+        icon: "academic",
+        logo: "assets/logos/nitk-crest.png",
+        url: "https://www.nitk.ac.in/",
+      },
+      {
+        name: "Association of Indian Universities",
+        role: "Co-Organizer",
+        icon: "building",
+        logo: "assets/logos/aiu-mark.png",
+        url: "https://aiu.ac.in/",
+      },
+    ],
+    cta: {
+      heading: "Join as a Partner",
+      text: "Align your brand with the forefront of AI research in higher education. Explore our partnership tiers and benefits.",
+      buttonLabel: "Become a Sponsor",
+      href: "sponsorship.html",
+    },
+  },
+
+  // Mock companies for layout preview — replace with real sponsors when confirmed.
+  sponsors: {
+    platinum: [
+      {
+        name: "TechCorp Global",
+        tagline: "Enterprise AI for academic institutions",
+        description:
+          "TechCorp Global partners with universities to deploy responsible AI platforms for teaching, research workflows and campus operations across South Asia.",
+        url: "https://example.com/techcorp-global",
+        logo: "",
+        image: "",
+        video: "",
+        mediaAlt: "TechCorp Global campus technology showcase",
+      },
+      {
+        name: "Innovate AI Labs",
+        tagline: "Research-grade AI tooling",
+        description:
+          "Innovate AI Labs builds applied research environments that help higher-education teams prototype curriculum tools, assessment support and interdisciplinary AI projects.",
+        url: "https://example.com/innovate-ai-labs",
+        logo: "",
+        image: "",
+        video: "",
+        mediaAlt: "Innovate AI Labs research workspace",
+      },
+      {
+        name: "FutureEd Systems",
+        tagline: "Connected learning infrastructure",
+        description:
+          "FutureEd Systems designs secure learning platforms and analytics that help institutions modernise delivery while keeping equity, privacy and academic integrity central.",
+        url: "https://example.com/futureed-systems",
+        logo: "",
+        image: "",
+        video: "",
+        mediaAlt: "FutureEd Systems connected learning network",
+      },
+    ],
+    gold: [
+      {
+        name: "EduTech Solutions",
+        tagline: "Digital learning platforms",
+        url: "https://example.com/edutech-solutions",
+        logo: "",
+      },
+      {
+        name: "Neural Networks Inc",
+        tagline: "AI model services",
+        url: "https://example.com/neural-networks-inc",
+        logo: "",
+      },
+      {
+        name: "Cognitive Cloud",
+        tagline: "Campus cloud & analytics",
+        url: "https://example.com/cognitive-cloud",
+        logo: "",
+      },
+      {
+        name: "Academic Press",
+        tagline: "Scholarly publishing",
+        url: "https://example.com/academic-press",
+        logo: "",
+      },
+    ],
+    silver: [
+      {
+        name: "CampusLink Softwares",
+        tagline: "Student engagement tools",
+        url: "https://example.com/campuslink",
+        logo: "",
+      },
+      {
+        name: "BrightPath Analytics",
+        tagline: "Institutional insights",
+        url: "https://example.com/brightpath",
+        logo: "",
+      },
+      {
+        name: "ScholarNet India",
+        tagline: "Academic networking",
+        url: "https://example.com/scholarnet",
+        logo: "",
+      },
+    ],
+    associate: [
+      {
+        name: "LearnForge Studio",
+        tagline: "Instructional design",
+        url: "https://example.com/learnforge",
+        logo: "",
+      },
+      {
+        name: "DataBridge Labs",
+        tagline: "Secure data exchange",
+        url: "https://example.com/databridge",
+        logo: "",
+      },
+    ],
+  },
+
   sponsorship: {
     heading: "Partner with the future of AI in higher education",
     introduction:
       "Support a focused gathering of university leaders, educators, researchers and technology partners.",
+    pageHero: {
+      eyebrow: "Sponsorship opportunities",
+      title: "Sponsorship Opportunities",
+      text: "Explore partnership tiers, branding benefits and payment details for the South Zone Conference on AI in Higher Education.",
+    },
     tiers: [
       { name: "Platinum", contribution: "₹1.5 lakh" },
       { name: "Gold", contribution: "₹1 lakh" },

@@ -63,9 +63,23 @@
   }
 
   function pageHref(href) {
-    return page === "committees" && href.startsWith("#")
-      ? `index.html${href}`
-      : href;
+    if (page === "home" && href.startsWith("index.html#")) {
+      return href.slice("index.html".length);
+    }
+    if (page === "home" && href === "index.html") {
+      return "#top";
+    }
+    return href;
+  }
+
+  function isNavActive(item) {
+    if (page === "sponsors" && item.href === "sponsors.html") return true;
+    if (page === "sponsorship" && item.href === "sponsorship.html") return true;
+    if (page === "committees" && item.href === "committees.html") return true;
+    if (page === "home" && (item.href === "index.html" || item.href === "#top")) {
+      return true;
+    }
+    return false;
   }
 
   function avatar(person) {
@@ -82,12 +96,48 @@
     return `<span class="person-avatar person-avatar--initials" aria-hidden="true">${h(initials)}</span>`;
   }
 
+  function sponsorInitials(name) {
+    return name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0] || "")
+      .join("")
+      .toUpperCase();
+  }
+
+  function sponsorLogo(sponsor, className = "sponsor-logo") {
+    if (sponsor.logo) {
+      return `<img class="${className}" src="${h(sponsor.logo)}" alt="" loading="lazy">`;
+    }
+    return `<span class="${className} ${className}--placeholder" aria-hidden="true">${h(sponsorInitials(sponsor.name))}</span>`;
+  }
+
+  function platinumMedia(sponsor) {
+    if (sponsor.video) {
+      return `<div class="platinum-feature__media">
+        <video controls preload="metadata" poster="${h(sponsor.image || "")}">
+          <source src="${h(sponsor.video)}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>`;
+    }
+    if (sponsor.image) {
+      return `<div class="platinum-feature__media">
+        <img src="${h(sponsor.image)}" alt="${h(sponsor.mediaAlt || sponsor.name)}" loading="lazy">
+      </div>`;
+    }
+    return `<div class="platinum-feature__media platinum-feature__media--placeholder" role="img" aria-label="${h(sponsor.mediaAlt || sponsor.name)}">
+      <span class="platinum-feature__mark">${h(sponsorInitials(sponsor.name))}</span>
+      <span class="platinum-feature__placeholder-label">${h(sponsor.name)}</span>
+    </div>`;
+  }
+
   function renderHeader() {
     const links = data.navigation
-      .filter((item) => item.href !== "#speakers" || data.speakers.length)
+      .filter((item) => !item.href.includes("#speakers") || data.speakers.length)
       .map((item) => {
-        const active =
-          page === "committees" && item.href === "committees.html";
+        const active = isNavActive(item);
         return `<a class="site-nav__link${active ? " is-active" : ""}" href="${h(pageHref(item.href))}"${active ? ' aria-current="page"' : ""}>${h(item.label)}</a>`;
       })
       .join("");
@@ -259,7 +309,7 @@
     setHtml(
       "#sponsorship-content",
       `<div class="sponsorship__intro">
-        <div class="section-heading reveal"><p class="eyebrow">Sponsorship opportunities</p><h2>${h(data.sponsorship.heading)}</h2></div>
+        <div class="section-heading reveal"><p class="eyebrow">Sponsorship categories</p><h2>${h(data.sponsorship.heading)}</h2></div>
         <p class="reveal">${h(data.sponsorship.introduction)}</p>
       </div>
       <div class="table-wrap reveal" tabindex="0" aria-label="Sponsorship categories and benefits">
@@ -278,6 +328,123 @@
           <a class="text-link" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">View sponsorship brochure ${icon("arrow")}</a>
         </article>
       </div>`,
+    );
+  }
+
+  function renderSponsorshipPage() {
+    const hero = data.sponsorship.pageHero;
+    setHtml(
+      "#sponsorship-hero-content",
+      `<div class="page-hero__copy reveal">
+        <p class="eyebrow eyebrow--light">${h(hero.eyebrow)}</p>
+        <h1>${h(hero.title)}</h1>
+        <p>${h(hero.text)}</p>
+      </div>
+      <div class="page-hero__actions reveal">
+        <a class="button button--gold" href="#sponsorship">View tiers ${icon("arrow")}</a>
+        <a class="button button--ghost" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">Sponsorship brochure</a>
+      </div>`,
+    );
+    renderSponsorship();
+  }
+
+  function renderSponsorsPage() {
+    const pageData = data.sponsorsPage;
+    const sponsors = data.sponsors;
+
+    setHtml(
+      "#sponsors-hero-content",
+      `<div class="page-hero__copy reveal">
+        <p class="eyebrow eyebrow--light">Partners &amp; sponsors</p>
+        <h1>${h(pageData.heading)}</h1>
+        <p>${h(pageData.introduction)}</p>
+        <p class="page-hero__notice">${h(pageData.sampleNotice)}</p>
+      </div>`,
+    );
+
+    setHtml(
+      "#organizers-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">${h(pageData.organizersHeading)}</p>
+        <h2>Institutions driving the dialogue</h2>
+      </div>
+      <div class="organizer-cards">${pageData.organizers
+        .map(
+          (org) =>
+            `<a class="organizer-card reveal" href="${h(org.url)}" target="_blank" rel="noopener">
+              <span class="organizer-card__icon">${org.logo ? `<img src="${h(org.logo)}" alt="">` : icon(org.icon)}</span>
+              <strong>${h(org.name)}</strong>
+              <span class="organizer-card__role">${h(org.role)}</span>
+            </a>`,
+        )
+        .join("")}</div>`,
+    );
+
+    setHtml(
+      "#platinum-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">Platinum sponsors</p>
+        <h2>Featured partners</h2>
+      </div>
+      <div class="platinum-list">${sponsors.platinum
+        .map(
+          (sponsor, index) =>
+            `<article class="platinum-feature reveal${index % 2 === 1 ? " platinum-feature--reverse" : ""}">
+              ${platinumMedia(sponsor)}
+              <div class="platinum-feature__body">
+                <p class="eyebrow">Platinum</p>
+                <h3>${h(sponsor.name)}</h3>
+                <p class="platinum-feature__tagline">${h(sponsor.tagline)}</p>
+                <p>${h(sponsor.description)}</p>
+                <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
+              </div>
+            </article>`,
+        )
+        .join("")}</div>`,
+    );
+
+    function renderTier(selector, heading, items, cardClass) {
+      const section = document.querySelector(selector)?.closest("section");
+      if (!items.length) {
+        if (section) section.hidden = true;
+        return;
+      }
+      setHtml(
+        selector,
+        `<div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">${h(heading)}</p>
+          <h2>${h(heading)}</h2>
+        </div>
+        <div class="sponsor-tier-grid sponsor-tier-grid--${cardClass}">${items
+          .map(
+            (sponsor) =>
+              `<a class="sponsor-tier-card reveal" href="${h(sponsor.url)}" target="_blank" rel="noopener">
+                ${sponsorLogo(sponsor)}
+                <strong>${h(sponsor.name)}</strong>
+                <span>${h(sponsor.tagline || "")}</span>
+              </a>`,
+          )
+          .join("")}</div>`,
+      );
+    }
+
+    renderTier("#gold-content", "Gold Sponsors", sponsors.gold, "gold");
+    renderTier("#silver-content", "Silver Sponsors", sponsors.silver, "silver");
+    renderTier(
+      "#associate-content",
+      "Associate Sponsors",
+      sponsors.associate,
+      "associate",
+    );
+
+    setHtml(
+      "#partner-cta-content",
+      `<div class="partner-cta__copy reveal">
+        <span class="partner-cta__icon" aria-hidden="true">${icon("people")}</span>
+        <h2>${h(pageData.cta.heading)}</h2>
+        <p>${h(pageData.cta.text)}</p>
+      </div>
+      <a class="button button--gold reveal" href="${h(pageData.cta.href)}">${h(pageData.cta.buttonLabel)} ${icon("arrow")}</a>`,
     );
   }
 
@@ -355,8 +522,11 @@
     renderHighlights();
     renderThemes();
     renderSpeakers();
-    renderSponsorship();
     renderRegistration();
+  } else if (page === "sponsors") {
+    renderSponsorsPage();
+  } else if (page === "sponsorship") {
+    renderSponsorshipPage();
   } else {
     renderCommitteePage();
   }
