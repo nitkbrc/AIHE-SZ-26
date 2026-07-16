@@ -33,7 +33,7 @@ window.SITE = {
     label: "Register to attend",
     qr: "assets/images/qr-code-registration.png",
     notes: [
-      "Registration is free, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",
+      "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",
       "Last Date for the Registration: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 29.08.2026 (Friday).",
     ],
   },

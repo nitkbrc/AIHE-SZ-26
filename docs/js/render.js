@@ -475,7 +475,9 @@
     const notes = (data.registration.notes || [])
       .map(
         (note, index) =>
-          `<li><span class="registration-band__index">${index + 1}.</span><span>${h(note)}</span></li>`,
+          `<li><span class="registration-band__index">${index + 1}.</span><span>${h(note)
+            .replaceAll("&lt;strong&gt;", "<strong>")
+            .replaceAll("&lt;/strong&gt;", "</strong>")}</span></li>`,
       )
       .join("");
     setHtml(
