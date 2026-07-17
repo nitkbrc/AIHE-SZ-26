@@ -1552,8 +1552,15 @@ h3 {
   padding: 24px;
   background: var(--white);
   border: 1px solid var(--line);
-  gap: 18px;
-  align-items: flex-start;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.coordinator .person-avatar {
+  width: 120px;
+  height: 140px;
 }
 
 .coordinator h3 {
@@ -1573,6 +1580,7 @@ h3 {
   color: var(--navy-700);
   gap: 6px;
   align-items: center;
+  justify-content: center;
   font-size: 0.65rem;
   font-weight: 700;
   word-break: break-word;

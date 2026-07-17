@@ -152,7 +152,7 @@ window.SITE = {
       department: "Department of Computer Science & Engineering",
       email: "brc@nitk.edu.in",
       phone: "0824-2473408",
-      photo: "",
+      photo: "assets/images/BRC-Photo.jpg",
     },
     {
       name: "Dr. Jeny Rajan",

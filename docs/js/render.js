@@ -191,7 +191,7 @@
        <div class="hero__veil" aria-hidden="true"></div>
        <div class="shell hero__inner">
         <div class="hero__top reveal">
-          <img class="hero__logo" src="${h(data.brand.nitkLogo)}" alt="NITK">
+          <img class="hero__logo" src="${h(data.brand.aiuLogo)}" alt="AIU">
           <div class="hero__intro">
             <div class="hero__institutes">
               <p>${h(nitkName)}</p>
@@ -199,7 +199,7 @@
             </div>
             <p class="eyebrow eyebrow--light">${h(data.brand.heroLine)}</p>
           </div>
-          <img class="hero__logo" src="${h(data.brand.aiuLogo)}" alt="AIU">
+          <img class="hero__logo" src="${h(data.brand.nitkLogo)}" alt="NITK">
         </div>
         <div class="hero__copy reveal">
           <h1>
