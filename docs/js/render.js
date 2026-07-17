@@ -333,7 +333,7 @@
       <div class="table-wrap reveal" tabindex="0" aria-label="Sponsorship categories and benefits">
         <table class="sponsorship-table"><thead><tr><th scope="col">Benefits</th>${heads}</tr></thead><tbody>${rows}</tbody></table>
       </div>
-      <p class="table-note">Advertisement material and payment must be submitted before the conference brochure is released. Benefits are subject to delegate consent and applicable privacy policy.</p>
+      <p class="table-note">* Subject to the release of the conference brochure. <br># Subject to delegate consent and applicable privacy policy.</p>
       <div class="sponsor-details">
         <article class="sponsor-detail reveal">
           <p class="eyebrow">Payment details</p><h3>${h(payment.bank)}</h3>
