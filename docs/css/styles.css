@@ -638,7 +638,7 @@ h3 {
 
 .schedule-speakers-section .speaker .person-avatar {
   width: 140px;
-  height: 160px;
+  height: 140px;
 }
 
 .highlights {
@@ -741,7 +741,7 @@ h3 {
 
 .speaker .person-avatar {
   width: 180px;
-  height: 210px;
+  height: 180px;
   margin: 0 auto 20px;
 }
 
@@ -768,6 +768,7 @@ h3 {
   color: var(--navy-900);
   background: var(--gold-100);
   border: 1px solid rgba(233, 185, 23, 0.4);
+  border-radius: 50%;
   object-fit: cover;
   place-items: center;
 }
@@ -1381,6 +1382,12 @@ h3 {
   gap: clamp(36px, 5vw, 56px);
 }
 
+#leadership-list,
+#coordinators-list,
+#committees-list {
+  display: contents;
+}
+
 .leadership-panel {
   padding: clamp(24px, 3vw, 36px);
   background: var(--white);
@@ -1444,46 +1451,8 @@ h3 {
 
 .coordinators-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.coordinator-item {
-  display: flex;
-  padding: 18px 20px;
-  background: var(--white);
-  border-left: 3px solid var(--navy-700);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.coordinator-item h4 {
-  margin-bottom: 4px;
-  color: var(--navy-950);
-  font-size: 0.95rem;
-}
-
-.coordinator-item p {
-  color: var(--muted);
-  font-size: 0.72rem;
-}
-
-.coordinator-item__contact {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-}
-
-.coordinator-item__contact a {
-  display: inline-flex;
-  color: var(--navy-700);
-  gap: 6px;
-  align-items: center;
-  font-size: 0.65rem;
-  font-weight: 700;
-  word-break: break-word;
 }
 
 .committees-list {
@@ -1561,7 +1530,6 @@ h3 {
   color: var(--navy-700);
 }
 
-/* Contact page still uses .coordinator cards */
 .coordinator {
   display: flex;
   min-height: 150px;
@@ -1576,7 +1544,7 @@ h3 {
 
 .coordinator .person-avatar {
   width: 120px;
-  height: 140px;
+  height: 120px;
 }
 
 .coordinator h3 {
@@ -1600,6 +1568,10 @@ h3 {
   font-size: 0.65rem;
   font-weight: 700;
   word-break: break-word;
+}
+
+.coordinator a + a {
+  margin-top: 6px;
 }
 
 .reveal {
@@ -1676,7 +1648,7 @@ h3 {
   }
 
   .coordinators-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .committee-card {
@@ -1685,15 +1657,6 @@ h3 {
 
   .committee-card__contact {
     grid-column: 2;
-  }
-
-  .coordinator-item {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .coordinator-item__contact {
-    align-items: flex-start;
   }
 
   .sponsor-tier-grid--gold {
@@ -1940,14 +1903,6 @@ h3 {
     grid-column: 2;
   }
 
-  .coordinator-item {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .coordinator-item__contact {
-    align-items: flex-start;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

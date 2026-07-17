@@ -481,95 +481,86 @@
     );
   }
 
+  function personCard(person) {
+    const links = [];
+    if (person.email) {
+      links.push(
+        `<a href="mailto:${h(person.email)}">${icon("mail")}<span>${h(person.email)}</span></a>`,
+      );
+    }
+    if (person.phone) {
+      links.push(
+        `<a href="tel:${h(person.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(person.phone)}</span></a>`,
+      );
+    }
+    const subtitle = person.title || person.department || person.role || "";
+    return `<article class="coordinator reveal">${avatar(person)}<div><h3>${h(person.name)}</h3>${subtitle ? `<p>${h(subtitle)}</p>` : ""}${links.join("")}</div></article>`;
+  }
+
+  function personGrid(people) {
+    return `<div class="coordinators-list">${people.map(personCard).join("")}</div>`;
+  }
+
+  function orgBlock(title, people) {
+    if (!people.length) return "";
+    return `<div class="org-block reveal">
+      <h3 class="org-block__title">${h(title)}</h3>
+      ${personGrid(people)}
+    </div>`;
+  }
+
+  function enrichPerson(person) {
+    const match = (data.coordinators || []).find(
+      (coordinator) => coordinator.name === person.name,
+    );
+    if (!match) return person;
+    return {
+      ...match,
+      ...person,
+      email: person.email || match.email || "",
+      phone: person.phone || match.phone || "",
+      photo: person.photo || match.photo || "",
+      department: person.department || match.department || "",
+      title: person.title || match.title || "",
+    };
+  }
+
   function renderCommitteePage() {
     const leadership = data.leadership || {};
-    const patronRows = (leadership.patrons || [])
-      .map(
-        (patron) =>
-          `<li><strong>${h(patron.name)}</strong><span>${h(patron.title)}</span></li>`,
-      )
-      .join("");
-    const convenorRows = (leadership.convenors || [])
-      .map(
-        (person) =>
-          `<div class="leadership-row">
-            <p class="leadership-row__role">${h(person.role)}</p>
-            <p class="leadership-row__name"><strong>${h(person.name)}</strong></p>
-            <p class="leadership-row__title">${h(person.title)}</p>
-          </div>`,
-      )
-      .join("");
+    const leadershipBlocks = [
+      orgBlock("Chief Patron", leadership.chiefPatron ? [enrichPerson(leadership.chiefPatron)] : []),
+      orgBlock(
+        "Patrons",
+        (leadership.patrons || []).map((patron) => enrichPerson(patron)),
+      ),
+      ...(leadership.convenors || []).map((person) =>
+        orgBlock(person.role, [enrichPerson(person)]),
+      ),
+    ].join("");
 
-    setHtml(
-      "#leadership-list",
-      `<div class="leadership-grid">
-        <div class="leadership-row leadership-row--chief">
-          <p class="leadership-row__role">Chief Patron</p>
-          <p class="leadership-row__name"><strong>${h(leadership.chiefPatron.name)}</strong></p>
-          <p class="leadership-row__title">${h(leadership.chiefPatron.title)}</p>
-        </div>
-        <div class="leadership-row">
-          <p class="leadership-row__role">Patrons</p>
-          <ul class="leadership-patrons">${patronRows}</ul>
-        </div>
-        ${convenorRows}
-      </div>`,
-    );
+    setHtml("#leadership-list", leadershipBlocks);
 
-    setHtml(
-      "#coordinators-list",
-      data.coordinators
-        .map((person) => {
-          const links = [];
-          if (person.email) {
-            links.push(
-              `<a href="mailto:${h(person.email)}">${icon("mail")}<span>${h(person.email)}</span></a>`,
-            );
-          }
-          if (person.phone) {
-            links.push(
-              `<a href="tel:${h(person.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(person.phone)}</span></a>`,
-            );
-          }
-          return `<article class="coordinator-item">
-            <div>
-              <h4>${h(person.name)}</h4>
-              <p>${h(person.department)}</p>
-            </div>
-            ${links.length ? `<div class="coordinator-item__contact">${links.join("")}</div>` : ""}
-          </article>`;
-        })
-        .join(""),
-    );
+    setHtml("#coordinators-list", orgBlock("Co-ordinators", data.coordinators || []));
 
     setHtml(
       "#committees-list",
       data.committees
         .map((committee) => {
           const people = [];
-          if (committee.lead) people.push(`<li><strong>${h(committee.lead)}</strong></li>`);
+          if (committee.lead) {
+            people.push(
+              enrichPerson({
+                name: committee.lead,
+                role: "Lead",
+                email: committee.email || "",
+                phone: committee.phone || "",
+              }),
+            );
+          }
           (committee.members || []).forEach((member) => {
-            people.push(`<li>${h(member)}</li>`);
+            people.push(enrichPerson({ name: member }));
           });
-          const contact = [];
-          if (committee.phone) {
-            contact.push(
-              `<a href="tel:${h(committee.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(committee.phone)}</span></a>`,
-            );
-          }
-          if (committee.email) {
-            contact.push(
-              `<a href="mailto:${h(committee.email)}">${icon("mail")}<span>${h(committee.email)}</span></a>`,
-            );
-          }
-          return `<article class="committee-card reveal">
-              <span class="committee-card__icon">${icon(committee.icon)}</span>
-              <div class="committee-card__body">
-                <h3>${h(committee.name)}</h3>
-                ${people.length ? `<ul class="committee-card__members">${people.join("")}</ul>` : ""}
-              </div>
-              ${contact.length ? `<div class="committee-card__contact">${contact.join("")}</div>` : ""}
-            </article>`;
+          return orgBlock(committee.name, people);
         })
         .join(""),
     );
