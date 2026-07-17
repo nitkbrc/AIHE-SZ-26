@@ -481,31 +481,35 @@
     );
   }
 
-  function personCard(person) {
+  function personCard(person, { showContact = true, showProfile = true } = {}) {
     const links = [];
-    if (person.email) {
+    if (showContact && person.email) {
       links.push(
         `<a href="mailto:${h(person.email)}">${icon("mail")}<span>${h(person.email)}</span></a>`,
       );
     }
-    if (person.phone) {
+    if (showContact && person.phone) {
       links.push(
         `<a href="tel:${h(person.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(person.phone)}</span></a>`,
       );
     }
     const subtitle = person.title || person.department || person.role || "";
-    return `<article class="coordinator reveal">${avatar(person)}<div><h3>${h(person.name)}</h3>${subtitle ? `<p>${h(subtitle)}</p>` : ""}${links.join("")}</div></article>`;
+    const profile =
+      showProfile && person.profile
+        ? `<a class="coordinator__profile" href="${h(person.profile)}" target="_blank" rel="noopener">Profile ${icon("arrow")}</a>`
+        : "";
+    return `<article class="coordinator reveal">${avatar(person)}<div><h3>${h(person.name)}</h3>${subtitle ? `<p>${h(subtitle)}</p>` : ""}${profile}${links.join("")}</div></article>`;
   }
 
-  function personGrid(people) {
-    return `<div class="coordinators-list">${people.map(personCard).join("")}</div>`;
+  function personGrid(people, options) {
+    return `<div class="coordinators-list">${people.map((person) => personCard(person, options)).join("")}</div>`;
   }
 
-  function orgBlock(title, people) {
+  function orgBlock(title, people, options) {
     if (!people.length) return "";
     return `<div class="org-block reveal">
       <h3 class="org-block__title">${h(title)}</h3>
-      ${personGrid(people)}
+      ${personGrid(people, options)}
     </div>`;
   }
 
@@ -520,27 +524,37 @@
       email: person.email || match.email || "",
       phone: person.phone || match.phone || "",
       photo: person.photo || match.photo || "",
+      profile: person.profile || match.profile || "",
       department: person.department || match.department || "",
       title: person.title || match.title || "",
     };
   }
 
   function renderCommitteePage() {
+    const noContact = { showContact: false };
     const leadership = data.leadership || {};
     const leadershipBlocks = [
-      orgBlock("Chief Patron", leadership.chiefPatron ? [enrichPerson(leadership.chiefPatron)] : []),
+      orgBlock(
+        "Chief Patron",
+        leadership.chiefPatron ? [enrichPerson(leadership.chiefPatron)] : [],
+        noContact,
+      ),
       orgBlock(
         "Patrons",
         (leadership.patrons || []).map((patron) => enrichPerson(patron)),
+        noContact,
       ),
       ...(leadership.convenors || []).map((person) =>
-        orgBlock(person.role, [enrichPerson(person)]),
+        orgBlock(person.role, [enrichPerson(person)], noContact),
       ),
     ].join("");
 
     setHtml("#leadership-list", leadershipBlocks);
 
-    setHtml("#coordinators-list", orgBlock("Co-ordinators", data.coordinators || []));
+    setHtml(
+      "#coordinators-list",
+      orgBlock("Co-ordinators", data.coordinators || [], noContact),
+    );
 
     setHtml(
       "#committees-list",
@@ -552,15 +566,15 @@
               enrichPerson({
                 name: committee.lead,
                 role: "Lead",
-                email: committee.email || "",
-                phone: committee.phone || "",
               }),
             );
           }
           (committee.members || []).forEach((member) => {
-            people.push(enrichPerson({ name: member }));
+            const person =
+              typeof member === "string" ? { name: member } : member;
+            people.push(enrichPerson(person));
           });
-          return orgBlock(committee.name, people);
+          return orgBlock(committee.name, people, noContact);
         })
         .join(""),
     );
@@ -582,7 +596,6 @@
 
   function renderContactPage() {
     const pageData = data.contactPage;
-    const sponsorshipContact = data.sponsorship.contact;
     setHtml(
       "#contact-content",
       `<div class="section-heading section-heading--center reveal">
@@ -591,29 +604,8 @@
         <p>${h(pageData.introduction)}</p>
       </div>
       <div class="coordinators-list reveal">${data.coordinators
-        .map((person) => {
-          const links = [];
-          if (person.email) {
-            links.push(
-              `<a href="mailto:${h(person.email)}">${icon("mail")}${h(person.email)}</a>`,
-            );
-          }
-          if (person.phone) {
-            links.push(
-              `<a href="tel:${h(person.phone.replaceAll("-", ""))}">${icon("phone")}${h(person.phone)}</a>`,
-            );
-          }
-          return `<article class="coordinator">${avatar(person)}<div><h3>${h(person.name)}</h3><p>${h(person.department)}</p>${links.join("")}</div></article>`;
-        })
-        .join("")}</div>
-      <div class="sponsor-details">
-        <article class="sponsor-detail sponsor-detail--contact reveal">
-          <p class="eyebrow">Sponsorship queries</p>
-          <h3>${h(sponsorshipContact.name)}</h3>
-          <a href="mailto:${h(sponsorshipContact.email)}">${icon("mail")}${h(sponsorshipContact.email)}</a>
-          <a href="tel:${h(sponsorshipContact.phone.replaceAll("-", ""))}">${icon("phone")}${h(sponsorshipContact.phone)}</a>
-        </article>
-      </div>`,
+        .map((person) => personCard(person, { showProfile: false }))
+        .join("")}</div>`,
     );
   }
 

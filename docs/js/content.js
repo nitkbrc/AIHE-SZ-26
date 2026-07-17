@@ -134,16 +134,20 @@ window.SITE = {
       name: "Prof. Vinay Kumar Pathak",
       title: "President, AIU",
       photo: "assets/images/members/prof-vinay-pathak.jpg",
+      profile: "https://www.aiu.ac.in/documents/index/Prof%20Vinay%20Kumer%20Pathak-Brief%20Profile.pdf",
     },
     patrons: [
       {
         name: "Dr. (Mrs) Pankaj Mittal",
         title: "Secretary General, AIU",
         photo: "assets/images/members/dr-pankaj-mittal.jpg",
+        profile: "https://aiu.ac.in/wp-content/uploads/docs/2026/03/Updated-Breif-Profile-of-Dr-Mrs-Pankaj-Mittal.pdf",
       },
       {
         name: "Prof. (Dr) B. Ravi",
         title: "Director, NITK",
+        photo: "assets/images/members/prof-b-ravi.jpg",
+        profile: "https://www.nitk.ac.in/director",
       },
     ],
     convenors: [
@@ -151,11 +155,14 @@ window.SITE = {
         role: "AIU Convenor",
         name: "Dr. Amarendra Pani",
         title: "Joint Director, Research, AIU",
+        profile: "https://independent.academia.edu/DRAMARENDRAPANI",
       },
       {
         role: "NITK Convenor",
         name: "Dr. B. R. Chandavarkar",
         title: "HoD, Department of CSE, NITK",
+        photo: "assets/images/members/dr-br-chandavarkar.jpg",
+        profile: "https://cse.nitk.ac.in/faculty/b-r-chandravarkar",
       },
     ],
   },
@@ -163,38 +170,43 @@ window.SITE = {
   coordinators: [
     {
       name: "Prof. Annappa B.",
-      department: "CSE Dept.",
+      department: "CSE Dept., NITK, Surathkal",
       email: "annappa@nitk.edu.in",
       phone: "0824-2473426",
-      photo: "",
+      photo: "assets/images/members/prof-annappa.jpg",
+      profile: "https://cse.nitk.ac.in/faculty/annappa",
     },
     {
       name: "Prof. Pushparaj Shetty D.",
-      department: "MACS Dept.",
+      department: "MACS Dept., NITK, Surathkal",
       email: "pushparaj@nitk.edu.in",
       phone: "0824-2473427",
-      photo: "",
+      photo: "assets/images/members/prof-pushparaj-shetty.jpg",
+      profile: "https://macs.nitk.ac.in/faculty/pushparaj-shetty-d",
     },
     {
       name: "Dr. B. R. Chandavarkar",
-      department: "CSE Dept.",
+      department: "CSE Dept., NITK, Surathkal",
       email: "brc@nitk.edu.in",
       phone: "0824-2473408",
-      photo: "assets/images/BRC-Photo.jpg",
+      photo: "assets/images/members/dr-br-chandavarkar.jpg",
+      profile: "https://cse.nitk.ac.in/faculty/b-r-chandravarkar",
     },
     {
       name: "Dr. Jeny Rajan",
-      department: "CSE Dept.",
+      department: "CSE Dept., NITK, Surathkal",
       email: "jenyrajan@nitk.edu.in",
       phone: "0824-2473440",
-      photo: "",
+      photo: "assets/images/members/dr-jeny-rajan.jpg",
+      profile: "https://cse.nitk.ac.in/faculty/jeny-rajan",
     },
     {
       name: "Dr. Anand Kumar M.",
-      department: "IT Dept.",
+      department: "IT Dept., NITK, Surathkal",
       email: "anandkumar@nitk.edu.in",
       phone: "0824-2473439",
-      photo: "",
+      photo: "assets/images/members/dr-anand-kumar.jpg",
+      profile: "https://infotech.nitk.ac.in/faculty/anand-kumar-m",
     },
     {
       name: "Mr. Kartik Acharya",
@@ -202,6 +214,7 @@ window.SITE = {
       email: "",
       phone: "8290579702",
       photo: "",
+      profile: "https://aiu.ac.in/research/research-division/",
     },
   ],
 
@@ -211,11 +224,31 @@ window.SITE = {
       name: "Technical Sessions Committee",
       lead: "Prof. Annappa B.",
       members: [
-        "Dr. Mohit P. Tahiliani",
-        "Dr. Jidesh P.",
-        "Dr. Geetha V.",
-        "Dr. Sowmya Kamath",
-        "Dr. Dinesh Naik",
+        {
+          name: "Dr. Mohit P. Tahiliani",
+          photo: "assets/images/members/dr-mohit-tahiliani.jpg",
+          profile: "https://cse.nitk.ac.in/faculty/mohit-p-tahiliani",
+        },
+        {
+          name: "Dr. Jidesh P.",
+          photo: "assets/images/members/dr-jidesh-p.jpg",
+          profile: "https://macs.nitk.ac.in/faculty/jidesh-p",
+        },
+        {
+          name: "Dr. Geetha V.",
+          photo: "assets/images/members/dr-geetha-v.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/geetha-v",
+        },
+        {
+          name: "Dr. Sowmya Kamath",
+          photo: "assets/images/members/dr-sowmya-kamath.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/sowmya-kamath-s",
+        },
+        {
+          name: "Dr. Dinesh Naik",
+          photo: "assets/images/members/dr-dinesh-naik.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/dinesh-naik",
+        },
       ],
       email: "annappa@nitk.edu.in",
       phone: "0824-2473426",
@@ -224,7 +257,23 @@ window.SITE = {
       icon: "bed",
       name: "Accommodation Committee",
       lead: "Prof. Pushparaj Shetty D.",
-      members: ["Dr. Abhilash M. H.", "Dr. Vamsi A."],
+      members: [
+        {
+          name: "Dr. Abhilash M. H.",
+          photo: "assets/images/members/dr-abhilash-mh.jpg",
+          profile: "https://cse.nitk.ac.in/faculty/abhilash-m-h",
+        },
+        {
+          name: "Dr. Vamsi A.",
+          photo: "assets/images/members/dr-vamsi-a.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/vamshi",
+        },
+        {
+          name: "Dr. Vidyadhar Upadhya",
+          photo: "assets/images/members/dr-vidyadhar-upadhya.jpg",
+          profile: "https://macs.nitk.ac.in/faculty/vidyadhar-upadhya",
+        },
+      ],
       email: "pushparaj@nitk.edu.in",
       phone: "0824-2473427",
     },
@@ -232,7 +281,23 @@ window.SITE = {
       icon: "bus",
       name: "Transportation Committee",
       lead: "Dr. B. R. Chandavarkar",
-      members: ["Dr. Shridhar Sanshi", "Dr. Shrutilipi B."],
+      members: [
+        {
+          name: "Dr. Shridhar Sanshi",
+          photo: "assets/images/members/dr-shridhar-sanshi.jpg",
+          profile: "https://cse.nitk.ac.in/faculty/shridhar-sanshi",
+        },
+        {
+          name: "Dr. Shrutilipi B.",
+          photo: "assets/images/members/dr-shrutilipi-b.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/shrutilipi-bhattacharjee",
+        },
+        {
+          name: "Dr. Jerry W. Sangma",
+          photo: "assets/images/members/dr-jerry-w-sangma.jpg",
+          profile: "https://macs.nitk.ac.in/faculty/jerry-w-sangma",
+        },
+      ],
       email: "brc@nitk.edu.in",
       phone: "0824-2473428",
     },
@@ -240,7 +305,23 @@ window.SITE = {
       icon: "food",
       name: "Catering Committee",
       lead: "Dr. Anand Kumar M.",
-      members: ["Dr. Manjanna B.", "Dr. Kiran M."],
+      members: [
+        {
+          name: "Dr. Manjanna B.",
+          photo: "assets/images/members/dr-manjanna-b.jpg",
+          profile: "https://cse.nitk.ac.in/faculty/manjanna-b",
+        },
+        {
+          name: "Dr. Kiran M.",
+          photo: "assets/images/members/dr-kiran-m.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/kiran-m",
+        },
+        {
+          name: "Dr. Jisna V. A.",
+          photo: "assets/images/members/dr-jisna-va.jpg",
+          profile: "https://macs.nitk.ac.in/faculty/jisna-v",
+        },
+      ],
       email: "anandkumar@nitk.edu.in",
       phone: "0824-2473439",
     },
@@ -248,7 +329,28 @@ window.SITE = {
       icon: "people",
       name: "Ceremonies Committee",
       lead: "Dr. Jeny Rajan",
-      members: ["Dr. Saumya Hegde", "Dr. Bhawana Rudra", "Dr. T. Janani"],
+      members: [
+        {
+          name: "Dr. Saumya Hegde",
+          photo: "assets/images/members/dr-saumya-hegde.jpg",
+          profile: "https://cse.nitk.ac.in/faculty/saumya-hegde",
+        },
+        {
+          name: "Dr. Bhawana Rudra",
+          photo: "assets/images/members/dr-bhawana-rudra.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/bhawana-rudra",
+        },
+        {
+          name: "Dr. Janani T",
+          photo: "assets/images/members/dr-janani-t.jpg",
+          profile: "https://infotech.nitk.ac.in/faculty/janani-t",
+        },
+        {
+          name: "Dr. Mahima",
+          photo: "assets/images/members/dr-mahima.jpg",
+          profile: "https://macs.nitk.ac.in/faculty/mahima",
+        },
+      ],
       email: "jenyrajan@nitk.edu.in",
       phone: "0824-2473440",
     },
@@ -336,7 +438,7 @@ window.SITE = {
   contactPage: {
     heading: "Contact Us",
     introduction:
-      "Reach the organising team for registration, travel, programme, or sponsorship queries.",
+      "Reach the organising team for registration, travel, or programme queries.",
   },
 
   assistance: {

@@ -767,9 +767,11 @@ h3 {
   flex: none;
   color: var(--navy-900);
   background: var(--gold-100);
-  border: 1px solid rgba(233, 185, 23, 0.4);
+  border: 3px solid var(--gold-500);
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 18%;
+  box-shadow: 0 0 0 3px rgba(233, 185, 23, 0.22);
   place-items: center;
 }
 
@@ -1549,6 +1551,8 @@ h3 {
 .coordinator .person-avatar {
   width: 120px;
   height: 120px;
+  border-width: 4px;
+  box-shadow: 0 0 0 4px rgba(233, 185, 23, 0.2);
 }
 
 .coordinator h3 {
@@ -1558,13 +1562,13 @@ h3 {
 }
 
 .coordinator p {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: var(--muted);
   font-size: 0.68rem;
 }
 
-.coordinator a {
-  display: inline-flex;
+.coordinator a:not(.coordinator__profile) {
+  display: flex;
   color: var(--navy-700);
   gap: 6px;
   align-items: center;
@@ -1574,8 +1578,40 @@ h3 {
   word-break: break-word;
 }
 
-.coordinator a + a {
-  margin-top: 6px;
+.coordinator a:not(.coordinator__profile) + a:not(.coordinator__profile) {
+  margin-top: 12px;
+}
+
+.coordinator a.coordinator__profile {
+  display: inline-flex;
+  margin: 0 0 12px;
+  min-height: 34px;
+  padding: 0 16px;
+  color: var(--white);
+  background: var(--navy-700);
+  border: 1px solid transparent;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  word-break: normal;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+}
+
+.coordinator a.coordinator__profile:hover {
+  color: var(--white);
+  background: var(--navy-800);
+  transform: translateY(-1px);
+}
+
+.coordinator a.coordinator__profile .icon {
+  width: 12px;
+  height: 12px;
 }
 
 .reveal {
