@@ -77,6 +77,8 @@
     if (page === "sponsorship" && item.href === "sponsorship.html") return true;
     if (page === "committees" && item.href === "committees.html") return true;
     if (page === "schedule" && item.href === "schedule.html") return true;
+    if (page === "gallery" && item.href === "gallery.html") return true;
+    if (page === "contact" && item.href === "contact.html") return true;
     if (page === "home" && (item.href === "index.html" || item.href === "#top")) {
       return true;
     }
@@ -148,8 +150,8 @@
         <div class="site-header__inner shell">
           <a class="brand" href="${page === "home" ? "#top" : "index.html"}" aria-label="${h(data.brand.short)} conference home">
             <span class="brand__marks">
-              <img src="${h(data.brand.nitkLogo)}" alt="">
               <img src="${h(data.brand.aiuLogo)}" alt="">
+              <img src="${h(data.brand.nitkLogo)}" alt="">
             </span>
             <span class="brand__text"><strong>${h(data.brand.short)}</strong><span>${h(data.brand.name)}</span></span>
           </a>
@@ -194,8 +196,8 @@
           <img class="hero__logo" src="${h(data.brand.aiuLogo)}" alt="AIU">
           <div class="hero__intro">
             <div class="hero__institutes">
-              <p>${h(nitkName)}</p>
               <p>${h(aiuName)}</p>
+              <p>${h(nitkName)}</p>
             </div>
             <p class="eyebrow eyebrow--light">${h(data.brand.heroLine)}</p>
           </div>
@@ -227,36 +229,38 @@
     );
   }
 
-  function renderInstitutionBlock(key, selector) {
+  function institutionBlock(key) {
     const item = data.institutions[key];
-    if (!item) return;
+    if (!item) return "";
     const paragraphs = (item.paragraphs || [])
       .map((text) => `<p>${h(text)}</p>`)
       .join("");
-    setHtml(
-      selector,
-      `<article class="institution-block reveal">
-        <div class="institution-block__copy">
-          <div class="section-heading">
-            <p class="eyebrow">Organising institution</p>
-            <h2>${h(item.heading)}</h2>
-          </div>
-          <div class="institution-block__body">${paragraphs}</div>
-          <a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
-        </div>
-        <div class="institution-block__media">
-          <a class="institution-block__qr" href="${h(item.url)}" target="_blank" rel="noopener">
-            <img src="${h(item.qr)}" alt="QR code for ${h(item.shortName)} website">
-            <span>Scan for website</span>
-          </a>
-        </div>
-      </article>`,
-    );
+    return `<article class="institution-block reveal">
+      <div class="institution-block__copy">
+        <h2>${h(item.heading)}</h2>
+        <div class="institution-block__body">${paragraphs}</div>
+        <a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
+      </div>
+      <div class="institution-block__media">
+        <a class="institution-block__qr" href="${h(item.url)}" target="_blank" rel="noopener">
+          <img src="${h(item.qr)}" alt="QR code for ${h(item.shortName)} website">
+          <span>Scan for website</span>
+        </a>
+      </div>
+    </article>`;
   }
 
   function renderInstitutions() {
-    renderInstitutionBlock("nitk", "#nitk-content");
-    renderInstitutionBlock("aiu", "#aiu-content");
+    setHtml(
+      "#organisers-content",
+      `<div class="section-heading reveal">
+        <p class="eyebrow">Organisers</p>
+      </div>
+      <div class="organisers-stack">
+        ${institutionBlock("aiu")}
+        ${institutionBlock("nitk")}
+      </div>`,
+    );
   }
 
   function renderThemes() {
@@ -273,15 +277,6 @@
 
   function renderSchedulePage() {
     const schedule = data.schedule;
-    const hero = schedule.pageHero;
-    setHtml(
-      "#schedule-hero-content",
-      `<div class="page-hero__copy reveal">
-        <p class="eyebrow eyebrow--light">${h(hero.eyebrow)}</p>
-        <h1>${h(hero.title)}</h1>
-        <p>${h(hero.text)}</p>
-      </div>`,
-    );
 
     setHtml(
       "#schedule-speakers-content",
@@ -355,19 +350,6 @@
   }
 
   function renderSponsorshipPage() {
-    const hero = data.sponsorship.pageHero;
-    setHtml(
-      "#sponsorship-hero-content",
-      `<div class="page-hero__copy reveal">
-        <p class="eyebrow eyebrow--light">${h(hero.eyebrow)}</p>
-        <h1>${h(hero.title)}</h1>
-        <p>${h(hero.text)}</p>
-      </div>
-      <div class="page-hero__actions reveal">
-        <a class="button button--gold" href="#sponsorship">View tiers ${icon("arrow")}</a>
-        <a class="button button--ghost" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">Sponsorship brochure</a>
-      </div>`,
-    );
     renderSponsorship();
   }
 
@@ -376,20 +358,12 @@
     const sponsors = data.sponsors;
 
     setHtml(
-      "#sponsors-hero-content",
-      `<div class="page-hero__copy reveal">
-        <p class="eyebrow eyebrow--light">Partners &amp; sponsors</p>
-        <h1>${h(pageData.heading)}</h1>
-        <p>${h(pageData.introduction)}</p>
-        <p class="page-hero__notice">${h(pageData.sampleNotice)}</p>
-      </div>`,
-    );
-
-    setHtml(
       "#organizers-content",
       `<div class="section-heading section-heading--center reveal">
         <p class="eyebrow">${h(pageData.organizersHeading)}</p>
-        <h2>Institutions driving the dialogue</h2>
+        <h2>${h(pageData.heading)}</h2>
+        <p class="section-intro">${h(pageData.introduction)}</p>
+        <p class="section-notice">${h(pageData.sampleNotice)}</p>
       </div>
       <div class="organizer-cards">${pageData.organizers
         .map(
@@ -403,28 +377,33 @@
         .join("")}</div>`,
     );
 
-    setHtml(
-      "#platinum-content",
-      `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">Platinum sponsors</p>
-        <h2>Featured partners</h2>
-      </div>
-      <div class="platinum-list">${sponsors.platinum
-        .map(
-          (sponsor, index) =>
-            `<article class="platinum-feature reveal${index % 2 === 1 ? " platinum-feature--reverse" : ""}">
-              ${platinumMedia(sponsor)}
-              <div class="platinum-feature__body">
-                <p class="eyebrow">Platinum</p>
-                <h3>${h(sponsor.name)}</h3>
-                <p class="platinum-feature__tagline">${h(sponsor.tagline)}</p>
-                <p>${h(sponsor.description)}</p>
-                <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
-              </div>
-            </article>`,
-        )
-        .join("")}</div>`,
-    );
+    const platinumSection = document.querySelector("#platinum-content")?.closest("section");
+    if (!sponsors.platinum.length) {
+      if (platinumSection) platinumSection.hidden = true;
+    } else {
+      setHtml(
+        "#platinum-content",
+        `<div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Platinum sponsors</p>
+          <h2>Featured partners</h2>
+        </div>
+        <div class="platinum-list">${sponsors.platinum
+          .map(
+            (sponsor, index) =>
+              `<article class="platinum-feature reveal${index % 2 === 1 ? " platinum-feature--reverse" : ""}">
+                ${platinumMedia(sponsor)}
+                <div class="platinum-feature__body">
+                  <p class="eyebrow">Platinum</p>
+                  <h3>${h(sponsor.name)}</h3>
+                  <p class="platinum-feature__tagline">${h(sponsor.tagline)}</p>
+                  <p>${h(sponsor.description)}</p>
+                  <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
+                </div>
+              </article>`,
+          )
+          .join("")}</div>`,
+      );
+    }
 
     function renderTier(selector, heading, items, cardClass) {
       const section = document.querySelector(selector)?.closest("section");
@@ -503,15 +482,64 @@
   }
 
   function renderCommitteePage() {
+    const leadership = data.leadership || {};
+    const patronRows = (leadership.patrons || [])
+      .map(
+        (patron) =>
+          `<li><strong>${h(patron.name)}</strong><span>${h(patron.title)}</span></li>`,
+      )
+      .join("");
+    const convenorRows = (leadership.convenors || [])
+      .map(
+        (person) =>
+          `<div class="leadership-row">
+            <p class="leadership-row__role">${h(person.role)}</p>
+            <p class="leadership-row__name"><strong>${h(person.name)}</strong></p>
+            <p class="leadership-row__title">${h(person.title)}</p>
+          </div>`,
+      )
+      .join("");
+
     setHtml(
-      "#committee-hero-content",
-      `<img class="committee-hero__logo reveal" src="${h(data.brand.nitkLogo)}" alt="NITK">
-      <div class="committee-hero__copy reveal">
-        <p class="eyebrow eyebrow--light">${h(data.brand.eyebrow)}</p>
-        <h1>Committees</h1>
-        <p>Faculty teams coordinating the South Zone Conference programme and arrangements.</p>
-      </div>
-      <img class="committee-hero__logo reveal" src="${h(data.brand.aiuLogo)}" alt="AIU">`,
+      "#leadership-list",
+      `<div class="leadership-grid">
+        <div class="leadership-row leadership-row--chief">
+          <p class="leadership-row__role">Chief Patron</p>
+          <p class="leadership-row__name"><strong>${h(leadership.chiefPatron.name)}</strong></p>
+          <p class="leadership-row__title">${h(leadership.chiefPatron.title)}</p>
+        </div>
+        <div class="leadership-row">
+          <p class="leadership-row__role">Patrons</p>
+          <ul class="leadership-patrons">${patronRows}</ul>
+        </div>
+        ${convenorRows}
+      </div>`,
+    );
+
+    setHtml(
+      "#coordinators-list",
+      data.coordinators
+        .map((person) => {
+          const links = [];
+          if (person.email) {
+            links.push(
+              `<a href="mailto:${h(person.email)}">${icon("mail")}<span>${h(person.email)}</span></a>`,
+            );
+          }
+          if (person.phone) {
+            links.push(
+              `<a href="tel:${h(person.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(person.phone)}</span></a>`,
+            );
+          }
+          return `<article class="coordinator-item">
+            <div>
+              <h4>${h(person.name)}</h4>
+              <p>${h(person.department)}</p>
+            </div>
+            ${links.length ? `<div class="coordinator-item__contact">${links.join("")}</div>` : ""}
+          </article>`;
+        })
+        .join(""),
     );
 
     setHtml(
@@ -519,61 +547,90 @@
       data.committees
         .map((committee) => {
           const people = [];
-          if (committee.lead) people.push(`<strong>${h(committee.lead)}</strong>`);
-          if (committee.title) people.push(`<span>${h(committee.title)}</span>`);
+          if (committee.lead) people.push(`<li><strong>${h(committee.lead)}</strong></li>`);
           (committee.members || []).forEach((member) => {
-            people.push(`<span>${h(member)}</span>`);
+            people.push(`<li>${h(member)}</li>`);
           });
           const contact = [];
-          if (committee.email) {
-            contact.push(
-              `<a href="mailto:${h(committee.email)}">${icon("mail")}<span>${h(committee.email)}</span></a>`,
-            );
-          }
           if (committee.phone) {
             contact.push(
               `<a href="tel:${h(committee.phone.replaceAll("-", ""))}">${icon("phone")}<span>${h(committee.phone)}</span></a>`,
+            );
+          }
+          if (committee.email) {
+            contact.push(
+              `<a href="mailto:${h(committee.email)}">${icon("mail")}<span>${h(committee.email)}</span></a>`,
             );
           }
           return `<article class="committee-card reveal">
               <span class="committee-card__icon">${icon(committee.icon)}</span>
               <div class="committee-card__body">
                 <h3>${h(committee.name)}</h3>
-                ${people.length ? `<div class="committee-card__people">${people.join("")}</div>` : ""}
+                ${people.length ? `<ul class="committee-card__members">${people.join("")}</ul>` : ""}
               </div>
               ${contact.length ? `<div class="committee-card__contact">${contact.join("")}</div>` : ""}
             </article>`;
         })
         .join(""),
     );
+  }
 
+  function renderGalleryPage() {
+    const gallery = data.gallery;
     setHtml(
-      "#coordinators-list",
-      data.coordinators
-        .map(
-          (person) =>
-            `<article class="coordinator reveal">${avatar(person)}<div><h3>${h(person.name)}</h3><p>${h(person.department)}</p><a href="mailto:${h(person.email)}">${icon("mail")}${h(person.email)}</a></div></article>`,
-        )
-        .join(""),
+      "#gallery-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">Photos</p>
+        <h2>${h(gallery.heading)}</h2>
+      </div>
+      <div class="schedule-programme reveal">
+        <p class="schedule-programme__note">${h(gallery.note)}</p>
+      </div>`,
     );
+  }
 
-    const institutions = Object.values(data.institutions)
-      .map((item) => {
-        const summary = (item.paragraphs || []).join(" ");
-        return `<article class="sidebar-block"><img src="${h(item.logo)}" alt=""><div><h3>About ${h(item.shortName)}</h3><p>${h(summary)}</p><a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Learn more ${icon("arrow")}</a></div></article>`;
-      })
-      .join("");
+  function renderContactPage() {
+    const pageData = data.contactPage;
+    const sponsorshipContact = data.sponsorship.contact;
     setHtml(
-      "#committee-sidebar",
-      `${institutions}<article class="sidebar-block sidebar-block--help"><span class="sidebar-block__icon">${icon("mail")}</span><div><h3>${h(data.assistance.heading)}</h3><p>${h(data.assistance.text)}</p><a href="mailto:${h(data.assistance.email)}">${h(data.assistance.email)}</a></div></article>`,
+      "#contact-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">Get in touch</p>
+        <h2>${h(pageData.heading)}</h2>
+        <p>${h(pageData.introduction)}</p>
+      </div>
+      <div class="coordinators-list reveal">${data.coordinators
+        .map((person) => {
+          const links = [];
+          if (person.email) {
+            links.push(
+              `<a href="mailto:${h(person.email)}">${icon("mail")}${h(person.email)}</a>`,
+            );
+          }
+          if (person.phone) {
+            links.push(
+              `<a href="tel:${h(person.phone.replaceAll("-", ""))}">${icon("phone")}${h(person.phone)}</a>`,
+            );
+          }
+          return `<article class="coordinator">${avatar(person)}<div><h3>${h(person.name)}</h3><p>${h(person.department)}</p>${links.join("")}</div></article>`;
+        })
+        .join("")}</div>
+      <div class="sponsor-details">
+        <article class="sponsor-detail sponsor-detail--contact reveal">
+          <p class="eyebrow">Sponsorship queries</p>
+          <h3>${h(sponsorshipContact.name)}</h3>
+          <a href="mailto:${h(sponsorshipContact.email)}">${icon("mail")}${h(sponsorshipContact.email)}</a>
+          <a href="tel:${h(sponsorshipContact.phone.replaceAll("-", ""))}">${icon("phone")}${h(sponsorshipContact.phone)}</a>
+        </article>
+      </div>`,
     );
   }
 
   renderHeader();
   renderFooter();
+  renderHero();
 
   if (page === "home") {
-    renderHero();
     renderAbout();
     renderThemes();
     renderInstitutions();
@@ -584,7 +641,11 @@
     renderSponsorsPage();
   } else if (page === "sponsorship") {
     renderSponsorshipPage();
-  } else {
+  } else if (page === "committees") {
     renderCommitteePage();
+  } else if (page === "gallery") {
+    renderGalleryPage();
+  } else if (page === "contact") {
+    renderContactPage();
   }
 })();

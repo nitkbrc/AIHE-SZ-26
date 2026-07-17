@@ -7,7 +7,7 @@
  */
 window.SITE = {
   brand: {
-    short: "NITK & AIU",
+    short: "AIU & NITK",
     name: "AI in Higher Education",
     eyebrow: "Jointly organised South Zone Conference",
     heroLine: "Jointly Organise South Zone Conference on",
@@ -45,24 +45,26 @@ window.SITE = {
 
   navigation: [
     { label: "Home", href: "index.html" },
-    { label: "Schedule", href: "schedule.html" },
-    { label: "Sponsors", href: "sponsors.html" },
-    { label: "Sponsorship", href: "sponsorship.html" },
     { label: "Committees", href: "committees.html" },
+    { label: "Schedule", href: "schedule.html" },
+    { label: "Sponsorship", href: "sponsorship.html" },
+    { label: "Sponsors", href: "sponsors.html" },
+    { label: "Gallery", href: "gallery.html" },
+    { label: "Contact Us", href: "contact.html" },
   ],
 
   about: {
     heading: "About the Conference",
     paragraphs: [
-      "The conference aims to provide a vibrant platform for academicians, administrators, industry experts, and other stakeholders to deliberate on the strategic integration of AI in higher education. It seeks to encourage speakers and delegates to share best practices adopted in their institutions, industries, and professional careers, aligned with the conference's themes.",
-      "The key observations, recommendations, and outcomes from each technical session's deliberations will be documented and consolidated as the conference's official outcome. The recommendations emerging from the conference will be submitted to the Association of Indian Universities (AIU) for consideration and possible further action, as appropriate.",
-      "The conference, therefore, serves as an important platform for sharing best practices, and collectively shaping the future of AI-driven transformation in higher education in India.",
+      "This conference brings together academicians, administrators, industry experts, and other stakeholders to examine the strategic integration of Artificial Intelligence in higher education. Speakers and delegates will exchange institutional and professional practices aligned with the conference themes.",
+      "Observations, recommendations, and outcomes from each technical session will be documented and consolidated as the official conference proceedings. These recommendations will be submitted to the Association of Indian Universities (AIU) for consideration and further action, as appropriate.",
+      "Through structured deliberation and knowledge exchange, the conference seeks to inform policy and practice for AI-driven transformation in higher education in India.",
     ],
   },
 
   institutions: {
     nitk: {
-      heading: "About NITK, Surathkal",
+      heading: "National Institute of Technology (NITK), Surathkal",
       shortName: "NITK, Surathkal",
       name: "National Institute of Technology Karnataka, Surathkal",
       paragraphs: [
@@ -74,7 +76,7 @@ window.SITE = {
       qr: "assets/images/qr-code-nitk.png",
     },
     aiu: {
-      heading: "About AIU, New Delhi",
+      heading: "Association of Indian Universities (AIU), New Delhi",
       shortName: "AIU, New Delhi",
       name: "Association of Indian Universities",
       paragraphs: [
@@ -117,11 +119,6 @@ window.SITE = {
   ],
 
   schedule: {
-    pageHero: {
-      eyebrow: "Programme",
-      title: "Schedule",
-      text: "Technical session speakers and the conference programme for 18 September 2026.",
-    },
     speakersHeading: "Technical Session Speakers",
     speakers: [
       { name: "Prof. KVG" },
@@ -132,40 +129,76 @@ window.SITE = {
     programmeNote: "Under Construction",
   },
 
+  leadership: {
+    chiefPatron: {
+      name: "Prof. Vinay Kumar Pathak",
+      title: "President, AIU",
+    },
+    patrons: [
+      {
+        name: "Dr. (Mrs) Pankaj Mittal",
+        title: "Secretary General, AIU",
+      },
+      {
+        name: "Prof. (Dr) B. Ravi",
+        title: "Director, NITK",
+      },
+    ],
+    convenors: [
+      {
+        role: "AIU Convenor",
+        name: "Dr. Amarendra Pani",
+        title: "Joint Director, Research, AIU",
+      },
+      {
+        role: "NITK Convenor",
+        name: "Dr. B. R. Chandavarkar",
+        title: "HoD, Department of CSE, NITK",
+      },
+    ],
+  },
+
   coordinators: [
     {
       name: "Prof. Annappa B.",
-      department: "Department of Computer Science & Engineering",
+      department: "CSE Dept.",
       email: "annappa@nitk.edu.in",
       phone: "0824-2473426",
       photo: "",
     },
     {
       name: "Prof. Pushparaj Shetty D.",
-      department: "Department of Mathematical and Computational Sciences",
+      department: "MACS Dept.",
       email: "pushparaj@nitk.edu.in",
       phone: "0824-2473427",
       photo: "",
     },
     {
       name: "Dr. B. R. Chandavarkar",
-      department: "Department of Computer Science & Engineering",
+      department: "CSE Dept.",
       email: "brc@nitk.edu.in",
       phone: "0824-2473408",
       photo: "assets/images/BRC-Photo.jpg",
     },
     {
       name: "Dr. Jeny Rajan",
-      department: "Department of Information Technology",
+      department: "CSE Dept.",
       email: "jenyrajan@nitk.edu.in",
       phone: "0824-2473440",
       photo: "",
     },
     {
       name: "Dr. Anand Kumar M.",
-      department: "Department of Information Technology",
+      department: "IT Dept.",
       email: "anandkumar@nitk.edu.in",
       phone: "0824-2473439",
+      photo: "",
+    },
+    {
+      name: "Mr. Kartik Acharya",
+      department: "Research Division, AIU",
+      email: "",
+      phone: "8290579702",
       photo: "",
     },
   ],
@@ -173,44 +206,49 @@ window.SITE = {
   committees: [
     {
       icon: "book",
-      name: "Technical Session Committee",
+      name: "Technical Sessions Committee",
       lead: "Prof. Annappa B.",
-      members: ["Dr. Mohit P. Tahiliani"],
-      email: "",
-      phone: "",
+      members: [
+        "Dr. Mohit P. Tahiliani",
+        "Dr. Jidesh P.",
+        "Dr. Geetha V.",
+        "Dr. Sowmya Kamath",
+        "Dr. Dinesh Naik",
+      ],
+      email: "annappa@nitk.edu.in",
+      phone: "0824-2473426",
     },
     {
       icon: "bed",
       name: "Accommodation Committee",
-      lead: "",
-      members: [],
-      email: "",
-      phone: "",
+      lead: "Prof. Pushparaj Shetty D.",
+      members: ["Dr. Abhilash M. H.", "Dr. Vamsi A."],
+      email: "pushparaj@nitk.edu.in",
+      phone: "0824-2473427",
     },
     {
       icon: "bus",
       name: "Transportation Committee",
       lead: "Dr. B. R. Chandavarkar",
-      title: "Assoc. Prof. & HOD, Department of CSE, NITK, Surathkal",
-      members: [],
+      members: ["Dr. Shridhar Sanshi", "Dr. Shrutilipi B."],
       email: "brc@nitk.edu.in",
-      phone: "0824-2473408",
+      phone: "0824-2473428",
     },
     {
       icon: "food",
       name: "Catering Committee",
-      lead: "",
-      members: [],
-      email: "",
-      phone: "",
+      lead: "Dr. Anand Kumar M.",
+      members: ["Dr. Manjanna B.", "Dr. Kiran M."],
+      email: "anandkumar@nitk.edu.in",
+      phone: "0824-2473439",
     },
     {
       icon: "people",
       name: "Ceremonies Committee",
-      lead: "",
-      members: [],
-      email: "",
-      phone: "",
+      lead: "Dr. Jeny Rajan",
+      members: ["Dr. Saumya Hegde", "Dr. Bhawana Rudra", "Dr. T. Janani"],
+      email: "jenyrajan@nitk.edu.in",
+      phone: "0824-2473440",
     },
   ],
 
@@ -256,30 +294,24 @@ window.SITE = {
   sponsorship: {
     heading: "Sponsorship Categories and Benefits",
     introduction: "",
-    pageHero: {
-      eyebrow: "Sponsorship opportunities",
-      title: "Sponsorship Opportunities",
-      text: "Explore partnership tiers, branding benefits and payment details for the South Zone Conference on AI in Higher Education.",
-    },
     tiers: [
       { name: "Platinum", contribution: "₹1.5 lakh" },
       { name: "Gold", contribution: "₹1 lakh" },
       { name: "Silver", contribution: "₹50,000" },
-      { name: "Associate", contribution: "₹25,000" },
     ],
     benefits: [
-      { label: "Stage branding", values: ["Yes", "Yes", "—", "—"] },
-      { label: "Backdrop logo", values: ["Yes", "Yes", "Yes", "—"] },
-      { label: "Standee placement", values: ["Yes", "Yes", "—", "—"] },
-      { label: "Exclusive website logo", values: ["Yes", "—", "—", "—"] },
-      { label: "Registration page branding", values: ["Yes", "Yes", "Yes", "Yes"] },
-      { label: "Email and social media branding", values: ["Yes", "Yes", "Yes", "—"] },
-      { label: "Brochure advertisement", values: ["Yes", "Yes", "Yes", "Yes"] },
-      { label: "Delegate bag branding", values: ["Yes", "Yes", "Yes", "Yes"] },
-      { label: "Speaking or keynote opportunity", values: ["10 min", "8 min", "—", "—"] },
-      { label: "Exhibition booth", values: ["2 prime", "1", "—", "—"] },
-      { label: "Delegate contact details", values: ["100%", "50%", "—", "—"] },
-      { label: "Promotional material in kit", values: ["Yes", "Yes", "Yes", "—"] },
+      { label: "Stage branding", values: ["Yes", "Yes", "—"] },
+      { label: "Backdrop logo", values: ["Yes", "Yes", "Yes"] },
+      { label: "Standee placement", values: ["Yes", "Yes", "—"] },
+      { label: "Exclusive website logo", values: ["Yes", "—", "—"] },
+      { label: "Registration page branding", values: ["Yes", "Yes", "Yes"] },
+      { label: "Email and social media branding", values: ["Yes", "Yes", "Yes"] },
+      { label: "Brochure advertisement", values: ["Yes", "Yes", "Yes"] },
+      { label: "Delegate bag branding", values: ["Yes", "Yes", "Yes"] },
+      { label: "Speaking or keynote opportunity", values: ["10 min", "8 min", "—"] },
+      { label: "Exhibition booth", values: ["2 prime", "1", "—"] },
+      { label: "Delegate contact details", values: ["100%", "50%", "—"] },
+      { label: "Promotional material in kit", values: ["Yes", "Yes", "Yes"] },
     ],
     payment: {
       bank: "State Bank of India (SBI)",
@@ -292,6 +324,17 @@ window.SITE = {
       email: "head.cs@nitk.edu.in",
       phone: "0824-2473408",
     },
+  },
+
+  gallery: {
+    heading: "Gallery",
+    note: "Under Construction",
+  },
+
+  contactPage: {
+    heading: "Contact Us",
+    introduction:
+      "Reach the organising team for registration, travel, programme, or sponsorship queries.",
   },
 
   assistance: {
