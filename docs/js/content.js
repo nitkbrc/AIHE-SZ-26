@@ -161,7 +161,7 @@ window.SITE = {
         role: "NITK Convenor",
         name: "Dr. B. R. Chandavarkar",
         title: "HoD, Department of CSE, NITK",
-        photo: "assets/images/members/dr-br-chandavarkar.jpg",
+        photo: "assets/images/BRC-Photo.jpg",
         profile: "https://cse.nitk.ac.in/faculty/b-r-chandravarkar",
       },
     ],
@@ -189,7 +189,7 @@ window.SITE = {
       department: "CSE Dept., NITK, Surathkal",
       email: "brc@nitk.edu.in",
       phone: "0824-2473408",
-      photo: "assets/images/members/dr-br-chandavarkar.jpg",
+      photo: "assets/images/BRC-Photo.jpg",
       profile: "https://cse.nitk.ac.in/faculty/b-r-chandravarkar",
     },
     {
@@ -226,26 +226,31 @@ window.SITE = {
       members: [
         {
           name: "Dr. Mohit P. Tahiliani",
+          department: "CSE Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-mohit-tahiliani.jpg",
           profile: "https://cse.nitk.ac.in/faculty/mohit-p-tahiliani",
         },
         {
           name: "Dr. Jidesh P.",
+          department: "MACS Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-jidesh-p.jpg",
           profile: "https://macs.nitk.ac.in/faculty/jidesh-p",
         },
         {
           name: "Dr. Geetha V.",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-geetha-v.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/geetha-v",
         },
         {
           name: "Dr. Sowmya Kamath",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-sowmya-kamath.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/sowmya-kamath-s",
         },
         {
           name: "Dr. Dinesh Naik",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-dinesh-naik.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/dinesh-naik",
         },
@@ -260,16 +265,19 @@ window.SITE = {
       members: [
         {
           name: "Dr. Abhilash M. H.",
+          department: "CSE Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-abhilash-mh.jpg",
           profile: "https://cse.nitk.ac.in/faculty/abhilash-m-h",
         },
         {
           name: "Dr. Vamsi A.",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-vamsi-a.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/vamshi",
         },
         {
           name: "Dr. Vidyadhar Upadhya",
+          department: "MACS Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-vidyadhar-upadhya.jpg",
           profile: "https://macs.nitk.ac.in/faculty/vidyadhar-upadhya",
         },
@@ -284,16 +292,19 @@ window.SITE = {
       members: [
         {
           name: "Dr. Shridhar Sanshi",
+          department: "CSE Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-shridhar-sanshi.jpg",
           profile: "https://cse.nitk.ac.in/faculty/shridhar-sanshi",
         },
         {
           name: "Dr. Shrutilipi B.",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-shrutilipi-b.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/shrutilipi-bhattacharjee",
         },
         {
           name: "Dr. Jerry W. Sangma",
+          department: "MACS Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-jerry-w-sangma.jpg",
           profile: "https://macs.nitk.ac.in/faculty/jerry-w-sangma",
         },
@@ -308,16 +319,19 @@ window.SITE = {
       members: [
         {
           name: "Dr. Manjanna B.",
+          department: "CSE Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-manjanna-b.jpg",
           profile: "https://cse.nitk.ac.in/faculty/manjanna-b",
         },
         {
           name: "Dr. Kiran M.",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-kiran-m.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/kiran-m",
         },
         {
           name: "Dr. Jisna V. A.",
+          department: "MACS Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-jisna-va.jpg",
           profile: "https://macs.nitk.ac.in/faculty/jisna-v",
         },
@@ -332,21 +346,25 @@ window.SITE = {
       members: [
         {
           name: "Dr. Saumya Hegde",
+          department: "CSE Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-saumya-hegde.jpg",
           profile: "https://cse.nitk.ac.in/faculty/saumya-hegde",
         },
         {
           name: "Dr. Bhawana Rudra",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-bhawana-rudra.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/bhawana-rudra",
         },
         {
           name: "Dr. Janani T",
+          department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-janani-t.jpg",
           profile: "https://infotech.nitk.ac.in/faculty/janani-t",
         },
         {
           name: "Dr. Mahima",
+          department: "MACS Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-mahima.jpg",
           profile: "https://macs.nitk.ac.in/faculty/mahima",
         },
