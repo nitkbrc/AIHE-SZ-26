@@ -74,6 +74,25 @@ window.SITE = {
       url: "https://www.nitk.ac.in/",
       logo: "assets/logos/nitk-crest.png",
       qr: "assets/images/qr-code-nitk.png",
+      howToReach: {
+        heading: "How to Reach NITK, Surathkal",
+        items: [
+          {
+            mode: "By Air",
+            text: "Mangaluru International Airport (IXE) is about 20 km from the campus. Taxis and app-based cabs are readily available from the airport to NITK.",
+          },
+          {
+            mode: "By Train",
+            text: "Surathkal Railway Station is the nearest station, about 2 km from the campus. Mangaluru Central and Mangaluru Junction, the major railway stations, are about 20 km away.",
+          },
+          {
+            mode: "By Road",
+            text: "The campus is located on National Highway 66 (Mangaluru–Udupi highway), about 20 km north of Mangaluru city. Frequent buses ply between Mangaluru and Surathkal.",
+          },
+        ],
+        mapLabel: "View NITK on Google Maps",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=NITK+Surathkal",
+      },
     },
     aiu: {
       heading: "Association of Indian Universities (AIU), New Delhi",

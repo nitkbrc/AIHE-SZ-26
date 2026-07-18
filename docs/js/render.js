@@ -244,6 +244,17 @@
     const paragraphs = (item.paragraphs || [])
       .map((text) => `<p>${h(text)}</p>`)
       .join("");
+    const reach = item.howToReach
+      ? `<div class="institution-block__reach">
+          <h3>${h(item.howToReach.heading)}</h3>
+          <ul>
+            ${item.howToReach.items
+              .map((entry) => `<li><strong>${h(entry.mode)}:</strong> ${h(entry.text)}</li>`)
+              .join("")}
+          </ul>
+          <a class="text-link" href="${h(item.howToReach.mapUrl)}" target="_blank" rel="noopener">${h(item.howToReach.mapLabel)} ${icon("pin")}</a>
+        </div>`
+      : "";
     return `<article class="institution-block reveal">
       <div class="institution-block__copy">
         <div class="institution-block__head">
@@ -251,6 +262,7 @@
           <h2>${h(item.heading)}</h2>
         </div>
         <div class="institution-block__body">${paragraphs}</div>
+        ${reach}
         <a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
       </div>
       <div class="institution-block__media">

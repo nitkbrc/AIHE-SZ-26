@@ -612,6 +612,30 @@ h3 {
   margin-top: 1.1em;
 }
 
+.institution-block__reach {
+  margin-bottom: 22px;
+  padding: 18px 20px;
+  background: rgba(6, 43, 80, 0.035);
+  border-left: 3px solid var(--gold-500);
+}
+
+.institution-block__reach h3 {
+  margin-bottom: 12px;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  color: var(--navy-950);
+}
+
+.institution-block__reach ul {
+  margin: 0 0 14px;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.institution-block__reach li + li {
+  margin-top: 8px;
+}
+
 .institution-block__media {
   display: grid;
   justify-items: center;
