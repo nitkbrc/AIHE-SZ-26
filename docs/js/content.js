@@ -24,6 +24,12 @@ window.SITE = {
     venue: "LHC-C Seminar Hall, NITK, Surathkal",
     heroImage: "assets/images/nitk-campus.jpg",
     heroAlt: "National Institute of Technology Karnataka, Surathkal",
+    // Per-page hero background overrides (keyed by <body data-page="...">).
+    heroImageByPage: {
+      committees: "assets/gallery/nitk/nitk-main-building.jpg",
+      schedule: "assets/gallery/nitk/nitk-campus-panorama.jpg",
+      sponsorship: "assets/gallery/nitk/nitk-lighthouse.jpg",
+    },
   },
 
   registration: {
@@ -40,7 +46,7 @@ window.SITE = {
 
   brochure: {
     url: "assets/brochures/Brochure.pdf",
-    sponsorshipUrl: "assets/brochures/Brochure.pdf",
+    sponsorshipUrl: "assets/images/Sponsor-26.pdf",
   },
 
   navigation: [
@@ -407,8 +413,9 @@ window.SITE = {
         name: "USDC Global",
         logo: "assets/images/usdc_global_logo.jpeg",
         url: "https://www.usdcglobal.com/",
-        tagline: "",
-        description: "",
+        tagline: "Empowering universities to deliver quality online higher education",
+        description:
+          "USDC Global (United Skills Development Corporation) is a Bengaluru-based education technology company that partners with universities and higher education institutions to design, build, and deliver online degree and skill-development programs. Providing end-to-end digital infrastructure — from curriculum design and pedagogical tools to technology platforms and learner support — USDC enables institutions such as JAIN Online, Vignan Online, and Yenepoya Online to reach learners across the globe. With a growing community of learners and collaborations with global professional bodies, USDC is on a mission to make higher education innovative, accessible, and affordable.",
         video: "",
         image: "",
       },
@@ -463,10 +470,10 @@ window.SITE = {
       },
     ],
     benefits: [
-      { label: "Stage Branding", values: ["Yes", "Yes", "—"] },
+      { label: "Stage Branding", values: ["Yes", "—", "—"] },
       { label: "Backdrop Logo", values: ["Yes", "Yes", "Yes"] },
       { label: "Standee Placement", values: ["Yes", "Yes", "—"] },
-      { label: "Website Advertisement", values: ["Logo with 250 words Text & Video Content", "Logo with 250 words Text Content", "Logo"] },
+      { label: "Website Advertisement", values: ["Company Logo, Profile (250 Words) & Video", "Company Logo, Profile (250 Words)", "Logo"] },
       { label: "Registration Page Branding", values: ["Yes", "Yes", "Yes"] },
       { label: "Email and Social Media Branding", values: ["Yes", "Yes", "Yes"] },
       { label: "Brochure Advertisement *", values: ["Yes", "Yes", "—"] },
@@ -481,6 +488,7 @@ window.SITE = {
       address: "NITK Campus, Srinivasa Nagar Post, Mangaluru – 575025",
       ifsc: "SBIN0002273",
       account: "37772503911",
+      merchantName: "03911",
       qr: "assets/images/qr-code-sbi.png",
       qrLabel: "Scan to pay",
     },

@@ -192,9 +192,12 @@
   function renderHero() {
     const nitkName = data.institutions.nitk.name;
     const aiuName = `${data.institutions.aiu.name} (AIU), New Delhi`;
+    const heroImage =
+      (data.event.heroImageByPage && data.event.heroImageByPage[page]) ||
+      data.event.heroImage;
     setHtml(
       "#hero-content",
-      `<div class="hero__image" style="background-image:url('${h(data.event.heroImage)}')" role="img" aria-label="${h(data.event.heroAlt)}"></div>
+      `<div class="hero__image" style="background-image:url('${h(heroImage)}')" role="img" aria-label="${h(data.event.heroAlt)}"></div>
        <div class="hero__veil" aria-hidden="true"></div>
        <div class="shell hero__inner">
         <div class="hero__top reveal">
@@ -414,7 +417,7 @@
           <span class="sponsor-detail__icon">${icon("building")}</span>
           <p class="eyebrow">Payment details</p><h3>${h(payment.bank)}</h3>
           <div class="sponsor-detail__body">
-            <dl><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div></dl>
+            <dl><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div><div><dt>Merchant name</dt><dd>${h(payment.merchantName)}</dd></div></dl>
             ${payment.qr ? `<figure class="sponsor-detail__qr"><img src="${h(payment.qr)}" alt="QR code to pay into the NITK SBI account" loading="lazy"><figcaption>${h(payment.qrLabel || "Scan to pay")}</figcaption></figure>` : ""}
           </div>
         </article>
