@@ -130,6 +130,11 @@
         <img src="${h(sponsor.image)}" alt="${h(sponsor.mediaAlt || sponsor.name)}" loading="lazy">
       </div>`;
     }
+    if (sponsor.logo) {
+      return `<div class="platinum-feature__media platinum-feature__media--logo">
+        <img src="${h(sponsor.logo)}" alt="${h(sponsor.mediaAlt || sponsor.name)}" loading="lazy">
+      </div>`;
+    }
     return `<div class="platinum-feature__media platinum-feature__media--placeholder" role="img" aria-label="${h(sponsor.mediaAlt || sponsor.name)}">
       <span class="platinum-feature__mark">${h(sponsorInitials(sponsor.name))}</span>
       <span class="platinum-feature__placeholder-label">${h(sponsor.name)}</span>
@@ -186,7 +191,7 @@
 
   function renderHero() {
     const nitkName = data.institutions.nitk.name;
-    const aiuName = `${data.institutions.aiu.name} (AIU)`;
+    const aiuName = `${data.institutions.aiu.name} (AIU), New Delhi`;
     setHtml(
       "#hero-content",
       `<div class="hero__image" style="background-image:url('${h(data.event.heroImage)}')" role="img" aria-label="${h(data.event.heroAlt)}"></div>
@@ -197,6 +202,7 @@
           <div class="hero__intro">
             <div class="hero__institutes">
               <p>${h(aiuName)}</p>
+              <p>&amp;</p>
               <p>${h(nitkName)}</p>
             </div>
             <p class="eyebrow eyebrow--light">${h(data.brand.heroLine)}</p>
@@ -224,8 +230,11 @@
   function renderAbout() {
     setHtml(
       "#about-content",
-      `<div class="section-heading reveal"><p class="eyebrow">${h(data.brand.eyebrow)}</p><h2>${h(data.about.heading)}</h2></div>
-       <div class="about__copy reveal">${data.about.paragraphs.map((text) => `<p>${h(text)}</p>`).join("")}</div>`,
+      `<div class="section-heading section-heading--center reveal"><p class="eyebrow">${h(data.brand.eyebrow)}</p><h2>${h(data.about.heading)}</h2></div>
+       <div class="about__copy reveal">
+        <p class="about__lead">${h(data.about.paragraphs[0])}</p>
+        <div class="about__columns">${data.about.paragraphs.slice(1).map((text) => `<p>${h(text)}</p>`).join("")}</div>
+       </div>`,
     );
   }
 
@@ -237,7 +246,10 @@
       .join("");
     return `<article class="institution-block reveal">
       <div class="institution-block__copy">
-        <h2>${h(item.heading)}</h2>
+        <div class="institution-block__head">
+          <img class="institution-block__badge" src="${h(item.logo)}" alt="" loading="lazy">
+          <h2>${h(item.heading)}</h2>
+        </div>
         <div class="institution-block__body">${paragraphs}</div>
         <a class="text-link" href="${h(item.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
       </div>
@@ -253,8 +265,9 @@
   function renderInstitutions() {
     setHtml(
       "#organisers-content",
-      `<div class="section-heading reveal">
+      `<div class="section-heading section-heading--center reveal">
         <p class="eyebrow">Organisers</p>
+        <h2>Organising Institutions</h2>
       </div>
       <div class="organisers-stack">
         ${institutionBlock("aiu")}
@@ -266,12 +279,101 @@
   function renderThemes() {
     setHtml(
       "#themes-content",
-      `<div class="section-heading reveal">
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">Focus areas</p>
         <h2>Themes of the Conference</h2>
       </div>
-      <ul class="themes-list reveal">${data.themes
-        .map((theme) => `<li>${h(theme.title)}</li>`)
-        .join("")}</ul>`,
+      <div class="themes-grid">${data.themes
+        .map(
+          (theme) => `<article class="theme-card reveal">
+            <span class="theme-card__number" aria-hidden="true">${h(theme.number)}</span>
+            <span class="theme-card__icon" aria-hidden="true">${icon(theme.icon)}</span>
+            <h3>${h(theme.title)}</h3>
+          </article>`,
+        )
+        .join("")}</div>`,
+    );
+  }
+
+  function renderSupportedBy() {
+    const container = $("#supported-content");
+    if (!container) return;
+    const section = container.closest("section");
+    const config = data.supportedBy || {};
+    const sponsors = data.sponsors || {};
+    const platinum = sponsors.platinum || [];
+    const gold = sponsors.gold || [];
+    const silver = sponsors.silver || [];
+
+    if (!platinum.length && !gold.length && !silver.length) {
+      if (section) section.hidden = true;
+      return;
+    }
+
+    const platinumBlock = platinum.length
+      ? `<div class="supported-tier reveal">
+          <h3 class="supported-tier__title">Platinum Sponsors</h3>
+          <div class="platinum-list">${platinum
+            .map(
+              (sponsor) =>
+                `<article class="platinum-feature platinum-feature--reverse">
+                  ${platinumMedia(sponsor)}
+                  <div class="platinum-feature__body">
+                    <p class="eyebrow">Platinum</p>
+                    <h3>${h(sponsor.name)}</h3>
+                    ${sponsor.tagline ? `<p class="platinum-feature__tagline">${h(sponsor.tagline)}</p>` : ""}
+                    ${sponsor.description ? `<p>${h(sponsor.description)}</p>` : ""}
+                    <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
+                  </div>
+                </article>`,
+            )
+            .join("")}</div>
+        </div>`
+      : "";
+
+    const goldBlock = gold.length
+      ? `<div class="supported-tier reveal">
+          <h3 class="supported-tier__title">Gold Sponsors</h3>
+          <div class="gold-sponsor-list">${gold
+            .map(
+              (sponsor) =>
+                `<article class="gold-sponsor-card">
+                  <div class="gold-sponsor-card__head">
+                    ${sponsorLogo(sponsor)}
+                    <div>
+                      <h4>${h(sponsor.name)}</h4>
+                      ${sponsor.tagline ? `<span>${h(sponsor.tagline)}</span>` : ""}
+                    </div>
+                  </div>
+                  ${sponsor.description ? `<p>${h(sponsor.description)}</p>` : ""}
+                  <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
+                </article>`,
+            )
+            .join("")}</div>
+        </div>`
+      : "";
+
+    const silverBlock = silver.length
+      ? `<div class="supported-tier reveal">
+          <h3 class="supported-tier__title">Silver Sponsors</h3>
+          <div class="sponsor-tier-grid sponsor-tier-grid--silver">${silver
+            .map(
+              (sponsor) =>
+                `<a class="sponsor-tier-card sponsor-tier-card--logo" href="${h(sponsor.url)}" target="_blank" rel="noopener" title="${h(sponsor.name)}" aria-label="${h(sponsor.name)}">
+                  ${sponsorLogo(sponsor)}
+                </a>`,
+            )
+            .join("")}</div>
+        </div>`
+      : "";
+
+    setHtml(
+      "#supported-content",
+      `<div class="section-heading section-heading--center reveal">
+        <p class="eyebrow">${h(config.label || "Supported by")}</p>
+        <h2>${h(config.heading || "Our Sponsors")}</h2>
+      </div>
+      <div class="supported-tiers">${platinumBlock}${goldBlock}${silverBlock}</div>`,
     );
   }
 
@@ -315,31 +417,79 @@
       .map(
         (benefit) =>
           `<tr><th scope="row">${h(benefit.label)}</th>${benefit.values
-            .map(
-              (value) =>
-                `<td>${value === "Yes" ? `<span class="table-check"><span class="sr-only">Included</span>${icon("check")}</span>` : h(value)}</td>`,
-            )
+            .map((value) => {
+              if (value === "Yes") {
+                return `<td><span class="table-check"><span class="sr-only">Included</span>${icon("check")}</span></td>`;
+              }
+              if (value === "—") {
+                return `<td><span class="table-dash" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>`;
+              }
+              return `<td>${h(value)}</td>`;
+            })
             .join("")}</tr>`,
       )
       .join("");
     const payment = data.sponsorship.payment;
     const contact = data.sponsorship.contact;
 
+    const highlightIcons = ["people", "academic", "mic", "network", "spark"];
+    const highlights = data.sponsorship.highlights
+      .map(
+        (item, index) =>
+          `<li class="highlight-card reveal">
+            <span class="highlight-card__icon">${icon(highlightIcons[index % highlightIcons.length])}</span>
+            <p>${h(item)}</p>
+          </li>`,
+      )
+      .join("");
+
+    const tierCards = data.sponsorship.tiers
+      .map((tier, index) => {
+        const featured = index === 0;
+        const perks = (tier.perks || [])
+          .map((perk) => `<li>${icon("check")}<span>${h(perk)}</span></li>`)
+          .join("");
+        return `<article class="tier-card tier-card--${h(tier.name.toLowerCase())}${featured ? " tier-card--featured" : ""} reveal">
+          ${tier.badge ? `<span class="tier-card__badge">${icon("star")}${h(tier.badge)}</span>` : ""}
+          <p class="tier-card__name">${h(tier.name)}</p>
+          <p class="tier-card__price">${h(tier.contribution)}</p>
+          ${perks ? `<ul class="tier-card__perks">${perks}</ul>` : ""}
+          <a class="button ${featured ? "button--gold" : "button--outline"}" href="mailto:${h(contact.email)}?subject=${encodeURIComponent(`${tier.name} Sponsorship — AIHE South Zone Conference`)}">Sponsor as ${h(tier.name)}</a>
+        </article>`;
+      })
+      .join("");
+
     setHtml(
       "#sponsorship-content",
-      `<div class="sponsorship__intro">
-        <div class="section-heading reveal"><h2>${h(data.sponsorship.heading)}</h2></div>
+      `<div class="sponsorship-highlights">
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Why partner with us</p>
+          <h2>${h(data.sponsorship.highlightsHeading)}</h2>
+        </div>
+        <ul class="highlight-cards">${highlights}</ul>
       </div>
-      <div class="table-wrap reveal" tabindex="0" aria-label="Sponsorship categories and benefits">
-        <table class="sponsorship-table"><thead><tr><th scope="col">Benefits</th>${heads}</tr></thead><tbody>${rows}</tbody></table>
+      <div class="sponsorship__intro">
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Partnership tiers</p>
+          <h2>${h(data.sponsorship.heading)}</h2>
+        </div>
       </div>
-      <p class="table-note">* Subject to the release of the conference brochure. <br># Subject to delegate consent and applicable privacy policy.</p>
+      <div class="tier-cards">${tierCards}</div>
+      <div class="benefits-compare reveal">
+        <p class="benefits-compare__title">Full benefits comparison</p>
+        <div class="table-wrap" tabindex="0" aria-label="Sponsorship categories and benefits">
+          <table class="sponsorship-table"><thead><tr><th scope="col">Benefits</th>${heads}</tr></thead><tbody>${rows}</tbody></table>
+        </div>
+        <p class="table-note">* Subject to the release of the conference brochure. <br># Subject to delegate consent and applicable privacy policy.</p>
+      </div>
       <div class="sponsor-details">
         <article class="sponsor-detail reveal">
+          <span class="sponsor-detail__icon">${icon("building")}</span>
           <p class="eyebrow">Payment details</p><h3>${h(payment.bank)}</h3>
           <dl><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div></dl>
         </article>
         <article class="sponsor-detail sponsor-detail--contact reveal">
+          <span class="sponsor-detail__icon">${icon("mail")}</span>
           <p class="eyebrow">Contact for sponsorship</p><h3>${h(contact.name)}</h3>
           <a href="mailto:${h(contact.email)}">${icon("mail")}${h(contact.email)}</a>
           <a href="tel:${h(contact.phone.replaceAll("-", ""))}">${icon("phone")}${h(contact.phone)}</a>
@@ -357,24 +507,30 @@
     const pageData = data.sponsorsPage;
     const sponsors = data.sponsors;
 
+    const supporters = pageData.supporters;
+    const supportersStrip =
+      supporters && Array.isArray(supporters.items) && supporters.items.length
+        ? `<div class="section-supporters reveal">
+            <span class="section-supporters__label">${h(supporters.label)}</span>
+            <div class="section-supporters__logos">${supporters.items
+              .map(
+                (item) =>
+                  `<a class="section-supporters__item" href="${h(item.url)}" target="_blank" rel="noopener" title="${h(item.name)}">
+                    <img src="${h(item.logo)}" alt="${h(item.name)}" loading="lazy">
+                  </a>`,
+              )
+              .join("")}</div>
+          </div>`
+        : "";
+
     setHtml(
       "#organizers-content",
       `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">${h(pageData.organizersHeading)}</p>
         <h2>${h(pageData.heading)}</h2>
         <p class="section-intro">${h(pageData.introduction)}</p>
         <p class="section-notice">${h(pageData.sampleNotice)}</p>
       </div>
-      <div class="organizer-cards">${pageData.organizers
-        .map(
-          (org) =>
-            `<a class="organizer-card reveal" href="${h(org.url)}" target="_blank" rel="noopener">
-              <span class="organizer-card__icon">${org.logo ? `<img src="${h(org.logo)}" alt="">` : icon(org.icon)}</span>
-              <strong>${h(org.name)}</strong>
-              <span class="organizer-card__role">${h(org.role)}</span>
-            </a>`,
-        )
-        .join("")}</div>`,
+      ${supportersStrip}`,
     );
 
     const platinumSection = document.querySelector("#platinum-content")?.closest("section");
@@ -617,6 +773,7 @@
     renderAbout();
     renderThemes();
     renderInstitutions();
+    renderSupportedBy();
     renderRegistration();
   } else if (page === "schedule") {
     renderSchedulePage();

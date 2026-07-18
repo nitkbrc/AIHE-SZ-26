@@ -43,6 +43,14 @@ window.SITE = {
     sponsorshipUrl: "assets/brochures/Brochure.pdf",
   },
 
+  // "Supported By" section shown on the home page. It groups the confirmed
+  // sponsors listed in the `sponsors` object below by tier:
+  //   Platinum — description + video, Gold — description only, Silver — logo only.
+  supportedBy: {
+    label: "Supported by",
+    heading: "Our Sponsors",
+  },
+
   navigation: [
     { label: "Home", href: "index.html" },
     { label: "Committees", href: "committees.html" },
@@ -56,9 +64,9 @@ window.SITE = {
   about: {
     heading: "About the Conference",
     paragraphs: [
-      "This conference brings together academicians, administrators, industry experts, and other stakeholders to examine the strategic integration of Artificial Intelligence in higher education. Speakers and delegates will exchange institutional and professional practices aligned with the conference themes.",
-      "Observations, recommendations, and outcomes from each technical session will be documented and consolidated as the official conference proceedings. These recommendations will be submitted to the Association of Indian Universities (AIU) for consideration and further action, as appropriate.",
-      "Through structured deliberation and knowledge exchange, the conference seeks to inform policy and practice for AI-driven transformation in higher education in India.",
+      "The conference aims to provide a vibrant platform for academicians, administrators, industry experts, and other stakeholders to deliberate on the strategic integration of AI in higher education. It seeks to encourage speakers and delegates to share best practices adopted in their institutions, industries, and professional careers, aligned with the conference's themes.",
+      "The key observations, recommendations, and outcomes from each technical session's deliberations will be documented and consolidated as the conference's official outcome. The recommendations emanating from the conference will be submitted to the Association of Indian Universities (AIU) for onward transmission to the Ministry of Education for devising policies on AI.",
+      "Therefore, the conference serves as an important platform for sharing best practices, and collectively shaping the future of AI-driven transformation in higher education in India.",
     ],
   },
 
@@ -380,23 +388,6 @@ window.SITE = {
     introduction:
       "Partners supporting the South Zone Conference on the strategic integration of Artificial Intelligence in Higher Education.",
     sampleNotice: "Sponsors to be announced.",
-    organizersHeading: "Primary Organizers",
-    organizers: [
-      {
-        name: "NITK Surathkal",
-        role: "Host Institution",
-        icon: "academic",
-        logo: "assets/logos/nitk-crest.png",
-        url: "https://www.nitk.ac.in/",
-      },
-      {
-        name: "Association of Indian Universities",
-        role: "Co-Organizer",
-        icon: "building",
-        logo: "assets/logos/aiu-mark.png",
-        url: "https://aiu.ac.in/",
-      },
-    ],
     cta: {
       heading: "Join as a Partner",
       text: "Align your brand with the forefront of AI research in higher education. Explore our partnership tiers and benefits.",
@@ -406,20 +397,70 @@ window.SITE = {
   },
 
   // Confirmed sponsors only. Empty tiers stay hidden on the sponsors page.
+  // Platinum: logo + description (up to 250 words) + video (set `video` to an
+  //   mp4 path such as "assets/videos/sponsor.mp4"; `image` is used as the
+  //   poster or as a fallback when there is no video yet).
+  // Gold: logo + description only. Silver: logo only.
   sponsors: {
-    platinum: [],
+    platinum: [
+      {
+        name: "USDC Global",
+        logo: "assets/images/usdc_global_logo.jpeg",
+        url: "https://www.usdcglobal.com/",
+        tagline: "",
+        description: "",
+        video: "",
+        image: "",
+      },
+    ],
     gold: [],
     silver: [],
     associate: [],
   },
 
   sponsorship: {
+    highlightsHeading: "Conference Highlights",
+    highlights: [
+      "Expected participation of ~100 delegates from AIU member universities and premier institutions, including IISc, IITs, IISERs, and NITs across South India.",
+      "Expected participation of Vice Chancellors, Directors, Registrars, Deans, Faculty Members, and Industry Experts.",
+      "Panel discussions and keynote talks by eminent academicians, administrators, and industry leaders.",
+      "Networking and collaboration opportunities with AIU member universities and higher educational institutions.",
+      "Showcase of innovative AI solutions, emerging technologies, and educational innovations.",
+    ],
     heading: "Sponsorship Categories and Benefits",
     introduction: "",
     tiers: [
-      { name: "Platinum", contribution: "₹1.5 Lakh" },
-      { name: "Gold", contribution: "₹1 Lakh" },
-      { name: "Silver", contribution: "₹50,000" },
+      {
+        name: "Platinum",
+        contribution: "₹2 Lakh",
+        badge: "Maximum visibility",
+        perks: [
+          "5-minute speaking opportunity on stage",
+          "2 exhibition booths at a prime location",
+          "Logo, 250-word profile & video on the website",
+          "Contact details of 100% of delegates #",
+        ],
+      },
+      {
+        name: "Gold",
+        contribution: "₹1 Lakh",
+        perks: [
+          "Stage branding & standee placement",
+          "1 exhibition booth",
+          "Logo & 250-word profile on the website",
+          "Contact details of 50% of delegates #",
+        ],
+      },
+      {
+        name: "Silver",
+        contribution: "₹50,000",
+        perks: [
+          "Backdrop logo & registration page branding",
+          "Logo on the conference website",
+          "Delegate bag branding",
+          "Promotional material in the delegate kit",
+        ],
+      },
     ],
     benefits: [
       { label: "Stage Branding", values: ["Yes", "Yes", "—"] },
