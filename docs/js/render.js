@@ -295,88 +295,6 @@
     );
   }
 
-  function renderSupportedBy() {
-    const container = $("#supported-content");
-    if (!container) return;
-    const section = container.closest("section");
-    const config = data.supportedBy || {};
-    const sponsors = data.sponsors || {};
-    const platinum = sponsors.platinum || [];
-    const gold = sponsors.gold || [];
-    const silver = sponsors.silver || [];
-
-    if (!platinum.length && !gold.length && !silver.length) {
-      if (section) section.hidden = true;
-      return;
-    }
-
-    const platinumBlock = platinum.length
-      ? `<div class="supported-tier reveal">
-          <h3 class="supported-tier__title">Platinum Sponsors</h3>
-          <div class="platinum-list">${platinum
-            .map(
-              (sponsor) =>
-                `<article class="platinum-feature platinum-feature--reverse">
-                  ${platinumMedia(sponsor)}
-                  <div class="platinum-feature__body">
-                    <p class="eyebrow">Platinum</p>
-                    <h3>${h(sponsor.name)}</h3>
-                    ${sponsor.tagline ? `<p class="platinum-feature__tagline">${h(sponsor.tagline)}</p>` : ""}
-                    ${sponsor.description ? `<p>${h(sponsor.description)}</p>` : ""}
-                    <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
-                  </div>
-                </article>`,
-            )
-            .join("")}</div>
-        </div>`
-      : "";
-
-    const goldBlock = gold.length
-      ? `<div class="supported-tier reveal">
-          <h3 class="supported-tier__title">Gold Sponsors</h3>
-          <div class="gold-sponsor-list">${gold
-            .map(
-              (sponsor) =>
-                `<article class="gold-sponsor-card">
-                  <div class="gold-sponsor-card__head">
-                    ${sponsorLogo(sponsor)}
-                    <div>
-                      <h4>${h(sponsor.name)}</h4>
-                      ${sponsor.tagline ? `<span>${h(sponsor.tagline)}</span>` : ""}
-                    </div>
-                  </div>
-                  ${sponsor.description ? `<p>${h(sponsor.description)}</p>` : ""}
-                  <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
-                </article>`,
-            )
-            .join("")}</div>
-        </div>`
-      : "";
-
-    const silverBlock = silver.length
-      ? `<div class="supported-tier reveal">
-          <h3 class="supported-tier__title">Silver Sponsors</h3>
-          <div class="sponsor-tier-grid sponsor-tier-grid--silver">${silver
-            .map(
-              (sponsor) =>
-                `<a class="sponsor-tier-card sponsor-tier-card--logo" href="${h(sponsor.url)}" target="_blank" rel="noopener" title="${h(sponsor.name)}" aria-label="${h(sponsor.name)}">
-                  ${sponsorLogo(sponsor)}
-                </a>`,
-            )
-            .join("")}</div>
-        </div>`
-      : "";
-
-    setHtml(
-      "#supported-content",
-      `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">${h(config.label || "Supported by")}</p>
-        <h2>${h(config.heading || "Our Sponsors")}</h2>
-      </div>
-      <div class="supported-tiers">${platinumBlock}${goldBlock}${silverBlock}</div>`,
-    );
-  }
-
   function renderSchedulePage() {
     const schedule = data.schedule;
 
@@ -386,12 +304,9 @@
         <p class="eyebrow">Speakers</p>
         <h2>${h(schedule.speakersHeading)}</h2>
       </div>
-      <div class="speakers-grid">${schedule.speakers
-        .map(
-          (speaker) =>
-            `<article class="speaker reveal">${avatar(speaker)}<h3>${h(speaker.name)}</h3></article>`,
-        )
-        .join("")}</div>`,
+      <div class="schedule-programme reveal">
+        <p class="schedule-programme__note">${h(schedule.speakersNote)}</p>
+      </div>`,
     );
 
     setHtml(
@@ -709,7 +624,7 @@
 
     setHtml(
       "#coordinators-list",
-      orgBlock("Co-ordinators", data.coordinators || [], noContact),
+      orgBlock("NITK Co-ordinators", data.coordinators || [], noContact),
     );
 
     setHtml(
@@ -773,7 +688,6 @@
     renderAbout();
     renderThemes();
     renderInstitutions();
-    renderSupportedBy();
     renderRegistration();
   } else if (page === "schedule") {
     renderSchedulePage();

@@ -29,26 +29,18 @@ window.SITE = {
   registration: {
     url: "https://forms.gle/9rFFwF7PahXsXrtEA",
     deadline: "20 August 2026",
-    confirmationDate: "29 August 2026",
+    confirmationDate: "27 August 2026",
     label: "Register to attend",
     qr: "assets/images/qr-code-registration.png",
     notes: [
       "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",
-      "Last Date for the Registration: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 29.08.2026 (Friday).",
+      "<strong>Last Date for the Registration</strong>: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 27.08.2026 (Thursday).",
     ],
   },
 
   brochure: {
     url: "assets/brochures/Brochure.pdf",
     sponsorshipUrl: "assets/brochures/Brochure.pdf",
-  },
-
-  // "Supported By" section shown on the home page. It groups the confirmed
-  // sponsors listed in the `sponsors` object below by tier:
-  //   Platinum — description + video, Gold — description only, Silver — logo only.
-  supportedBy: {
-    label: "Supported by",
-    heading: "Our Sponsors",
   },
 
   navigation: [
@@ -128,11 +120,7 @@ window.SITE = {
 
   schedule: {
     speakersHeading: "Technical Session Speakers",
-    speakers: [
-      { name: "Prof. KVG" },
-      { name: "Prof. Ananatnarayan" },
-      { name: "Prof. G. Ram Mohan Reddy" },
-    ],
+    speakersNote: "Under Construction",
     programmeHeading: "Programme Schedule",
     programmeNote: "Under Construction",
   },
@@ -164,13 +152,6 @@ window.SITE = {
         name: "Dr. Amarendra Pani",
         title: "Joint Director, Research, AIU",
         profile: "https://independent.academia.edu/DRAMARENDRAPANI",
-      },
-      {
-        role: "NITK Convenor",
-        name: "Dr. B. R. Chandavarkar",
-        title: "HoD, Department of CSE, NITK",
-        photo: "assets/images/BRC-Photo.jpg",
-        profile: "https://cse.nitk.ac.in/faculty/b-r-chandravarkar",
       },
     ],
   },
@@ -508,6 +489,6 @@ window.SITE = {
 
   footer: {
     note: "South Zone Conference on AI in Higher Education",
-    copyright: "© 2026 NITK Surathkal & Association of Indian Universities.",
+    copyright: "© Copyright All Rights Reserved 2026, NITK Surathkal",
   },
 };
