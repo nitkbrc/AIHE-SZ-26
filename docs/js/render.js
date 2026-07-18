@@ -413,7 +413,10 @@
         <article class="sponsor-detail reveal">
           <span class="sponsor-detail__icon">${icon("building")}</span>
           <p class="eyebrow">Payment details</p><h3>${h(payment.bank)}</h3>
-          <dl><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div></dl>
+          <div class="sponsor-detail__body">
+            <dl><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div></dl>
+            ${payment.qr ? `<figure class="sponsor-detail__qr"><img src="${h(payment.qr)}" alt="QR code to pay into the NITK SBI account" loading="lazy"><figcaption>${h(payment.qrLabel || "Scan to pay")}</figcaption></figure>` : ""}
+          </div>
         </article>
         <article class="sponsor-detail sponsor-detail--contact reveal">
           <span class="sponsor-detail__icon">${icon("mail")}</span>
@@ -665,16 +668,128 @@
 
   function renderGalleryPage() {
     const gallery = data.gallery;
+    const sections = gallery.sections || [];
+
+    const sectionsHtml = sections
+      .map(
+        (section, sectionIndex) => `<div class="gallery-section reveal" id="${h(section.id)}">
+          <div class="section-heading section-heading--center">
+            <p class="eyebrow">${h(section.eyebrow)}</p>
+            <h2>${h(section.title)}</h2>
+            <p>${h(section.description)}</p>
+          </div>
+          <div class="photo-grid">
+            ${section.photos
+              .map(
+                (photo, photoIndex) => `<button
+                  type="button"
+                  class="photo-tile${photo.size ? ` photo-tile--${h(photo.size)}` : ""}"
+                  data-section="${sectionIndex}"
+                  data-photo="${photoIndex}"
+                  aria-label="View photo: ${h(photo.caption)}"
+                >
+                  <img src="${h(photo.src)}" alt="${h(photo.alt)}" loading="lazy">
+                  <span class="photo-tile__caption">${h(photo.caption)}</span>
+                </button>`,
+              )
+              .join("")}
+          </div>
+          ${
+            section.attribution
+              ? `<p class="gallery-attribution">${h(section.attribution)}</p>`
+              : ""
+          }
+        </div>`,
+      )
+      .join("");
+
     setHtml(
       "#gallery-content",
       `<div class="section-heading section-heading--center reveal">
         <p class="eyebrow">Photos</p>
         <h2>${h(gallery.heading)}</h2>
       </div>
-      <div class="schedule-programme reveal">
-        <p class="schedule-programme__note">${h(gallery.note)}</p>
-      </div>`,
+      ${sectionsHtml}`,
     );
+
+    setupGalleryLightbox(sections);
+  }
+
+  function setupGalleryLightbox(sections) {
+    const lightbox = document.createElement("div");
+    lightbox.className = "lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Photo viewer");
+    lightbox.hidden = true;
+    lightbox.innerHTML = `
+      <button type="button" class="lightbox__close" aria-label="Close photo viewer">${icon("close")}</button>
+      <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">${icon("arrow")}</button>
+      <figure class="lightbox__figure">
+        <img class="lightbox__image" src="" alt="">
+        <figcaption class="lightbox__caption">
+          <span class="lightbox__title"></span>
+          <span class="lightbox__meta"></span>
+        </figcaption>
+      </figure>
+      <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">${icon("arrow")}</button>`;
+    document.body.appendChild(lightbox);
+
+    const image = lightbox.querySelector(".lightbox__image");
+    const title = lightbox.querySelector(".lightbox__title");
+    const meta = lightbox.querySelector(".lightbox__meta");
+    let current = { section: 0, photo: 0 };
+    let lastFocus = null;
+
+    function show(sectionIndex, photoIndex) {
+      const photos = sections[sectionIndex].photos;
+      const index = (photoIndex + photos.length) % photos.length;
+      const photo = photos[index];
+      current = { section: sectionIndex, photo: index };
+      image.src = photo.src;
+      image.alt = photo.alt;
+      title.textContent = photo.caption;
+      meta.textContent = `${index + 1} of ${photos.length}${
+        photo.credit ? ` · Photo: ${photo.credit}` : ""
+      }`;
+    }
+
+    function open(sectionIndex, photoIndex) {
+      lastFocus = document.activeElement;
+      show(sectionIndex, photoIndex);
+      lightbox.hidden = false;
+      document.body.classList.add("lightbox-open");
+      lightbox.querySelector(".lightbox__close").focus();
+    }
+
+    function close() {
+      lightbox.hidden = true;
+      document.body.classList.remove("lightbox-open");
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll(".photo-tile").forEach((tile) => {
+      tile.addEventListener("click", () => {
+        open(Number(tile.dataset.section), Number(tile.dataset.photo));
+      });
+    });
+
+    lightbox.querySelector(".lightbox__close").addEventListener("click", close);
+    lightbox
+      .querySelector(".lightbox__nav--prev")
+      .addEventListener("click", () => show(current.section, current.photo - 1));
+    lightbox
+      .querySelector(".lightbox__nav--next")
+      .addEventListener("click", () => show(current.section, current.photo + 1));
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (lightbox.hidden) return;
+      if (event.key === "Escape") close();
+      if (event.key === "ArrowLeft") show(current.section, current.photo - 1);
+      if (event.key === "ArrowRight") show(current.section, current.photo + 1);
+    });
   }
 
   function renderContactPage() {

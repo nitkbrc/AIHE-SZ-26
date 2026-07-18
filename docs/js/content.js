@@ -481,6 +481,8 @@ window.SITE = {
       address: "NITK Campus, Srinivasa Nagar Post, Mangaluru – 575025",
       ifsc: "SBIN0002273",
       account: "37772503911",
+      qr: "assets/images/qr-code-sbi.png",
+      qrLabel: "Scan to pay",
     },
     contact: {
       name: "Dr. B. R. Chandavarkar",
@@ -491,7 +493,70 @@ window.SITE = {
 
   gallery: {
     heading: "Gallery",
-    note: "Under Construction",
+    sections: [
+      {
+        id: "nitk-surathkal",
+        eyebrow: "The Venue",
+        title: "NITK, Surathkal",
+        description:
+          "Spread across 295 acres along the Arabian Sea coast, the National Institute of Technology Karnataka, Surathkal offers a scenic setting for the conference — from its iconic main building and lighthouse to its private beach.",
+        attribution:
+          "Photographs courtesy of NITK Surathkal and respective publishers.",
+        photos: [
+          {
+            src: "assets/gallery/nitk/nitk-lighthouse.jpg",
+            alt: "Surathkal lighthouse near the NITK campus",
+            caption: "Surathkal Lighthouse",
+            credit: "NITK Alumni Network",
+            size: "featured",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-campus-official.jpg",
+            alt: "View of the NITK Surathkal campus",
+            caption: "NITK Surathkal Campus",
+            credit: "NIT Karnataka, Surathkal",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-main-building.jpg",
+            alt: "NITK Surathkal campus building",
+            caption: "Around the Institute",
+            credit: "The Times of India",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-campus-panorama.jpg",
+            alt: "Panoramic view of the NITK Surathkal campus",
+            caption: "Campus Panorama",
+            credit: "College360",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-beach.jpg",
+            alt: "NITK Beach along the Arabian Sea",
+            caption: "NITK Beach",
+            credit: "NITK Surathkal",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-alumni-campus.png",
+            alt: "NITK Surathkal campus from the alumni gallery",
+            caption: "Campus Views",
+            credit: "NITK Alumni & Corporate Relations",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-campus-view.jpg",
+            alt: "A view of the NITK Surathkal campus",
+            caption: "Around the Campus",
+            credit: "CollegeDekho",
+          },
+          {
+            src: "assets/gallery/nitk/nitk-campus-gardens.jpg",
+            alt: "Greenery on the NITK Surathkal campus",
+            caption: "Campus Greenery",
+            credit: "Aaj Tak",
+          },
+        ],
+      },
+    ],
   },
 
   contactPage: {
