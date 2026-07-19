@@ -489,13 +489,15 @@ window.SITE = {
       { label: "Promotional Material in Kit", values: ["Yes", "Yes", "Yes"] },
     ],
     payment: {
+      name: "NITK, Surathkal",
       bank: "State Bank of India (SBI)",
       address: "NITK Campus, Srinivasa Nagar Post, Mangaluru – 575025",
-      ifsc: "SBIN0002273",
       account: "37772503911",
-      merchantName: "03911",
+      ifsc: "SBIN0002273",
       qr: "assets/images/qr-code-sbi.png",
       qrLabel: "Scan to pay",
+      qrMerchantName: "03911",
+      upiId: "xyz3911.948@sbi",
     },
     contact: {
       name: "Dr. B. R. Chandavarkar",

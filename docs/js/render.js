@@ -475,8 +475,8 @@
           <span class="sponsor-detail__icon">${icon("building")}</span>
           <p class="eyebrow">Payment details</p><h3>${h(payment.bank)}</h3>
           <div class="sponsor-detail__body">
-            <dl><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div><div><dt>Merchant name</dt><dd>${h(payment.merchantName)}</dd></div></dl>
-            ${payment.qr ? `<figure class="sponsor-detail__qr"><img src="${h(payment.qr)}" alt="QR code to pay into the NITK SBI account" loading="lazy"><figcaption>${h(payment.qrLabel || "Scan to pay")}</figcaption></figure>` : ""}
+            <dl><div><dt>Name</dt><dd>${h(payment.name)}</dd></div><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div></dl>
+            ${payment.qr ? `<figure class="sponsor-detail__qr"><img src="${h(payment.qr)}" alt="QR code to pay into the NITK SBI account" loading="lazy"><figcaption>${h(payment.qrLabel || "Scan to pay")}</figcaption><p class="sponsor-detail__qr-meta">Merchant name: ${h(payment.qrMerchantName)}<br>UPI ID: ${h(payment.upiId)}</p></figure>` : ""}
           </div>
         </article>
         <article class="sponsor-detail sponsor-detail--contact reveal">
