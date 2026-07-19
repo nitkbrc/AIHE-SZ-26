@@ -50,6 +50,8 @@
       '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/>',
     check: '<path d="m5 12 4 4L19 6"/>',
     star: '<path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.9L12 3Z"/>',
+    whatsapp:
+      '<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M9.2 8.4c-.4 0-.8.4-.8 1 0 2.9 3.3 6.2 6.2 6.2.6 0 1-.4 1-.8 0-.5-.9-1.3-1.5-1.4-.4-.1-.8.5-1.2.4-.9-.2-2.5-1.8-2.7-2.7-.1-.4.5-.8.4-1.2-.1-.6-.9-1.5-1.4-1.5Z"/>',
   };
 
   function icon(name, className = "") {
@@ -478,6 +480,8 @@
             <dl><div><dt>Name</dt><dd>${h(payment.name)}</dd></div><div><dt>Address</dt><dd>${h(payment.address)}</dd></div><div><dt>Account number</dt><dd>${h(payment.account)}</dd></div><div><dt>IFSC code</dt><dd>${h(payment.ifsc)}</dd></div></dl>
             ${payment.qr ? `<figure class="sponsor-detail__qr"><img src="${h(payment.qr)}" alt="QR code to pay into the NITK SBI account" loading="lazy"><figcaption>${h(payment.qrLabel || "Scan to pay")}</figcaption><p class="sponsor-detail__qr-meta">Merchant name: ${h(payment.qrMerchantName)}<br>UPI ID: ${h(payment.upiId)}</p></figure>` : ""}
           </div>
+          <p class="sponsor-detail__note">Already made the payment? Let the sponsorship coordinator know.</p>
+          <button type="button" class="button button--whatsapp" data-sponsor-whatsapp>${icon("whatsapp")}Share payment confirmation on WhatsApp</button>
         </article>
         <article class="sponsor-detail sponsor-detail--contact reveal">
           <span class="sponsor-detail__icon">${icon("mail")}</span>
@@ -490,8 +494,126 @@
     );
   }
 
+  function setupSponsorWhatsApp() {
+    const modal = document.createElement("div");
+    modal.className = "wa-modal";
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="wa-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="wa-modal-title">
+        <button class="wa-modal__close" type="button" aria-label="Close">${icon("close")}</button>
+        <h3 id="wa-modal-title">Share payment confirmation</h3>
+        <p>Enter the details below and your WhatsApp will open with a pre-filled message to the sponsorship coordinator.</p>
+        <form class="wa-form" novalidate>
+          <div class="wa-form__field">
+            <label for="wa-mobile">Your mobile number</label>
+            <input id="wa-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10-digit mobile number" required>
+          </div>
+          <div class="wa-form__field">
+            <label for="wa-mobile-confirm">Re-enter mobile number (verification)</label>
+            <input id="wa-mobile-confirm" name="mobileConfirm" type="tel" inputmode="numeric" maxlength="10" placeholder="Re-enter to verify" required>
+          </div>
+          <div class="wa-form__field">
+            <label for="wa-transaction">Transaction no. (UTR / reference)</label>
+            <input id="wa-transaction" name="transaction" type="text" maxlength="40" placeholder="e.g. UTR / transaction reference" required>
+          </div>
+          <div class="wa-form__field">
+            <label for="wa-date">Date of transaction</label>
+            <input id="wa-date" name="date" type="date" required>
+          </div>
+          <p class="wa-form__error" role="alert" hidden></p>
+          <button type="submit" class="button button--whatsapp">${icon("whatsapp")}Open WhatsApp</button>
+        </form>
+      </div>`;
+    document.body.appendChild(modal);
+
+    const form = modal.querySelector(".wa-form");
+    const errorBox = modal.querySelector(".wa-form__error");
+    const mobileInput = modal.querySelector("#wa-mobile");
+    const confirmInput = modal.querySelector("#wa-mobile-confirm");
+    const transactionInput = modal.querySelector("#wa-transaction");
+    const dateInput = modal.querySelector("#wa-date");
+    dateInput.max = new Date().toISOString().slice(0, 10);
+
+    const open = () => {
+      modal.hidden = false;
+      document.body.classList.add("lightbox-open");
+      mobileInput.focus();
+    };
+    const close = () => {
+      modal.hidden = true;
+      document.body.classList.remove("lightbox-open");
+      form.reset();
+      errorBox.hidden = true;
+    };
+    const fail = (message, field) => {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+      if (field) field.focus();
+    };
+
+    document.addEventListener("click", (event) => {
+      if (event.target.closest("[data-sponsor-whatsapp]")) open();
+    });
+    modal.querySelector(".wa-modal__close").addEventListener("click", close);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (!modal.hidden && event.key === "Escape") close();
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      errorBox.hidden = true;
+
+      const mobile = mobileInput.value.replace(/\D/g, "");
+      const confirmMobile = confirmInput.value.replace(/\D/g, "");
+      const transaction = transactionInput.value.trim();
+      const date = dateInput.value;
+
+      if (!/^[6-9]\d{9}$/.test(mobile)) {
+        fail("Please enter a valid 10-digit Indian mobile number.", mobileInput);
+        return;
+      }
+      if (mobile !== confirmMobile) {
+        fail("The two mobile numbers do not match. Please re-check.", confirmInput);
+        return;
+      }
+      if (transaction.length < 4) {
+        fail("Please enter a valid transaction / UTR reference number.", transactionInput);
+        return;
+      }
+      if (!date) {
+        fail("Please select the date of the transaction.", dateInput);
+        return;
+      }
+      if (date > dateInput.max) {
+        fail("The transaction date cannot be in the future.", dateInput);
+        return;
+      }
+
+      const prettyDate = new Date(`${date}T00:00:00`).toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+      const message = [
+        "Sponsorship payment confirmation \u2013 AIU South Zone Conference on AI in Higher Education (NITK, Surathkal)",
+        "",
+        `Mobile number: ${mobile}`,
+        `Transaction no.: ${transaction}`,
+        `Date of transaction: ${prettyDate}`,
+      ].join("\n");
+
+      const target = `https://wa.me/${window.atob("OTE5ODgwMjcwOTYx")}?text=${encodeURIComponent(message)}`;
+      window.open(target, "_blank", "noopener");
+      close();
+    });
+  }
+
   function renderSponsorshipPage() {
     renderSponsorship();
+    setupSponsorWhatsApp();
   }
 
   function renderSponsorsPage() {
