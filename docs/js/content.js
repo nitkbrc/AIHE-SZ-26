@@ -414,18 +414,7 @@ window.SITE = {
   //   poster or as a fallback when there is no video yet).
   // Gold: logo + description only. Silver: logo only.
   sponsors: {
-    platinum: [
-      {
-        name: "USDC Global",
-        logo: "assets/images/usdc_global_logo.jpeg",
-        url: "https://www.usdcglobal.com/",
-        tagline: "Empowering universities to deliver quality online higher education",
-        description:
-          "USDC Global (United Skills Development Corporation) is a Bengaluru-based education technology company that partners with universities and higher education institutions to design, build, and deliver online degree and skill-development programs. Providing end-to-end digital infrastructure — from curriculum design and pedagogical tools to technology platforms and learner support — USDC enables institutions such as JAIN Online, Vignan Online, and Yenepoya Online to reach learners across the globe. With a growing community of learners and collaborations with global professional bodies, USDC is on a mission to make higher education innovative, accessible, and affordable.",
-        video: "",
-        image: "",
-      },
-    ],
+    platinum: [],
     gold: [],
     silver: [],
     associate: [],
