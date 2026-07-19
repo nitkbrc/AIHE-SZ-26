@@ -442,7 +442,7 @@
           <p class="tier-card__name">${h(tier.name)}</p>
           <p class="tier-card__price">${h(tier.contribution)}</p>
           ${perks ? `<ul class="tier-card__perks">${perks}</ul>` : ""}
-          <a class="button ${featured ? "button--gold" : "button--outline"}" href="mailto:aihesz26@nitk.edu.in?subject=${encodeURIComponent(`${tier.name} Sponsorship — AIHE South Zone Conference`)}">Sponsor as ${h(tier.name)}</a>
+          <a class="button ${featured ? "button--gold" : "button--outline"}" href="#payment-details">Sponsor as ${h(tier.name)}</a>
         </article>`;
       })
       .join("");
@@ -471,7 +471,7 @@
         <p class="table-note">* Subject to the release of the conference brochure. <br># Subject to delegate consent and applicable privacy policy.</p>
       </div>
       <div class="sponsor-details">
-        <article class="sponsor-detail reveal">
+        <article class="sponsor-detail reveal" id="payment-details">
           <span class="sponsor-detail__icon">${icon("building")}</span>
           <p class="eyebrow">Payment details</p><h3>${h(payment.bank)}</h3>
           <div class="sponsor-detail__body">
@@ -482,7 +482,7 @@
         <article class="sponsor-detail sponsor-detail--contact reveal">
           <span class="sponsor-detail__icon">${icon("mail")}</span>
           <p class="eyebrow">Contact for sponsorship</p><h3>${h(contact.name)}</h3>
-          <a href="mailto:${h(contact.email)}">${icon("mail")}${h(contact.email)}</a>
+          <a href="mailto:${h(contact.email)}?subject=${encodeURIComponent("Conference Sponsorship – Expression of Interest")}">${icon("mail")}${h(contact.email)}</a>
           <a href="tel:${h(contact.phone.replaceAll("-", ""))}">${icon("phone")}${h(contact.phone)}</a>
           <a class="text-link" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">View sponsorship brochure ${icon("arrow")}</a>
         </article>
