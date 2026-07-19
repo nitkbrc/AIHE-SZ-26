@@ -451,7 +451,7 @@ window.SITE = {
           "5-minute speaking opportunity on stage",
           "2 exhibition booths at a prime location",
           "Logo, 250-word profile & video on the website",
-          "Contact details of 100% of delegates #",
+          "Contact details of delegates #",
         ],
       },
       {
@@ -461,7 +461,6 @@ window.SITE = {
           "Stage branding & standee placement",
           "1 exhibition booth",
           "Logo & 250-word profile on the website",
-          "Contact details of 50% of delegates #",
         ],
       },
       {
@@ -481,12 +480,12 @@ window.SITE = {
       { label: "Standee Placement", values: ["Yes", "Yes", "—"] },
       { label: "Website Advertisement", values: ["Company Logo, Profile (250 Words) & Video", "Company Logo, Profile (250 Words)", "Logo"] },
       { label: "Registration Page Branding", values: ["Yes", "Yes", "Yes"] },
-      { label: "Email and Social Media Branding", values: ["Yes", "Yes", "Yes"] },
+      { label: "Email and Social Media Branding", values: ["Yes", "Yes", "—"] },
       { label: "Brochure Advertisement *", values: ["Yes", "Yes", "—"] },
       { label: "Delegate Bag Branding", values: ["Yes", "Yes", "Yes"] },
       { label: "Speaking Opportunity", values: ["5 min", "—", "—"] },
       { label: "Exhibition Booth", values: ["2, at Prime Location", "1", "—"] },
-      { label: "Delegate Contact Details #", values: ["100%", "50%", "—"] },
+      { label: "Delegate Contact Details #", values: ["Yes", "—", "—"] },
       { label: "Promotional Material in Kit", values: ["Yes", "Yes", "Yes"] },
     ],
     payment: {

@@ -1110,6 +1110,9 @@ h3 {
 }
 
 .table-wrap {
+  /* Positioning context so the absolutely-positioned .sr-only labels inside
+     the table are clipped by this scroll container instead of widening the page. */
+  position: relative;
   overflow-x: auto;
   border: 1px solid var(--line);
   background: var(--white);
@@ -1948,6 +1951,34 @@ h3 {
   color: var(--white);
   background: var(--navy-900);
   border-color: var(--navy-900);
+}
+
+/* Committee page has six tabs; a fixed grid keeps rows balanced
+   instead of leaving an orphan tab on the wrapped line. */
+.committee-page .org-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.committee-page .org-tab {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 780px) {
+  .committee-page .org-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  .committee-page .org-tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .org-stack {
