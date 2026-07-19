@@ -62,6 +62,47 @@
     if (element) element.innerHTML = html;
   }
 
+  function brochureLink(label, className = "") {
+    const classAttr = className ? ` class="${className}"` : "";
+    if (data.brochure.available) {
+      return `<a${classAttr} href="${h(data.brochure.url)}" target="_blank" rel="noopener">${label}</a>`;
+    }
+    return `<a${classAttr} href="#" data-brochure-pending role="button">${label}</a>`;
+  }
+
+  function setupBrochureNotice() {
+    if (data.brochure.available) return;
+    const messages = data.brochure.pendingMessage || [];
+    const notice = document.createElement("div");
+    notice.className = "brochure-notice";
+    notice.hidden = true;
+    notice.innerHTML = `
+      <div class="brochure-notice__dialog" role="dialog" aria-modal="true" aria-labelledby="brochure-notice-title">
+        <button class="brochure-notice__close" type="button" aria-label="Close">${icon("close")}</button>
+        <h3 id="brochure-notice-title">Brochure coming soon</h3>
+        ${messages.map((text) => `<p>${h(text)}</p>`).join("")}
+      </div>`;
+    document.body.appendChild(notice);
+
+    const close = () => {
+      notice.hidden = true;
+    };
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-brochure-pending]");
+      if (!trigger) return;
+      event.preventDefault();
+      notice.hidden = false;
+    });
+    notice.addEventListener("click", (event) => {
+      if (event.target === notice) close();
+    });
+    notice.querySelector(".brochure-notice__close").addEventListener("click", close);
+    document.addEventListener("keydown", (event) => {
+      if (!notice.hidden && event.key === "Escape") close();
+    });
+  }
+
   function pageHref(href) {
     if (page === "home" && href.startsWith("index.html#")) {
       return href.slice("index.html".length);
@@ -166,7 +207,7 @@
           </button>
           <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
             ${links}
-            <a class="button button--small button--gold" href="${h(data.registration.url)}" target="_blank" rel="noopener">${h(data.registration.label)}</a>
+            <a class="button button--small button--gold" href="${pageHref("index.html#register")}">${h(data.registration.label)}</a>
           </nav>
         </div>
       </header>`,
@@ -181,7 +222,7 @@
           <div class="footer-brand"><strong>${h(data.brand.short)}</strong><span>${h(data.footer.note)}</span></div>
           <div class="site-footer__meta">
             <a href="mailto:${h(data.assistance.email)}">Contact</a>
-            <a href="${h(data.brochure.url)}" target="_blank">Conference brochure</a>
+            ${brochureLink("Conference brochure")}
             <span>${h(data.footer.copyright)}</span>
           </div>
         </div>
@@ -222,8 +263,8 @@
             <span>${icon("pin")}${h(data.event.venue)}</span>
           </div>
           <div class="button-row">
-            <a class="button button--gold" href="${h(data.registration.url)}" target="_blank" rel="noopener">${h(data.registration.label)} ${icon("arrow")}</a>
-            <a class="button button--ghost" href="${h(data.brochure.url)}" target="_blank">Download brochure</a>
+            <a class="button button--gold" href="${pageHref("index.html#register")}">${h(data.registration.label)} ${icon("arrow")}</a>
+            ${brochureLink("Download brochure", "button button--ghost")}
           </div>
         </div>
        </div>`,
@@ -581,7 +622,7 @@
         </div>
         <p class="registration-band__brochure">
           Brochure:
-          <a href="${h(data.brochure.url)}" target="_blank" rel="noopener">Download brochure</a>
+          ${brochureLink("Download brochure")}
         </p>
       </aside>`,
     );
@@ -905,6 +946,7 @@
   renderHeader();
   renderFooter();
   renderHero();
+  setupBrochureNotice();
 
   if (page === "home") {
     renderAbout();

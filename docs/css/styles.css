@@ -2863,3 +2863,74 @@ body.lightbox-open {
     max-height: calc(100vh - 220px);
   }
 }
+
+.brochure-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 320;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 56px);
+  background: rgba(4, 30, 56, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.brochure-notice[hidden] {
+  display: none;
+}
+
+.brochure-notice__dialog {
+  position: relative;
+  max-width: 480px;
+  padding: clamp(28px, 4vw, 40px);
+  background: var(--white);
+  border-top: 4px solid var(--gold-400);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.brochure-notice__dialog h3 {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--navy-900);
+}
+
+.brochure-notice__dialog p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.brochure-notice__dialog p:last-child {
+  margin-bottom: 0;
+}
+
+.brochure-notice__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  color: var(--navy-900);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.brochure-notice__close:hover,
+.brochure-notice__close:focus-visible {
+  color: var(--navy-950);
+  background: var(--gold-400);
+  border-color: var(--gold-400);
+}
+
+.brochure-notice__close .icon {
+  width: 18px;
+  height: 18px;
+}

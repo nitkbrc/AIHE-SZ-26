@@ -47,6 +47,11 @@ window.SITE = {
   brochure: {
     url: "assets/brochures/Brochure.pdf",
     sponsorshipUrl: "assets/images/Sponsor.png",
+    available: false,
+    pendingMessage: [
+      "The conference brochure is currently being finalized and will be made available after the confirmation of our sponsors.",
+      "Thank you for your patience and understanding.",
+    ],
   },
 
   navigation: [
