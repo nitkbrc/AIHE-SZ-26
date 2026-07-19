@@ -1916,9 +1916,52 @@ h3 {
     var(--mist);
 }
 
+.org-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.org-tab {
+  padding: 10px 20px;
+  color: var(--navy-800);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.org-tab:hover {
+  border-color: var(--navy-700);
+}
+
+.org-tab.is-active {
+  color: var(--white);
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+}
+
 .org-stack {
   display: grid;
   gap: clamp(36px, 5vw, 56px);
+}
+
+.org-panel {
+  display: grid;
+  gap: clamp(36px, 5vw, 56px);
+}
+
+.org-panel[hidden] {
+  display: none;
 }
 
 #leadership-list,
@@ -2668,6 +2711,17 @@ h3 {
 
 .photo-tile--tall {
   grid-row: span 2;
+}
+
+.gallery-placeholder {
+  margin: 8px auto 0;
+  max-width: 560px;
+  padding: 40px 24px;
+  border: 1px dashed rgba(6, 43, 80, 0.25);
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
 }
 
 .gallery-attribution {

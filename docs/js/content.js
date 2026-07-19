@@ -23,7 +23,7 @@ window.SITE = {
     day: "Friday",
     venue: "LHC-C Seminar Hall, NITK, Surathkal",
     heroImage: "assets/images/nitk-campus.jpg",
-    heroAlt: "National Institute of Technology Karnataka, Surathkal",
+    heroAlt: "National Institute of Technology Karnataka (NITK), Surathkal",
     // Per-page hero background overrides (keyed by <body data-page="...">).
     heroImageByPage: {
       committees: "assets/gallery/nitk/nitk-main-building.jpg",
@@ -46,7 +46,7 @@ window.SITE = {
 
   brochure: {
     url: "assets/brochures/Brochure.pdf",
-    sponsorshipUrl: "assets/images/Sponsor-26.pdf",
+    sponsorshipUrl: "assets/images/Sponsor.png",
   },
 
   navigation: [
@@ -72,7 +72,7 @@ window.SITE = {
     nitk: {
       heading: "National Institute of Technology (NITK), Surathkal",
       shortName: "NITK, Surathkal",
-      name: "National Institute of Technology Karnataka, Surathkal",
+      name: "National Institute of Technology Karnataka (NITK), Surathkal",
       paragraphs: [
         "National Institute of Technology Karnataka (NITK), Surathkal was established in 1960 as Karnataka Regional Engineering College (KREC). NITK is a top-ranked engineering institute in the state, ranked among the top 20 in India (NIRF, 2025) and 120th among universities in Southern Asia (QS, 2024).",
         "There are 14 departments in the Institute, offering 40 different academic programs, which lead to various degrees including B.Tech., M.Tech., M.Sc., M.B.A., and Ph.D. All the UG programs and most of the PG programs are accredited by the NBA, New Delhi. At present, 7,000 students are enrolled in NITK; one in four is a girl student.",
@@ -165,7 +165,7 @@ window.SITE = {
         profile: "https://aiu.ac.in/wp-content/uploads/docs/2026/03/Updated-Breif-Profile-of-Dr-Mrs-Pankaj-Mittal.pdf",
       },
       {
-        name: "Prof. (Dr) B. Ravi",
+        name: "Prof. (Dr.) B. Ravi",
         title: "Director, NITK",
         photo: "assets/images/members/prof-b-ravi.jpg",
         profile: "https://www.nitk.ac.in/director",
@@ -235,7 +235,7 @@ window.SITE = {
   committees: [
     {
       icon: "book",
-      name: "Technical Sessions Committee",
+      name: "Technical Committee",
       lead: "Prof. Annappa B.",
       members: [
         {
@@ -494,7 +494,7 @@ window.SITE = {
     },
     contact: {
       name: "Dr. B. R. Chandavarkar",
-      email: "head.cs@nitk.edu.in",
+      email: "aihesz26@nitk.edu.in",
       phone: "0824-2473408",
     },
   },
@@ -502,6 +502,71 @@ window.SITE = {
   gallery: {
     heading: "Gallery",
     sections: [
+      {
+        id: "conference",
+        tabLabel: "Conference",
+        eyebrow: "The Event",
+        title: "Conference Moments",
+        description:
+          "Highlights from the AIU South Zone Conference on the Strategic Integration of AI in Higher Education at NITK, Surathkal.",
+        placeholder:
+          "Photographs from the conference will be published here after the event on 18 September 2026.",
+        photos: [],
+      },
+      {
+        id: "aiu",
+        tabLabel: "AIU",
+        eyebrow: "The Association",
+        title: "Association of Indian Universities",
+        description:
+          "Celebrating 100 years of the Association of Indian Universities (AIU) \u2014 glimpses from the 99th Annual Meet & Vice Chancellors\u2019 Conference, zonal Vice Chancellors\u2019 meets, and international collaborations.",
+        attribution:
+          "Photographs courtesy of the Association of Indian Universities (www.aiu.ac.in).",
+        photos: [
+          {
+            src: "assets/gallery/aiu/aiu-south-zone-vc-meet.jpg",
+            alt: "AIU South Zone Vice Chancellors\u2019 Meet 2025-26 at M S Ramaiah University of Applied Sciences, Bengaluru",
+            caption: "AIU South Zone Vice Chancellors\u2019 Meet 2025\u201326, Bengaluru",
+            credit: "AIU",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/aiu/aiu-99th-annual-meet-inauguration.jpg",
+            alt: "Inauguration of the 99th AIU Annual Meet and National Conference of Vice Chancellors at Amity University, Noida",
+            caption: "Inauguration of the 99th AIU Annual Meet & VCs\u2019 Conference",
+            credit: "AIU",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/aiu/aiu-president-sg-address.jpg",
+            alt: "Addresses by the AIU President and Secretary General at the 99th AIU Annual Meet",
+            caption: "Addresses by the AIU President & Secretary General",
+            credit: "AIU",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/aiu/aiu-coffee-table-book-release.jpg",
+            alt: "Release of the AIU Coffee Table Book depicting 100 years of AIU",
+            caption: "Release of the AIU Coffee Table Book \u2014 100 Years of AIU",
+            credit: "AIU",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/aiu/aiu-centenary-postal-stamp.jpg",
+            alt: "Release of the commemorative postage stamp marking 100 years of AIU",
+            caption: "Commemorative Postage Stamp \u2014 100 Years of AIU",
+            credit: "AIU",
+            size: "wide",
+          },
+          {
+            src: "assets/gallery/aiu/aiu-kansai-university-mou.jpg",
+            alt: "Signing of an MoU between AIU and Kansai University, Japan",
+            caption: "MoU with Kansai University \u2014 India\u2013Japan Collaboration",
+            credit: "AIU",
+            size: "wide",
+          },
+        ],
+      },
       {
         id: "nitk-surathkal",
         eyebrow: "The Venue",

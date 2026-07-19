@@ -313,27 +313,44 @@
   function renderSchedulePage() {
     const schedule = data.schedule;
 
+    const tabs = [
+      { id: "speakers", label: schedule.speakersHeading },
+      { id: "programme", label: schedule.programmeHeading },
+    ];
+
     setHtml(
-      "#schedule-speakers-content",
-      `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">Speakers</p>
-        <h2>${h(schedule.speakersHeading)}</h2>
-      </div>
-      <div class="schedule-programme reveal">
-        <p class="schedule-programme__note">${h(schedule.speakersNote)}</p>
-      </div>`,
+      "#schedule-nav",
+      `<div class="org-tabs reveal" role="tablist" aria-label="Conference schedule">${tabs
+        .map(
+          (tab, index) =>
+            `<button type="button" class="org-tab${index === 0 ? " is-active" : ""}" role="tab" aria-selected="${index === 0}" data-org-tab="${h(tab.id)}">${h(tab.label)}</button>`,
+        )
+        .join("")}</div>`,
     );
 
     setHtml(
-      "#schedule-programme-content",
-      `<div class="section-heading section-heading--center reveal">
-        <p class="eyebrow">Agenda</p>
-        <h2>${h(schedule.programmeHeading)}</h2>
+      "#schedule-content",
+      `<div class="org-panel" data-org-panel="speakers">
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Speakers</p>
+          <h2>${h(schedule.speakersHeading)}</h2>
+        </div>
+        <div class="schedule-programme reveal">
+          <p class="schedule-programme__note">${h(schedule.speakersNote)}</p>
+        </div>
       </div>
-      <div class="schedule-programme reveal">
-        <p class="schedule-programme__note">${h(schedule.programmeNote)}</p>
+      <div class="org-panel" data-org-panel="programme" hidden>
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Agenda</p>
+          <h2>${h(schedule.programmeHeading)}</h2>
+        </div>
+        <div class="schedule-programme reveal">
+          <p class="schedule-programme__note">${h(schedule.programmeNote)}</p>
+        </div>
       </div>`,
     );
+
+    setupOrgTabs();
   }
 
   function renderSponsorship() {
@@ -384,7 +401,7 @@
           <p class="tier-card__name">${h(tier.name)}</p>
           <p class="tier-card__price">${h(tier.contribution)}</p>
           ${perks ? `<ul class="tier-card__perks">${perks}</ul>` : ""}
-          <a class="button ${featured ? "button--gold" : "button--outline"}" href="mailto:${h(contact.email)}?subject=${encodeURIComponent(`${tier.name} Sponsorship — AIHE South Zone Conference`)}">Sponsor as ${h(tier.name)}</a>
+          <a class="button ${featured ? "button--gold" : "button--outline"}" href="mailto:aihesz26@nitk.edu.in?subject=${encodeURIComponent(`${tier.name} Sponsorship — AIHE South Zone Conference`)}">Sponsor as ${h(tier.name)}</a>
         </article>`;
       })
       .join("");
@@ -619,9 +636,36 @@
     };
   }
 
+  function orgSlug(name) {
+    return String(name)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
   function renderCommitteePage() {
     const noContact = { showContact: false };
     const leadership = data.leadership || {};
+    const committees = data.committees || [];
+
+    const tabs = [
+      { id: "organizing", label: "Organizing Committee" },
+      ...committees.map((committee) => ({
+        id: orgSlug(committee.name),
+        label: committee.name,
+      })),
+    ];
+
+    setHtml(
+      "#org-nav",
+      `<div class="org-tabs reveal" role="tablist" aria-label="Conference committees">${tabs
+        .map(
+          (tab, index) =>
+            `<button type="button" class="org-tab${index === 0 ? " is-active" : ""}" role="tab" aria-selected="${index === 0}" data-org-tab="${h(tab.id)}">${h(tab.label)}</button>`,
+        )
+        .join("")}</div>`,
+    );
+
     const leadershipBlocks = [
       orgBlock(
         "Chief Patron",
@@ -638,16 +682,23 @@
       ),
     ].join("");
 
-    setHtml("#leadership-list", leadershipBlocks);
+    setHtml(
+      "#leadership-list",
+      `<div class="org-panel" data-org-panel="organizing">${leadershipBlocks}</div>`,
+    );
 
     setHtml(
       "#coordinators-list",
-      orgBlock("NITK Co-ordinators", data.coordinators || [], noContact),
+      `<div class="org-panel" data-org-panel="organizing">${orgBlock(
+        "NITK Co-ordinators",
+        data.coordinators || [],
+        noContact,
+      )}</div>`,
     );
 
     setHtml(
       "#committees-list",
-      data.committees
+      committees
         .map((committee) => {
           const people = [];
           if (committee.lead) {
@@ -663,25 +714,62 @@
               typeof member === "string" ? { name: member } : member;
             people.push(enrichPerson(person));
           });
-          return orgBlock(committee.name, people, noContact);
+          return `<div class="org-panel" data-org-panel="${h(orgSlug(committee.name))}" hidden>${orgBlock(committee.name, people, noContact)}</div>`;
         })
         .join(""),
     );
+
+    setupOrgTabs();
+  }
+
+  function setupOrgTabs() {
+    const tabs = Array.from(document.querySelectorAll("[data-org-tab]"));
+    const panels = Array.from(document.querySelectorAll("[data-org-panel]"));
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((button) => {
+          const active = button === tab;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-selected", String(active));
+        });
+        panels.forEach((panel) => {
+          const show = panel.dataset.orgPanel === tab.dataset.orgTab;
+          panel.hidden = !show;
+          if (show) {
+            // Hidden panels never intersect the reveal observer, so force
+            // their content visible when the tab is opened.
+            panel
+              .querySelectorAll(".reveal")
+              .forEach((element) => element.classList.add("is-visible"));
+          }
+        });
+      });
+    });
   }
 
   function renderGalleryPage() {
     const gallery = data.gallery;
     const sections = gallery.sections || [];
 
+    const tabsHtml = `<div class="org-tabs reveal" role="tablist" aria-label="Gallery sections">${sections
+      .map(
+        (section, index) =>
+          `<button type="button" class="org-tab${index === 0 ? " is-active" : ""}" role="tab" aria-selected="${index === 0}" data-org-tab="${h(section.id)}">${h(section.tabLabel || section.title)}</button>`,
+      )
+      .join("")}</div>`;
+
     const sectionsHtml = sections
       .map(
-        (section, sectionIndex) => `<div class="gallery-section reveal" id="${h(section.id)}">
+        (section, sectionIndex) => `<div class="org-panel" data-org-panel="${h(section.id)}"${sectionIndex === 0 ? "" : " hidden"}><div class="gallery-section reveal" id="${h(section.id)}">
           <div class="section-heading section-heading--center">
             <p class="eyebrow">${h(section.eyebrow)}</p>
             <h2>${h(section.title)}</h2>
             <p>${h(section.description)}</p>
           </div>
-          <div class="photo-grid">
+          ${
+            section.photos.length
+              ? `<div class="photo-grid">
             ${section.photos
               .map(
                 (photo, photoIndex) => `<button
@@ -696,13 +784,15 @@
                 </button>`,
               )
               .join("")}
-          </div>
+          </div>`
+              : `<p class="gallery-placeholder">${h(section.placeholder || "Photographs will be published here soon.")}</p>`
+          }
           ${
             section.attribution
               ? `<p class="gallery-attribution">${h(section.attribution)}</p>`
               : ""
           }
-        </div>`,
+        </div></div>`,
       )
       .join("");
 
@@ -712,9 +802,11 @@
         <p class="eyebrow">Photos</p>
         <h2>${h(gallery.heading)}</h2>
       </div>
+      ${tabsHtml}
       ${sectionsHtml}`,
     );
 
+    setupOrgTabs();
     setupGalleryLightbox(sections);
   }
 
