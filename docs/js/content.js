@@ -37,7 +37,7 @@ window.SITE = {
     deadline: "20 August 2026",
     confirmationDate: "27 August 2026",
     label: "Register to attend",
-    qr: "assets/images/qr-code-registration.png",
+    qr: "assets/images/QR-Google_Form.png",
     notes: [
       "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",
       "<strong>Last Date for the Registration</strong>: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 27.08.2026 (Thursday).",
@@ -170,7 +170,7 @@ window.SITE = {
         profile: "https://aiu.ac.in/wp-content/uploads/docs/2026/03/Updated-Breif-Profile-of-Dr-Mrs-Pankaj-Mittal.pdf",
       },
       {
-        name: "Prof. (Dr.) B. Ravi",
+        name: "Prof. B. Ravi",
         title: "Director, NITK",
         photo: "assets/images/members/prof-b-ravi.jpg",
         profile: "https://www.nitk.ac.in/director",
@@ -181,6 +181,7 @@ window.SITE = {
         role: "AIU Convenor",
         name: "Dr. Amarendra Pani",
         title: "Joint Director, Research, AIU",
+        photo: "assets/images/members/dr-amarendra-pani.jpg",
         profile: "https://independent.academia.edu/DRAMARENDRAPANI",
       },
     ],
