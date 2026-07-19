@@ -37,6 +37,7 @@ window.SITE = {
     deadline: "20 August 2026",
     confirmationDate: "27 August 2026",
     label: "Register to attend",
+    heroNotice: "Last Date for Registration: 20 August 2026 (Thursday)",
     qr: "assets/images/QR-Google_Form.png",
     notes: [
       "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",

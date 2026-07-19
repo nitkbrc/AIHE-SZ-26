@@ -238,6 +238,12 @@
     const heroImage =
       (data.event.heroImageByPage && data.event.heroImageByPage[page]) ||
       data.event.heroImage;
+    const heroNotice = data.registration.heroNotice;
+    const noticeText = h(heroNotice);
+    const noticeSep = `<span class="hero__notice-sep" aria-hidden="true"></span>`;
+    const noticeGroup = Array(3)
+      .fill(`<span class="hero__notice-text">${noticeText}</span>`)
+      .join(noticeSep);
     setHtml(
       "#hero-content",
       `<div class="hero__image" style="background-image:url('${h(heroImage)}')" role="img" aria-label="${h(data.event.heroAlt)}"></div>
@@ -269,7 +275,18 @@
             ${brochureLink("Download brochure", "button button--ghost")}
           </div>
         </div>
-       </div>`,
+       </div>
+       ${
+         heroNotice
+           ? `<div class="hero__notice" role="region" aria-label="Registration deadline">
+                <div class="hero__notice-track">
+                  <div class="hero__notice-group">${noticeGroup}</div>
+                  ${noticeSep}
+                  <div class="hero__notice-group" aria-hidden="true">${noticeGroup}</div>
+                </div>
+              </div>`
+           : ""
+       }`,
     );
   }
 
