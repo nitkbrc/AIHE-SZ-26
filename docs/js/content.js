@@ -501,6 +501,9 @@ window.SITE = {
     },
     contact: {
       name: "Dr. B. R. Chandavarkar",
+      role: "Sponsorship Coordinator",
+      department: "CSE Dept., NITK, Surathkal",
+      photo: "assets/images/BRC-Photo.jpg",
       email: "aihesz26@nitk.edu.in",
       phone: "0824-2473408",
     },

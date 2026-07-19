@@ -485,9 +485,31 @@
         </article>
         <article class="sponsor-detail sponsor-detail--contact reveal">
           <span class="sponsor-detail__icon">${icon("mail")}</span>
-          <p class="eyebrow">Contact for sponsorship</p><h3>${h(contact.name)}</h3>
-          <a href="mailto:${h(contact.email)}?subject=${encodeURIComponent("Conference Sponsorship – Expression of Interest")}">${icon("mail")}${h(contact.email)}</a>
-          <a href="tel:${h(contact.phone.replaceAll("-", ""))}">${icon("phone")}${h(contact.phone)}</a>
+          <p class="eyebrow">Contact for sponsorship</p>
+          <div class="sponsor-contact__person">
+            ${avatar(contact)}
+            <div>
+              <h3>${h(contact.name)}</h3>
+              ${contact.role ? `<p class="sponsor-contact__role">${h(contact.role)}</p>` : ""}
+              ${contact.department ? `<p class="sponsor-contact__dept">${h(contact.department)}</p>` : ""}
+            </div>
+          </div>
+          <ul class="sponsor-contact__channels">
+            <li>
+              <a href="mailto:${h(contact.email)}?subject=${encodeURIComponent("Conference Sponsorship – Expression of Interest")}">
+                <span class="sponsor-contact__channel-icon">${icon("mail")}</span>
+                <span class="sponsor-contact__channel-text"><small>Email</small><strong>${h(contact.email)}</strong></span>
+                ${icon("arrow")}
+              </a>
+            </li>
+            <li>
+              <a href="tel:${h(contact.phone.replaceAll("-", ""))}">
+                <span class="sponsor-contact__channel-icon">${icon("phone")}</span>
+                <span class="sponsor-contact__channel-text"><small>Phone</small><strong>${h(contact.phone)}</strong></span>
+                ${icon("arrow")}
+              </a>
+            </li>
+          </ul>
           <a class="text-link" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">View sponsorship brochure ${icon("arrow")}</a>
         </article>
       </div>`,
@@ -517,8 +539,16 @@
             <input id="wa-transaction" name="transaction" type="text" maxlength="40" placeholder="e.g. UTR / transaction reference" required>
           </div>
           <div class="wa-form__field">
+            <label for="wa-amount">Amount paid (INR)</label>
+            <input id="wa-amount" name="amount" type="text" inputmode="decimal" maxlength="12" placeholder="e.g. 50000" required>
+          </div>
+          <div class="wa-form__field">
             <label for="wa-date">Date of transaction</label>
             <input id="wa-date" name="date" type="date" required>
+          </div>
+          <div class="wa-form__field">
+            <label id="wa-captcha-label">Verification</label>
+            <div class="wa-recaptcha" aria-labelledby="wa-captcha-label"></div>
           </div>
           <p class="wa-form__error" role="alert" hidden></p>
           <button type="submit" class="button button--whatsapp">${icon("whatsapp")}Open WhatsApp</button>
@@ -531,18 +561,58 @@
     const mobileInput = modal.querySelector("#wa-mobile");
     const confirmInput = modal.querySelector("#wa-mobile-confirm");
     const transactionInput = modal.querySelector("#wa-transaction");
+    const amountInput = modal.querySelector("#wa-amount");
     const dateInput = modal.querySelector("#wa-date");
     dateInput.max = new Date().toISOString().slice(0, 10);
+
+    // Conference's reCAPTCHA v2 site keys (managed at
+    // https://www.google.com/recaptcha/admin); a separate key is
+    // registered for localhost development.
+    const isLocalhost = ["localhost", "127.0.0.1"].includes(
+      window.location.hostname
+    );
+    const RECAPTCHA_SITE_KEY = isLocalhost
+      ? "6LcEx1stAAAAAO5rMTOa88t-IlkGkoUmrFbk4pvd"
+      : "6Ldyx1stAAAAAELLdixiuSD8-lJs5kJwucHHP5-C";
+    const captchaBox = modal.querySelector(".wa-recaptcha");
+    let captchaWidgetId = null;
+
+    const renderCaptcha = () => {
+      if (captchaWidgetId !== null) return;
+      if (!(window.grecaptcha && window.grecaptcha.render)) return;
+      captchaWidgetId = window.grecaptcha.render(captchaBox, {
+        sitekey: RECAPTCHA_SITE_KEY,
+      });
+    };
+    const loadCaptcha = () => {
+      if (window.grecaptcha && window.grecaptcha.render) {
+        renderCaptcha();
+        return;
+      }
+      if (document.querySelector("script[data-wa-recaptcha]")) return;
+      window.waRecaptchaOnLoad = renderCaptcha;
+      const script = document.createElement("script");
+      script.src =
+        "https://www.google.com/recaptcha/api.js?onload=waRecaptchaOnLoad&render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.setAttribute("data-wa-recaptcha", "true");
+      document.head.appendChild(script);
+    };
 
     const open = () => {
       modal.hidden = false;
       document.body.classList.add("lightbox-open");
+      loadCaptcha();
       mobileInput.focus();
     };
     const close = () => {
       modal.hidden = true;
       document.body.classList.remove("lightbox-open");
       form.reset();
+      if (captchaWidgetId !== null && window.grecaptcha) {
+        window.grecaptcha.reset(captchaWidgetId);
+      }
       errorBox.hidden = true;
     };
     const fail = (message, field) => {
@@ -569,6 +639,8 @@
       const mobile = mobileInput.value.replace(/\D/g, "");
       const confirmMobile = confirmInput.value.replace(/\D/g, "");
       const transaction = transactionInput.value.trim();
+      const amountRaw = amountInput.value.replace(/[,\s]/g, "");
+      const amount = Number(amountRaw);
       const date = dateInput.value;
 
       if (!/^[6-9]\d{9}$/.test(mobile)) {
@@ -583,12 +655,24 @@
         fail("Please enter a valid transaction / UTR reference number.", transactionInput);
         return;
       }
+      if (!amountRaw || !Number.isFinite(amount) || amount <= 0) {
+        fail("Please enter a valid amount paid (in INR).", amountInput);
+        return;
+      }
       if (!date) {
         fail("Please select the date of the transaction.", dateInput);
         return;
       }
       if (date > dateInput.max) {
         fail("The transaction date cannot be in the future.", dateInput);
+        return;
+      }
+      const captchaResponse =
+        captchaWidgetId !== null && window.grecaptcha
+          ? window.grecaptcha.getResponse(captchaWidgetId)
+          : "";
+      if (!captchaResponse) {
+        fail("Please tick the reCAPTCHA box to verify you are human.");
         return;
       }
 
@@ -601,6 +685,7 @@
         "Sponsorship payment confirmation \u2013 AIU South Zone Conference on AI in Higher Education (NITK, Surathkal)",
         "",
         `Mobile number: ${mobile}`,
+        `Amount paid: \u20B9${amount.toLocaleString("en-IN")}`,
         `Transaction no.: ${transaction}`,
         `Date of transaction: ${prettyDate}`,
       ].join("\n");
