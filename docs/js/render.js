@@ -217,6 +217,10 @@
   }
 
   function renderFooter() {
+    const visitorCount =
+      page === "home"
+        ? `<span class="visitor-count" id="visitor-count" aria-live="polite">Visitors <strong id="visitor-count-value">…</strong></span>`
+        : "";
     setHtml(
       "#site-footer",
       `<footer class="site-footer">
@@ -225,11 +229,31 @@
           <div class="site-footer__meta">
             <a href="mailto:${h(data.assistance.email)}">Contact</a>
             ${brochureLink("Conference brochure")}
+            ${visitorCount}
             <span>${h(data.footer.copyright)}</span>
           </div>
         </div>
       </footer>`,
     );
+    if (page === "home") loadVisitorCount();
+  }
+
+  async function loadVisitorCount() {
+    const value = $("#visitor-count-value");
+    const wrap = $("#visitor-count");
+    if (!value || !wrap) return;
+    try {
+      const response = await fetch(
+        "https://api.counterapi.dev/v1/nitkbrc-aihe-sz-26/home/up",
+      );
+      if (!response.ok) throw new Error("Counter unavailable");
+      const payload = await response.json();
+      const count = Number(payload.count);
+      if (!Number.isFinite(count)) throw new Error("Invalid count");
+      value.textContent = count.toLocaleString("en-IN");
+    } catch {
+      wrap.hidden = true;
+    }
   }
 
   function renderHero() {

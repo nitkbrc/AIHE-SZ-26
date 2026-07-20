@@ -2071,6 +2071,19 @@ h3 {
   color: var(--white);
 }
 
+.visitor-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  letter-spacing: 0.02em;
+}
+
+.visitor-count strong {
+  color: var(--gold-400);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 
 .committee-page {
   background:
