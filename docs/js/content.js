@@ -494,7 +494,7 @@ window.SITE = {
       role: "Sponsorship Coordinator",
       department: "CSE Dept., NITK, Surathkal",
       photo: "assets/images/BRC-Photo.jpg",
-      email: "aihesz26@nitk.edu.in",
+      email: "aihe.sz26@nitk.edu.in",
       phone: "0824-2473428",
     },
   },
