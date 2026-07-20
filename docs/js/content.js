@@ -112,8 +112,8 @@ window.SITE = {
       name: "Association of Indian Universities",
       paragraphs: [
         "Association of Indian Universities (AIU), the world's largest and one of the premier apex higher education institutions in the country, established in 1925, is a research-based policy advisory institution to the Government of India in the fields of Higher Education, Sports, Culture, and Internationalisation.",
-        "At present, it has a membership of 1088 universities, including 19 international universities. Since its inception, it has been playing a vital role in shaping Indian higher education. As an apex institution, it facilitates cooperation and coordination among Indian universities, liaises between universities and the Government, and with national and international bodies of higher education in other countries, on matters of interest.",
-        "AIU has successfully traversed this long journey of 99 years, growing continuously in strength and stature, carrying forward the legacy and glory of Indian Higher Education. Dr. Sarvepalli Radhakrishnan, Dr. Zakir Hussain, and Dr. Syama Prasad Mukherjee are among the stalwarts who served AIU as its presidents.",
+        "At present, AIU has a membership of 1180 universities, including 20 foreign universities as Associate Members. Since its inception, it has been playing a vital role in shaping Indian higher education. As an apex institution, it facilitates cooperation and coordination among Indian universities, liaises between universities and the Government, and with national and international bodies of higher education in other countries on matters of common interests.",
+        "AIU has successfully traversed this long journey of 100 years, growing continuously in strength and stature, carrying forward the legacy and glory of Indian Higher Education. Dr. Sarvepalli Radhakrishnan, Dr. Zakir Hussain, and Dr. Syama Prasad Mukherjee are among the stalwarts who served AIU as its presidents.",
       ],
       url: "https://aiu.ac.in/",
       logo: "assets/logos/aiu-mark.png",
