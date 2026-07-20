@@ -44,4 +44,4 @@ The apex higher-education association representing Indian and international univ
 
 For registration and conference queries, write to the organising team via the [conference website](https://nitkbrc.github.io/AIHE-SZ-26/) or contact the coordinators listed there.
 
-Sponsorship enquiries: Dr. B. R. Chandavarkar — [brc@nitk.edu.in](mailto:brc@nitk.edu.in) · 0824-2473408
+Sponsorship enquiries: Dr. B. R. Chandavarkar — [brc@nitk.edu.in](mailto:brc@nitk.edu.in) · 0824-2473428

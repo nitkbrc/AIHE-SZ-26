@@ -40,7 +40,7 @@ window.SITE = {
     heroNotice: "Last Date for Registration: 20 August 2026 (Thursday)",
     qr: "assets/images/QR-Google_Form.png",
     notes: [
-      "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Accommodation will be provided only for two nights.",
+      "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Free accommodation is available only for the duration of the conference.",
       "<strong>Last Date for the Registration</strong>: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 27.08.2026 (Thursday).",
     ],
   },
@@ -209,7 +209,7 @@ window.SITE = {
       name: "Dr. B. R. Chandavarkar",
       department: "CSE Dept., NITK, Surathkal",
       email: "brc@nitk.edu.in",
-      phone: "0824-2473408",
+      phone: "0824-2473428",
       photo: "assets/images/BRC-Photo.jpg",
       profile: "https://cse.nitk.ac.in/faculty/b-r-chandravarkar",
     },
@@ -217,7 +217,7 @@ window.SITE = {
       name: "Dr. Jeny Rajan",
       department: "CSE Dept., NITK, Surathkal",
       email: "jenyrajan@nitk.edu.in",
-      phone: "0824-2473440",
+      phone: "0824-2473429",
       photo: "assets/images/members/dr-jeny-rajan.jpg",
       profile: "https://cse.nitk.ac.in/faculty/jeny-rajan",
     },
@@ -225,7 +225,7 @@ window.SITE = {
       name: "Dr. Anand Kumar M.",
       department: "IT Dept., NITK, Surathkal",
       email: "anandkumar@nitk.edu.in",
-      phone: "0824-2473439",
+      phone: "0824-2473430",
       photo: "assets/images/members/dr-anand-kumar.jpg",
       profile: "https://infotech.nitk.ac.in/faculty/anand-kumar-m",
     },
@@ -358,7 +358,7 @@ window.SITE = {
         },
       ],
       email: "anandkumar@nitk.edu.in",
-      phone: "0824-2473439",
+      phone: "0824-2473430",
     },
     {
       icon: "people",
@@ -391,7 +391,7 @@ window.SITE = {
         },
       ],
       email: "jenyrajan@nitk.edu.in",
-      phone: "0824-2473440",
+      phone: "0824-2473429",
     },
   ],
 
@@ -495,7 +495,7 @@ window.SITE = {
       department: "CSE Dept., NITK, Surathkal",
       photo: "assets/images/BRC-Photo.jpg",
       email: "aihesz26@nitk.edu.in",
-      phone: "0824-2473408",
+      phone: "0824-2473428",
     },
   },
 
@@ -515,7 +515,7 @@ window.SITE = {
       },
       {
         id: "aiu",
-        tabLabel: "AIU",
+        tabLabel: "AIU, New Delhi",
         eyebrow: "The Association",
         title: "Association of Indian Universities",
         description:
@@ -569,6 +569,7 @@ window.SITE = {
       },
       {
         id: "nitk-surathkal",
+        tabLabel: "NITK, Surathkal",
         eyebrow: "The Venue",
         title: "NITK, Surathkal",
         description:

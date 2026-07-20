@@ -685,6 +685,7 @@ h3 {
   padding-left: 18px;
   color: var(--muted);
   line-height: 1.7;
+  text-align: justify;
 }
 
 .institution-block__reach li + li {
@@ -1010,6 +1011,7 @@ h3 {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
+  text-align: justify;
 }
 
 .sponsorship__intro {
@@ -1959,6 +1961,7 @@ h3 {
   color: rgba(255, 255, 255, 0.84);
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   line-height: 1.7;
+  text-align: justify;
 }
 
 .registration-band__index {
@@ -2838,6 +2841,27 @@ h3 {
 }
 
 /* Gallery page */
+
+/* Three equal-width tabs so Conference / AIU, New Delhi / NITK, Surathkal stay aligned. */
+.gallery-page .org-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.gallery-page .org-tab {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 460px) {
+  .gallery-page .org-tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 
 .gallery-section {
   margin-top: clamp(40px, 7vw, 72px);
