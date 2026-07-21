@@ -40,7 +40,7 @@ window.SITE = {
     heroNotice: "Last Date for Registration: 20 August 2026 (Thursday)",
     qr: "assets/images/QR-Google_Form.png",
     notes: [
-      "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Free accommodation is available only for the duration of the conference.",
+      "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Complimentary accommodation, will be provided during the conference.",
       "<strong>Last Date for the Registration</strong>: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 27.08.2026 (Thursday).",
     ],
   },
@@ -481,7 +481,7 @@ window.SITE = {
     payment: {
       name: "NITK, Surathkal",
       bank: "State Bank of India (SBI)",
-      address: "NITK Campus, Srinivasa Nagar Post, Mangaluru – 575025",
+      address: "NITK Campus, Srinivasnagar Post, Mangaluru – 575025",
       account: "37772503911",
       ifsc: "SBIN0002273",
       qr: "assets/images/qr-code-sbi.png",

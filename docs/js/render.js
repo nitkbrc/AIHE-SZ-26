@@ -227,7 +227,7 @@
         <div class="shell site-footer__grid">
           <div class="footer-brand"><strong>${h(data.brand.short)}</strong><span>${h(data.footer.note)}</span></div>
           <div class="site-footer__meta">
-            <a href="mailto:${h(data.assistance.email)}">Contact</a>
+            <a href="${pageHref("contact.html")}">Contact</a>
             ${brochureLink("Conference brochure")}
             ${visitorCount}
             <span>${h(data.footer.copyright)}</span>
