@@ -511,7 +511,7 @@
         <div class="table-wrap" tabindex="0" aria-label="Sponsorship categories and benefits">
           <table class="sponsorship-table"><thead><tr><th scope="col">Benefits</th>${heads}</tr></thead><tbody>${rows}</tbody></table>
         </div>
-        <p class="table-note">* Subject to the release of the conference brochure. <br># Subject to delegate consent.</p>
+        <p class="table-note">* To view sponsorship brochure. Updated as per the website. <br># Subject to delegate consent.</p>
       </div>
       <div class="sponsor-details">
         <article class="sponsor-detail reveal" id="payment-details">
@@ -551,7 +551,10 @@
               </a>
             </li>
           </ul>
-          <a class="text-link" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">View sponsorship brochure ${icon("arrow")}</a>
+          <div class="sponsor-brochure-link">
+            <a class="text-link" href="${h(data.brochure.sponsorshipUrl)}" target="_blank">View sponsorship brochure ${icon("arrow")}</a>
+            <p class="sponsor-brochure-link__note">* Updated as per the website.</p>
+          </div>
         </article>
       </div>`,
     );

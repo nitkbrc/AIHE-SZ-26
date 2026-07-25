@@ -1485,9 +1485,17 @@ h3 {
   overflow-wrap: anywhere;
 }
 
-.sponsor-detail--contact .text-link {
+.sponsor-detail--contact .sponsor-brochure-link {
   margin-top: auto;
   padding-top: 18px;
+}
+
+.sponsor-brochure-link__note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  max-width: 28ch;
 }
 
 .text-link {
