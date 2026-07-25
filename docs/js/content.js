@@ -372,6 +372,12 @@ window.SITE = {
           profile: "https://cse.nitk.ac.in/faculty/saumya-hegde",
         },
         {
+          name: "Dr. Sourav Kanti Addya",
+          department: "CSE Dept., NITK, Surathkal",
+          photo: "assets/images/members/dr-sourav-kanti-addya.jpg",
+          profile: "https://cse.nitk.ac.in/faculty/sourav-kanti-addya",
+        },
+        {
           name: "Dr. Bhawana Rudra",
           department: "IT Dept., NITK, Surathkal",
           photo: "assets/images/members/dr-bhawana-rudra.jpg",
