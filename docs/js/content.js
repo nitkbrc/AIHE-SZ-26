@@ -40,7 +40,7 @@ window.SITE = {
     heroNotice: "Last Date for Registration: 20 August 2026 (Thursday)",
     qr: "assets/images/QR-Google_Form.png",
     notes: [
-      "<strong>Registration is free</strong>, except travel expenditure to the nearest Railway Station / Airport to NITK, Surathkal. Complimentary accommodation, will be provided during the conference.",
+      "<strong>Registration is free</strong>, except travel expenditure to NITK, Surathkal. Complimentary accommodation, will be provided during the conference.",
       "<strong>Last Date for the Registration</strong>: 20.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 27.08.2026 (Thursday).",
     ],
   },
