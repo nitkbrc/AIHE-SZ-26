@@ -769,7 +769,7 @@
       `<div class="section-heading section-heading--center reveal">
         <h2>${h(pageData.heading)}</h2>
         <p class="section-intro">${h(pageData.introduction)}</p>
-        <p class="section-notice">${h(pageData.sampleNotice)}</p>
+        ${pageData.sampleNotice ? `<p class="section-notice">${h(pageData.sampleNotice)}</p>` : ""}
       </div>
       ${supportersStrip}`,
     );
@@ -785,19 +785,26 @@
           <h2>Featured partners</h2>
         </div>
         <div class="platinum-list">${sponsors.platinum
-          .map(
-            (sponsor, index) =>
-              `<article class="platinum-feature reveal${index % 2 === 1 ? " platinum-feature--reverse" : ""}">
+          .map((sponsor, index) => {
+            const paragraphs = (
+              Array.isArray(sponsor.description)
+                ? sponsor.description
+                : sponsor.description
+                  ? [sponsor.description]
+                  : []
+            )
+              .map((text) => `<p>${h(text)}</p>`)
+              .join("");
+            return `<article class="platinum-feature reveal${index % 2 === 1 ? " platinum-feature--reverse" : ""}">
                 ${platinumMedia(sponsor)}
                 <div class="platinum-feature__body">
-                  <p class="eyebrow">Platinum</p>
                   <h3>${h(sponsor.name)}</h3>
                   <p class="platinum-feature__tagline">${h(sponsor.tagline)}</p>
-                  <p>${h(sponsor.description)}</p>
+                  <div class="platinum-feature__profile">${paragraphs}</div>
                   <a class="text-link" href="${h(sponsor.url)}" target="_blank" rel="noopener">Visit website ${icon("arrow")}</a>
                 </div>
-              </article>`,
-          )
+              </article>`;
+          })
           .join("")}</div>`,
       );
     }

@@ -406,7 +406,7 @@ window.SITE = {
     heading: "Our Partners & Sponsors",
     introduction:
       "Partners supporting the South Zone Conference on the strategic integration of Artificial Intelligence in Higher Education.",
-    sampleNotice: "Sponsors to be announced.",
+    sampleNotice: "",
     cta: {
       heading: "Join as a Partner",
       text: "Align your brand with the forefront of AI research in higher education. Explore our partnership tiers and benefits.",
@@ -421,7 +421,21 @@ window.SITE = {
   //   poster or as a fallback when there is no video yet).
   // Gold: logo + description only. Silver: logo only.
   sponsors: {
-    platinum: [],
+    platinum: [
+      {
+        name: "USDC Global",
+        logo: "assets/images/usdc_global_logo.jpeg",
+        url: "https://usdcglobal.com/",
+        tagline: "Empowering futures, fostering excellence",
+        description: [
+          "USDC Global (United Skills Development Corporation) is a higher-education and EdTech partner that enables universities and institutions worldwide to design, deliver, and scale quality learning. Through collaborations with premier universities and industry experts, the organisation connects millions of learners to career-relevant programmes that strengthen institutional capacity and improve outcomes across diverse geographies.",
+          "Guided by accessibility, affordability, employability, and growth in Gross Enrolment Ratio, USDC delivers a comprehensive 360-degree EdTech model—spanning infrastructure, curriculum and content design, technology integration, student support, and global education services—so partners can offer exceptional higher education experiences at scale.",
+          "As Platinum Sponsor of the NITK and AIU South Zone Conference on the strategic integration of Artificial Intelligence in Higher Education, USDC Global affirms its commitment to innovation, inclusive access, and excellence in partnering with institutions to empower educators and shape tomorrow’s leaders.",
+        ],
+        video: "",
+        image: "",
+      },
+    ],
     gold: [],
     silver: [],
     associate: [],
