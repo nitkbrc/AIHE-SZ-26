@@ -18,7 +18,7 @@ window.SITE = {
   event: {
     title:
       "Strategic Integration of Artificial Intelligence (AI) in Higher Education",
-    subtitle: "Opportunities and Implications",
+    subtitle: "Opportunities, Challenges and Implications",
     date: "18 September 2026",
     day: "Friday",
     venue: "LHC-C Seminar Hall, NITK, Surathkal",
