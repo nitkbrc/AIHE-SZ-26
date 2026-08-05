@@ -8,7 +8,7 @@ Jointly organised by the [National Institute of Technology Karnataka (NITK), Sur
 | --- | --- |
 | **Date** | 18 September 2026 (Friday) |
 | **Venue** | LHC-C Seminar Hall, NITK, Surathkal |
-| **Registration deadline** | 20 August 2026 |
+| **Registration deadline** | 27 August 2026 |
 
 **[Register to attend](https://forms.gle/QPVo4YW914ZMDg359)** · **[Conference website](https://nitkbrc.github.io/AIHE-SZ-26/)**
 

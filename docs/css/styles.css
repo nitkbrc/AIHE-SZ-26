@@ -1269,6 +1269,18 @@ h3 {
   font-size: 0.82rem;
 }
 
+.table-note a {
+  color: var(--navy-700);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.table-note a:hover,
+.table-note a:focus-visible {
+  color: var(--navy-950);
+}
+
 .sponsor-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
