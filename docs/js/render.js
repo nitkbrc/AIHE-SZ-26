@@ -398,8 +398,8 @@
     const schedule = data.schedule;
 
     const tabs = [
-      { id: "speakers", label: schedule.speakersHeading },
       { id: "programme", label: schedule.programmeHeading },
+      { id: "speakers", label: schedule.speakersHeading },
     ];
 
     setHtml(
@@ -414,22 +414,41 @@
 
     setHtml(
       "#schedule-content",
-      `<div class="org-panel" data-org-panel="speakers">
+      `<div class="org-panel" data-org-panel="programme">
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Agenda</p>
+          <h2>${h(schedule.programmeHeading)}</h2>
+        </div>
+        <div class="schedule-programme schedule-programme--agenda reveal">
+          ${
+            schedule.programmeNote
+              ? `<p class="schedule-programme__disclaimer">${h(schedule.programmeNote)}</p>`
+              : ""
+          }
+          <div class="schedule-programme__table" role="table" aria-label="${h(schedule.programmeHeading)}">
+            <div class="schedule-programme__row schedule-programme__row--head" role="row">
+              <div class="schedule-programme__time" role="columnheader">Time</div>
+              <div class="schedule-programme__title" role="columnheader">Activity</div>
+            </div>
+            ${(schedule.programmeItems || [])
+              .map(
+                (item) =>
+                  `<div class="schedule-programme__row" role="row">
+                    <time class="schedule-programme__time" role="cell">${h(item.time)}</time>
+                    <span class="schedule-programme__title" role="cell">${h(item.title)}</span>
+                  </div>`,
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+      <div class="org-panel" data-org-panel="speakers" hidden>
         <div class="section-heading section-heading--center reveal">
           <p class="eyebrow">Speakers</p>
           <h2>${h(schedule.speakersHeading)}</h2>
         </div>
         <div class="schedule-programme reveal">
           <p class="schedule-programme__note">${h(schedule.speakersNote)}</p>
-        </div>
-      </div>
-      <div class="org-panel" data-org-panel="programme" hidden>
-        <div class="section-heading section-heading--center reveal">
-          <p class="eyebrow">Agenda</p>
-          <h2>${h(schedule.programmeHeading)}</h2>
-        </div>
-        <div class="schedule-programme reveal">
-          <p class="schedule-programme__note">${h(schedule.programmeNote)}</p>
         </div>
       </div>`,
     );

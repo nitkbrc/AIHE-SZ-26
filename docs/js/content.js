@@ -153,7 +153,17 @@ window.SITE = {
     speakersHeading: "Technical Session Speakers",
     speakersNote: "Under Construction",
     programmeHeading: "Programme Schedule",
-    programmeNote: "Under Construction",
+    programmeNote: "The detailed conference schedule will be updated shortly.",
+    programmeItems: [
+      { time: "08:30 AM", title: "Registration" },
+      { time: "09:00 AM", title: "Inauguration" },
+      { time: "10:00 AM – 01:00 PM", title: "Invited Talks" },
+      { time: "01:00 PM – 02:00 PM", title: "Group Photo and Lunch" },
+      { time: "02:00 PM – 04:00 PM", title: "Panel Discussion and Group Activity" },
+      { time: "04:00 PM – 04:30 PM", title: "Valedictory" },
+      { time: "04:30 PM – 04:45 PM", title: "Tea Break" },
+      { time: "04:45 PM – 05:30 PM", title: "Campus Tour" },
+    ],
   },
 
   leadership: {

@@ -750,6 +750,108 @@ h3 {
   font-weight: 700;
 }
 
+.schedule-programme--agenda {
+  display: block;
+  place-items: stretch;
+  min-height: 0;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding: 0;
+  text-align: left;
+  overflow: hidden;
+}
+
+.schedule-programme__disclaimer {
+  margin: 0;
+  padding: 1rem 1.35rem;
+  background: rgba(6, 43, 80, 0.04);
+  border-bottom: 1px solid rgba(6, 43, 80, 0.08);
+  color: var(--navy-700);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.schedule-programme__table {
+  display: grid;
+  margin: 0;
+}
+
+.schedule-programme__row {
+  display: grid;
+  grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr);
+  gap: 1.25rem 1.75rem;
+  align-items: center;
+  padding: 1.05rem 1.5rem;
+  border-bottom: 1px solid rgba(6, 43, 80, 0.08);
+}
+
+.schedule-programme__row:last-child {
+  border-bottom: none;
+}
+
+.schedule-programme__row--head {
+  background: rgba(6, 43, 80, 0.04);
+  border-bottom-color: rgba(6, 43, 80, 0.12);
+}
+
+.schedule-programme__row--head .schedule-programme__time,
+.schedule-programme__row--head .schedule-programme__title {
+  color: var(--navy-700);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.schedule-programme__row:not(.schedule-programme__row--head):nth-child(even) {
+  background: rgba(6, 43, 80, 0.02);
+}
+
+.schedule-programme__time {
+  color: var(--navy-700);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.schedule-programme__title {
+  color: var(--navy-950);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .schedule-programme__row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 1rem 1.15rem;
+  }
+
+  .schedule-programme__row--head {
+    display: none;
+  }
+
+  .schedule-programme__time {
+    white-space: normal;
+    font-size: 0.82rem;
+  }
+
+  .schedule-programme__title {
+    font-size: 1rem;
+  }
+
+  .schedule-programme__disclaimer {
+    padding: 0.9rem 1.1rem;
+    font-size: 0.9rem;
+  }
+}
+
 .speakers-section {
   background: var(--navy-950);
 }
