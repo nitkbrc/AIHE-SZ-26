@@ -297,6 +297,7 @@
           <div class="button-row">
             <a class="button button--gold" href="${pageHref("index.html#register")}">${h(data.registration.label)} ${icon("arrow")}</a>
             ${brochureLink("Download brochure", "button button--ghost")}
+            <a class="button button--ghost" href="${h(data.brochure.invitationUrl)}" target="_blank" rel="noopener">Invitation from AIU</a>
           </div>
         </div>
        </div>

@@ -48,6 +48,7 @@ window.SITE = {
   brochure: {
     url: "assets/images/Brochure.pdf",
     sponsorshipUrl: "assets/images/Sponsorship.pdf",
+    invitationUrl: "assets/images/AIU-Invitation-All.pdf",
     available: true,
     pendingMessage: [
       "The conference brochure is currently being finalized and will be made available after the confirmation of our sponsors.",
