@@ -448,9 +448,13 @@
           <p class="eyebrow">Speakers</p>
           <h2>${h(schedule.speakersHeading)}</h2>
         </div>
-        <div class="schedule-programme reveal">
-          <p class="schedule-programme__note">${h(schedule.speakersNote)}</p>
-        </div>
+        ${
+          (schedule.speakers || []).length
+            ? `<div class="schedule-speakers-section reveal">${personGrid(schedule.speakers || [], { showContact: false, showProfile: true })}</div>`
+            : `<div class="schedule-programme reveal">
+          <p class="schedule-programme__note">${h(schedule.speakersNote || "Speaker details will be announced soon.")}</p>
+        </div>`
+        }
       </div>`,
     );
 

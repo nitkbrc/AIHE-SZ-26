@@ -152,7 +152,26 @@ window.SITE = {
 
   schedule: {
     speakersHeading: "Technical Session Speakers",
-    speakersNote: "Under Construction",
+    speakers: [
+      {
+        name: "Sunil Bhatia",
+        title: "Engineering Leader, Google",
+        photo: "assets/photos/sunil-bhatia.jpg",
+        profile: "https://www.linkedin.com/in/sabhatia/",
+      },
+      {
+        name: "Dr. K. Visalini",
+        title: "Director of R&D, VIKA Park",
+        photo: "assets/photos/dr-k-visalini.jpg",
+        profile: "https://www.linkedin.com/in/drkvisalini/",
+      },
+      {
+        name: "Dr. KRV Raja Subramanian",
+        title: "Senior Vice President, Learning, USDC Global",
+        photo: "assets/photos/krv-raja-subramanian.jpg",
+        profile: "https://www.linkedin.com/in/krvsraja/",
+      },
+    ],
     programmeHeading: "Programme Schedule",
     programmeNote: "The detailed conference schedule will be updated shortly.",
     programmeItems: [
