@@ -163,7 +163,7 @@ window.SITE = {
         name: "Dr. K. Visalini",
         title: "Director of R&D, VIKA Park",
         photo: "assets/photos/dr-k-visalini.jpg",
-        profile: "https://www.linkedin.com/in/drkvisalini/",
+        profile: "http://www.kvisalini.com/",
       },
       {
         name: "Dr. KRV Raja Subramanian",

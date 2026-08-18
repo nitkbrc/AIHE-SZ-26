@@ -399,8 +399,8 @@
     const schedule = data.schedule;
 
     const tabs = [
-      { id: "programme", label: schedule.programmeHeading },
       { id: "speakers", label: schedule.speakersHeading },
+      { id: "programme", label: schedule.programmeHeading },
     ];
 
     setHtml(
@@ -415,7 +415,20 @@
 
     setHtml(
       "#schedule-content",
-      `<div class="org-panel" data-org-panel="programme">
+      `<div class="org-panel" data-org-panel="speakers">
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Speakers</p>
+          <h2>${h(schedule.speakersHeading)}</h2>
+        </div>
+        ${
+          (schedule.speakers || []).length
+            ? `<div class="schedule-speakers-section reveal">${personGrid(schedule.speakers || [], { showContact: false, showProfile: true })}</div>`
+            : `<div class="schedule-programme reveal">
+          <p class="schedule-programme__note">${h(schedule.speakersNote || "Speaker details will be announced soon.")}</p>
+        </div>`
+        }
+      </div>
+      <div class="org-panel" data-org-panel="programme" hidden>
         <div class="section-heading section-heading--center reveal">
           <p class="eyebrow">Agenda</p>
           <h2>${h(schedule.programmeHeading)}</h2>
@@ -442,19 +455,6 @@
               .join("")}
           </div>
         </div>
-      </div>
-      <div class="org-panel" data-org-panel="speakers" hidden>
-        <div class="section-heading section-heading--center reveal">
-          <p class="eyebrow">Speakers</p>
-          <h2>${h(schedule.speakersHeading)}</h2>
-        </div>
-        ${
-          (schedule.speakers || []).length
-            ? `<div class="schedule-speakers-section reveal">${personGrid(schedule.speakers || [], { showContact: false, showProfile: true })}</div>`
-            : `<div class="schedule-programme reveal">
-          <p class="schedule-programme__note">${h(schedule.speakersNote || "Speaker details will be announced soon.")}</p>
-        </div>`
-        }
       </div>`,
     );
 
