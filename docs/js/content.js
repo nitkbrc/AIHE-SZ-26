@@ -171,6 +171,12 @@ window.SITE = {
         photo: "assets/photos/krv-raja-subramanian.jpg",
         profile: "https://www.linkedin.com/in/krvsraja/",
       },
+      {
+        name: "Prof. Karthik Raman",
+        title: "Professor, Department of Data Science and AI, IIT Madras",
+        photo: "assets/photos/prof-karthik-raman.jpg",
+        profile: "https://home.iitm.ac.in/kraman/",
+      },
     ],
     programmeHeading: "Programme Schedule",
     programmeNote: "The detailed conference schedule will be updated shortly.",
