@@ -151,7 +151,7 @@ window.SITE = {
   ],
 
   schedule: {
-    speakersHeading: "Technical Session Speakers",
+    speakersHeading: "Resource Persons",
     speakers: [
       {
         name: "Sunil Bhatia",
