@@ -19,10 +19,10 @@ The conference brings together academicians, administrators, industry experts an
 ## Conference themes
 
 1. AI-enabled teaching and learning
-2. Curriculum transformation and future skills
+2. Curriculum Transformation and Future Skills
 3. AI in research and innovation
 4. Institutional governance and data-driven decision-making
-5. Ethical, social and equity dimensions of AI
+5. Ethical, Social, and Equity Dimensions of AI
 
 ## Highlights
 

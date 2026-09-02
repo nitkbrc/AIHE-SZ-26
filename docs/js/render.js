@@ -445,13 +445,66 @@
               <div class="schedule-programme__title" role="columnheader">Activity</div>
             </div>
             ${(schedule.programmeItems || [])
-              .map(
-                (item) =>
-                  `<div class="schedule-programme__row" role="row">
+              .map((item) => {
+                const sessions = item.sessions || [];
+
+                if (!sessions.length) {
+                  const detailBlocks = [];
+                  if (item.theme) {
+                    detailBlocks.push(
+                      `<p class="schedule-programme__session-theme"><span>Theme:</span> ${h(item.theme)}</p>`,
+                    );
+                  }
+                  if (item.resourcePerson) {
+                    detailBlocks.push(
+                      `<p class="schedule-programme__session-speaker"><span>Resource Person:</span> ${h(item.resourcePerson)}</p>`,
+                    );
+                  }
+                  if (item.panelMembers) {
+                    detailBlocks.push(
+                      `<p class="schedule-programme__session-speaker"><span>Panel Members:</span> ${h(item.panelMembers)}</p>`,
+                    );
+                  }
+
+                  const titleContent = detailBlocks.length
+                    ? `<div class="schedule-programme__title" role="cell">
+                        <p class="schedule-programme__group-title"><strong>${h(item.title)}</strong></p>
+                        ${detailBlocks.join("")}
+                      </div>`
+                    : `<span class="schedule-programme__title" role="cell">${h(item.title)}</span>`;
+
+                  return `<div class="schedule-programme__row" role="row">
                     <time class="schedule-programme__time" role="cell">${h(item.time)}</time>
-                    <span class="schedule-programme__title" role="cell">${h(item.title)}</span>
-                  </div>`,
-              )
+                    ${titleContent}
+                  </div>`;
+                }
+
+                const sessionCells = sessions
+                  .map(
+                    (session) =>
+                      `<time class="schedule-programme__time schedule-programme__time--session" role="cell">${h(session.time)}</time>
+                        <div class="schedule-programme__title" role="cell">
+                          <p class="schedule-programme__session-theme"><span>Theme:</span> ${h(session.theme)}</p>
+                          ${
+                            session.resourcePerson
+                              ? `<p class="schedule-programme__session-speaker"><span>Resource Person:</span> ${h(session.resourcePerson)}</p>`
+                              : ""
+                          }
+                          ${
+                            session.panelMembers
+                              ? `<p class="schedule-programme__session-speaker"><span>Panel Members:</span> ${h(session.panelMembers)}</p>`
+                              : ""
+                          }
+                        </div>`,
+                  )
+                  .join("");
+
+                return `<div class="schedule-programme__row schedule-programme__row--group" role="row">
+                    <time class="schedule-programme__time" role="cell">${h(item.time)}</time>
+                    <p class="schedule-programme__group-title" role="cell"><strong>${h(item.title)}</strong></p>
+                    ${sessionCells}
+                  </div>`;
+              })
               .join("")}
           </div>
         </div>

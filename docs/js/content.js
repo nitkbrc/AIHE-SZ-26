@@ -131,7 +131,7 @@ window.SITE = {
     {
       number: "02",
       icon: "path",
-      title: "Curriculum transformation and future skills",
+      title: "Curriculum Transformation and Future Skills",
     },
     {
       number: "03",
@@ -146,7 +146,7 @@ window.SITE = {
     {
       number: "05",
       icon: "balance",
-      title: "Ethical, social, and equity dimensions of AI",
+      title: "Ethical, Social, and Equity Dimensions of AI",
     },
   ],
 
@@ -179,16 +179,42 @@ window.SITE = {
       },
     ],
     programmeHeading: "Programme Schedule",
-    programmeNote: "The detailed conference schedule will be updated shortly.",
     programmeItems: [
       { time: "08:30 AM", title: "Registration" },
       { time: "09:00 AM", title: "Inauguration" },
-      { time: "10:00 AM – 01:00 PM", title: "Invited Talks" },
+      {
+        time: "10:00 AM – 10:45 AM",
+        title: "Technical Session-1",
+        theme: "AI-enabled Teaching and Learning",
+        resourcePerson: "Prof. Karthik Raman, IIT Madras",
+      },
+      {
+        time: "11:00 AM – 11:45 AM",
+        title: "Technical Session-2",
+        theme: "Institutional Governance and Data-driven Decision-Making",
+        resourcePerson: "Dr. K. Visalini, VIKA Park",
+      },
+      {
+        time: "12:00 PM – 12:45 PM",
+        title: "Technical Session-3",
+        theme: "AI in Research and Innovation",
+        resourcePerson: "Mr. Sunil Bhatia, Google",
+      },
       { time: "01:00 PM – 02:00 PM", title: "Group Photo and Lunch" },
-      { time: "02:00 PM – 04:00 PM", title: "Panel Discussion and Group Activity" },
+      {
+        time: "02:00 PM – 02:45 PM",
+        title: "Panel Discussion",
+        theme:
+          "Curriculum Transformation and Future Skills; Ethical, Social, and Equity Dimensions of AI",
+        panelMembers: "Mr. Sunil Bhatia, Prof. Raja Subramanian, Prof. B. Ravi",
+      },
+      { time: "03:00 PM – 03:45 PM", title: "Group Activity" },
       { time: "04:00 PM – 04:30 PM", title: "Valedictory" },
       { time: "04:30 PM – 04:45 PM", title: "Tea Break" },
-      { time: "04:45 PM – 05:30 PM", title: "Campus Tour" },
+      {
+        time: "04:45 PM – 05:30 PM",
+        title: "Campus Tour — Central Research Facility (CRF), Center for System Design (CSD)",
+      },
     ],
   },
 
