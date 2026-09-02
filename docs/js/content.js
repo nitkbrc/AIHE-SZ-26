@@ -719,6 +719,21 @@ window.SITE = {
     heading: "Contact Us",
     introduction:
       "Reach the organising team for registration, travel, or programme queries.",
+    localTransportationHeading: "Local Transportation Contact",
+    localTransportation: [
+      {
+        name: "Sharanam Tours & Travels",
+        phones: ["9845927327", "9742927327"],
+      },
+      {
+        name: "AMS Travels",
+        phones: ["9538105959"],
+      },
+      {
+        name: "Nandadeepa Travels",
+        phones: ["9686488708"],
+      },
+    ],
   },
 
   assistance: {

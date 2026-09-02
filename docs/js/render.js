@@ -399,8 +399,8 @@
     const schedule = data.schedule;
 
     const tabs = [
-      { id: "speakers", label: schedule.speakersHeading },
       { id: "programme", label: schedule.programmeHeading },
+      { id: "speakers", label: schedule.speakersHeading },
     ];
 
     setHtml(
@@ -415,20 +415,7 @@
 
     setHtml(
       "#schedule-content",
-      `<div class="org-panel" data-org-panel="speakers">
-        <div class="section-heading section-heading--center reveal">
-          <p class="eyebrow">Speakers</p>
-          <h2>${h(schedule.speakersHeading)}</h2>
-        </div>
-        ${
-          (schedule.speakers || []).length
-            ? `<div class="schedule-speakers-section reveal">${personGrid(schedule.speakers || [], { showContact: false, showProfile: true })}</div>`
-            : `<div class="schedule-programme reveal">
-          <p class="schedule-programme__note">${h(schedule.speakersNote || "Speaker details will be announced soon.")}</p>
-        </div>`
-        }
-      </div>
-      <div class="org-panel" data-org-panel="programme" hidden>
+      `<div class="org-panel" data-org-panel="programme">
         <div class="section-heading section-heading--center reveal">
           <p class="eyebrow">Agenda</p>
           <h2>${h(schedule.programmeHeading)}</h2>
@@ -508,6 +495,19 @@
               .join("")}
           </div>
         </div>
+      </div>
+      <div class="org-panel" data-org-panel="speakers" hidden>
+        <div class="section-heading section-heading--center reveal">
+          <p class="eyebrow">Speakers</p>
+          <h2>${h(schedule.speakersHeading)}</h2>
+        </div>
+        ${
+          (schedule.speakers || []).length
+            ? `<div class="schedule-speakers-section reveal">${personGrid(schedule.speakers || [], { showContact: false, showProfile: true })}</div>`
+            : `<div class="schedule-programme reveal">
+          <p class="schedule-programme__note">${h(schedule.speakersNote || "Speaker details will be announced soon.")}</p>
+        </div>`
+        }
       </div>`,
     );
 
@@ -986,6 +986,19 @@
     return `<div class="coordinators-list">${people.map((person) => personCard(person, options)).join("")}</div>`;
   }
 
+  function transportContactCard(contact) {
+    const phones = (contact.phones || [])
+      .map(
+        (phone) =>
+          `<a href="tel:${h(phone.replaceAll(/\s/g, ""))}">${icon("phone")}<span>${h(phone)}</span></a>`,
+      )
+      .join("");
+    return `<article class="coordinator reveal">
+      <span class="person-avatar person-avatar--initials" aria-hidden="true">${h(sponsorInitials(contact.name))}</span>
+      <div><h3>${h(contact.name)}</h3>${phones}</div>
+    </article>`;
+  }
+
   function orgBlock(title, people, options) {
     if (!people.length) return "";
     return `<div class="org-block reveal">
@@ -1264,6 +1277,14 @@
 
   function renderContactPage() {
     const pageData = data.contactPage;
+    const transportSection = (pageData.localTransportation || []).length
+      ? `<div class="org-block reveal">
+          <h3 class="org-block__title">${h(pageData.localTransportationHeading)}</h3>
+          <div class="coordinators-list">${pageData.localTransportation
+            .map((contact) => transportContactCard(contact))
+            .join("")}</div>
+        </div>`
+      : "";
     setHtml(
       "#contact-content",
       `<div class="section-heading section-heading--center reveal">
@@ -1271,9 +1292,12 @@
         <h2>${h(pageData.heading)}</h2>
         <p>${h(pageData.introduction)}</p>
       </div>
-      <div class="coordinators-list reveal">${data.coordinators
-        .map((person) => personCard(person, { showProfile: false }))
-        .join("")}</div>`,
+      <div class="contact-sections">
+        <div class="coordinators-list reveal">${data.coordinators
+          .map((person) => personCard(person, { showProfile: false }))
+          .join("")}</div>
+        ${transportSection}
+      </div>`,
     );
   }
 
