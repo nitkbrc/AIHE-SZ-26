@@ -34,14 +34,14 @@ window.SITE = {
 
   registration: {
     url: "https://forms.gle/9rFFwF7PahXsXrtEA",
-    deadline: "27 August 2026",
-    confirmationDate: "31 August 2026",
+    deadline: "05 September 2026",
+    confirmationDate: "05 September 2026",
     label: "Register to attend",
-    heroNotice: "Last Date for Registration: 27 August 2026 (Thursday)",
+    heroNotice: "Last Date for Registration: 05 SEPTEMBER 2026 (Saturday)",
     qr: "assets/images/QR-Google_Form.png",
     notes: [
       "<strong>Registration is free</strong>. Complimentary accommodation (1-night) will be provided during the conference.",
-      "<strong>Last Date for the Registration</strong>: 27.08.2026 (Thursday) and the confirmation will be conveyed by email on or before 31.08.2026 (Monday).",
+      "<strong>Last Date for the Registration</strong>: 05.09.2026 (Saturday) and the confirmation of registration will be communicated by email on or before the same date.",
     ],
   },
 
