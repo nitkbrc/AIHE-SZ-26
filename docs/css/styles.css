@@ -454,6 +454,10 @@ h3 {
   white-space: nowrap;
 }
 
+.hero__notice-email {
+  text-transform: none;
+}
+
 .hero__notice-sep {
   display: inline-flex;
   align-items: center;
@@ -560,6 +564,18 @@ h3 {
 
 .event-meta .icon {
   color: var(--gold-400);
+}
+
+.event-meta__venue {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+}
+
+.event-meta__venue:hover,
+.event-meta__venue:focus-visible {
+  text-decoration-color: var(--gold-400);
 }
 
 .button-row {

@@ -21,7 +21,8 @@ window.SITE = {
     subtitle: "Opportunities, Challenges and Implications",
     date: "18 September 2026",
     day: "Friday",
-    venue: "LHC-C Seminar Hall, NITK, Surathkal",
+    venue: "Digital Library, NITK, Surathkal",
+    venueMapUrl: "https://maps.app.goo.gl/YXhyfS43jEj4ZSjD7",
     heroImage: "assets/images/nitk-campus.jpg",
     heroAlt: "National Institute of Technology Karnataka (NITK), Surathkal",
     // Per-page hero background overrides (keyed by <body data-page="...">).
@@ -37,7 +38,7 @@ window.SITE = {
     deadline: "05 September 2026",
     confirmationDate: "05 September 2026",
     label: "Register to attend",
-    heroNotice: "Last Date for Registration: 05 SEPTEMBER 2026 (Saturday)",
+    heroNotice: "Confirmation emails sent to all delegates with necessary instructions. If not received, please email aihe.sz26@nitk.edu.in",
     qr: "assets/images/QR-Google_Form.png",
     notes: [
       "<strong>Registration is free</strong>. Complimentary accommodation (1-night) will be provided during the conference.",
@@ -103,8 +104,8 @@ window.SITE = {
             text: "The campus is located on National Highway 66 (Mangaluru–Udupi highway), about 20 km north of Mangaluru city. Frequent buses ply between Mangaluru and Surathkal.",
           },
         ],
-        mapLabel: "View NITK on Google Maps",
-        mapUrl: "https://www.google.com/maps/search/?api=1&query=NITK+Surathkal",
+        mapLabel: "View venue on Google Maps",
+        mapUrl: "https://maps.app.goo.gl/YXhyfS43jEj4ZSjD7",
       },
     },
     aiu: {
@@ -154,10 +155,10 @@ window.SITE = {
     speakersHeading: "Resource Persons",
     speakers: [
       {
-        name: "Sunil Bhatia",
-        title: "Engineering Leader, Google",
-        photo: "assets/photos/sunil-bhatia.jpg",
-        profile: "https://www.linkedin.com/in/sabhatia/",
+        name: "Sarath Kummamuru",
+        title: "CDTO, Bharat Connect",
+        photo: "assets/photos/sarath-kummamuru.jpg",
+        profile: "https://www.linkedin.com/in/kcsarath?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
       },
       {
         name: "Dr. K. Visalini",
@@ -198,7 +199,7 @@ window.SITE = {
         time: "12:00 PM – 12:45 PM",
         title: "Technical Session-3",
         theme: "AI in Research and Innovation",
-        resourcePerson: "Mr. Sunil Bhatia, Google",
+        resourcePerson: "Mr. Sarath Kummamuru, Bharat Connect",
       },
       { time: "01:00 PM – 02:00 PM", title: "Group Photo and Lunch" },
       {
@@ -206,7 +207,7 @@ window.SITE = {
         title: "Panel Discussion",
         theme:
           "Curriculum Transformation and Future Skills; Ethical, Social, and Equity Dimensions of AI",
-        panelMembers: "Mr. Sunil Bhatia, Prof. Raja Subramanian, Prof. B. Ravi",
+        panelMembers: "Mr. Sarath Kummamuru, Prof. Raja Subramanian, Prof. B. Ravi",
       },
       { time: "03:00 PM – 03:45 PM", title: "Group Activity" },
       { time: "04:00 PM – 04:30 PM", title: "Valedictory" },

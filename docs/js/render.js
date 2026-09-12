@@ -263,7 +263,10 @@
       (data.event.heroImageByPage && data.event.heroImageByPage[page]) ||
       data.event.heroImage;
     const heroNotice = data.registration.heroNotice;
-    const noticeText = h(heroNotice);
+    const noticeText = h(heroNotice).replace(
+      /([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})/gi,
+      '<span class="hero__notice-email">$1</span>'
+    );
     const noticeSep = `<span class="hero__notice-sep" aria-hidden="true"></span>`;
     const noticeGroup = Array(3)
       .fill(`<span class="hero__notice-text">${noticeText}</span>`)
@@ -292,7 +295,11 @@
           </h1>
           <div class="event-meta">
             <span>${icon("calendar")}${h(data.event.date)} · ${h(data.event.day)}</span>
-            <span>${icon("pin")}${h(data.event.venue)}</span>
+            <span>${icon("pin")}${
+              data.event.venueMapUrl
+                ? `<a class="event-meta__venue" href="${h(data.event.venueMapUrl)}" target="_blank" rel="noopener">${h(data.event.venue)}</a>`
+                : h(data.event.venue)
+            }</span>
           </div>
           <div class="button-row">
             <a class="button button--gold" href="${pageHref("index.html#register")}">${h(data.registration.label)} ${icon("arrow")}</a>
@@ -303,7 +310,7 @@
        </div>
        ${
          heroNotice
-           ? `<div class="hero__notice" role="region" aria-label="Registration deadline">
+           ? `<div class="hero__notice" role="region" aria-label="Important notice">
                 <div class="hero__notice-track">
                   <div class="hero__notice-group">${noticeGroup}</div>
                   ${noticeSep}
