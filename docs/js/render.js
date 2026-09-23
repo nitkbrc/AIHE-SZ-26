@@ -52,6 +52,8 @@
     star: '<path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.9L12 3Z"/>',
     whatsapp:
       '<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M9.2 8.4c-.4 0-.8.4-.8 1 0 2.9 3.3 6.2 6.2 6.2.6 0 1-.4 1-.8 0-.5-.9-1.3-1.5-1.4-.4-.1-.8.5-1.2.4-.9-.2-2.5-1.8-2.7-2.7-.1-.4.5-.8.4-1.2-.1-.6-.9-1.5-1.4-1.5Z"/>',
+    badge:
+      '<circle cx="12" cy="8" r="5"/><path d="M8.2 12.4 7 21l5-2.4L17 21l-1.2-8.6"/>',
   };
 
   function icon(name, className = "") {
@@ -102,6 +104,157 @@
     notice.querySelector(".brochure-notice__close").addEventListener("click", close);
     document.addEventListener("keydown", (event) => {
       if (!notice.hidden && event.key === "Escape") close();
+    });
+  }
+
+  function foldName(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/['’]/g, "")
+      .replace(/\b(prof|dr|mr|ms|mrs)\.?\b/g, " ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function foldEmail(value) {
+    return String(value || "").toLowerCase().trim();
+  }
+
+  function findAttendees(query) {
+    const attendees = Array.isArray(window.SITE_ATTENDEES)
+      ? window.SITE_ATTENDEES
+      : [];
+    const raw = String(query || "").trim();
+    if (!attendees.length) {
+      return { error: "The attendees list could not be loaded. Please try again later." };
+    }
+    if (!raw) {
+      return { error: "Please enter a name or email ID." };
+    }
+    if (raw.includes("@")) {
+      const email = foldEmail(raw);
+      return {
+        matches: attendees.filter((item) => foldEmail(item.email) === email),
+      };
+    }
+    const needle = foldName(raw);
+    if (needle.length < 3) {
+      return { error: "Please enter at least 3 characters of the name." };
+    }
+    return {
+      matches: attendees.filter((item) => {
+        const hay = foldName(item.name);
+        return hay === needle || hay.includes(needle);
+      }),
+    };
+  }
+
+  function setupCertificateVerification() {
+    const copy = data.certificate || {};
+    const heading = copy.heading || "e-Certificate Verification";
+    const intro =
+      copy.intro ||
+      "Enter the name or email ID of the delegate to verify it against the official attendees list.";
+    const modal = document.createElement("div");
+    modal.className = "cert-modal";
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="cert-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+        <button class="cert-modal__close" type="button" aria-label="Close">${icon("close")}</button>
+        <h3 id="cert-modal-title">${h(heading)}</h3>
+        <p>${h(intro)}</p>
+        <form class="cert-form" novalidate>
+          <div class="cert-form__field">
+            <label for="cert-query">Name or email ID</label>
+            <input id="cert-query" name="query" type="text" autocomplete="off" placeholder="e.g. name or name@institute.edu" required>
+          </div>
+          <p class="cert-form__error" role="alert" hidden></p>
+          <button type="submit" class="button button--gold">Verify ${icon("badge")}</button>
+        </form>
+        <div class="cert-results" hidden></div>
+      </div>`;
+    document.body.appendChild(modal);
+
+    const form = modal.querySelector(".cert-form");
+    const input = modal.querySelector("#cert-query");
+    const errorBox = modal.querySelector(".cert-form__error");
+    const results = modal.querySelector(".cert-results");
+
+    const renderMatch = (item) => `
+      <article class="cert-card">
+        <dl class="cert-card__details">
+          <div><dt>Name</dt><dd>${h(item.name)}</dd></div>
+          <div><dt>Affiliation</dt><dd>${h(item.affiliation)}</dd></div>
+          <div><dt>Email ID</dt><dd>${h(item.email)}</dd></div>
+          <div>
+            <dt>Status</dt>
+            <dd><span class="cert-status cert-status--valid">${icon("check")}Valid</span></dd>
+          </div>
+        </dl>
+      </article>`;
+
+    const open = () => {
+      modal.hidden = false;
+      document.body.classList.add("lightbox-open");
+      input.focus();
+    };
+    const close = () => {
+      modal.hidden = true;
+      document.body.classList.remove("lightbox-open");
+      form.reset();
+      errorBox.hidden = true;
+      results.hidden = true;
+      results.innerHTML = "";
+    };
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-cert-verify]");
+      if (!trigger) return;
+      event.preventDefault();
+      open();
+    });
+    if (window.location.hash === "#verify-certificate") {
+      open();
+    }
+    modal.querySelector(".cert-modal__close").addEventListener("click", close);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (!modal.hidden && event.key === "Escape") close();
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      errorBox.hidden = true;
+      results.hidden = true;
+      results.innerHTML = "";
+
+      const outcome = findAttendees(input.value);
+      if (outcome.error) {
+        errorBox.textContent = outcome.error;
+        errorBox.hidden = false;
+        input.focus();
+        return;
+      }
+
+      if (!outcome.matches.length) {
+        results.innerHTML = `
+          <div class="cert-card cert-card--empty">
+            <p>No matching attendee was found in the official attendees list.</p>
+            <p><span class="cert-status cert-status--invalid">Not found</span></p>
+          </div>`;
+        results.hidden = false;
+        return;
+      }
+
+      const note =
+        outcome.matches.length > 1
+          ? `<p class="cert-results__note">${outcome.matches.length} matching records found.</p>`
+          : "";
+      results.innerHTML = `${note}${outcome.matches.map(renderMatch).join("")}`;
+      results.hidden = false;
     });
   }
 
@@ -305,6 +458,7 @@
             <a class="button button--gold" href="${pageHref("index.html#register")}">${h(data.registration.label)} ${icon("arrow")}</a>
             ${brochureLink("Download brochure", "button button--ghost")}
             <a class="button button--ghost" href="${h(data.brochure.invitationUrl)}" target="_blank" rel="noopener">Invitation from AIU</a>
+            <a class="button button--ghost" href="#verify-certificate" data-cert-verify>${h((data.certificate && data.certificate.label) || "e-Certificate Verification")}</a>
           </div>
         </div>
        </div>
@@ -1312,6 +1466,7 @@
   renderFooter();
   renderHero();
   setupBrochureNotice();
+  setupCertificateVerification();
 
   if (page === "home") {
     renderAbout();

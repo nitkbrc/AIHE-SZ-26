@@ -57,6 +57,12 @@ window.SITE = {
     ],
   },
 
+  certificate: {
+    label: "e-Certificate Verification",
+    heading: "e-Certificate Verification",
+    intro: "Enter the name or email ID of the delegate to verify it against the official attendees list.",
+  },
+
   navigation: [
     { label: "Home", href: "index.html" },
     { label: "Committees", href: "committees.html" },
