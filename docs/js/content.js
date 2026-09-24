@@ -600,7 +600,68 @@ window.SITE = {
           "Highlights from the AIU South Zone Conference on the Strategic Integration of AI in Higher Education at NITK, Surathkal.",
         placeholder:
           "Photographs from the conference will be published here after the event on 18 September 2026.",
-        photos: [],
+        photos: [
+          {
+            src: "assets/images/Photo/1.png",
+            alt: "Photograph 1 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 1",
+          },
+          {
+            src: "assets/images/Photo/2.png",
+            alt: "Photograph 2 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 2",
+          },
+          {
+            src: "assets/images/Photo/3.png",
+            alt: "Photograph 3 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 3",
+          },
+          {
+            src: "assets/images/Photo/4.png",
+            alt: "Photograph 4 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 4",
+          },
+          {
+            src: "assets/images/Photo/5.png",
+            alt: "Photograph 5 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 5",
+          },
+          {
+            src: "assets/images/Photo/6.png",
+            alt: "Photograph 6 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 6",
+          },
+          {
+            src: "assets/images/Photo/7.png",
+            alt: "Photograph 7 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 7",
+          },
+          {
+            src: "assets/images/Photo/8.png",
+            alt: "Photograph 8 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 8",
+          },
+          {
+            src: "assets/images/Photo/9.png",
+            alt: "Photograph 9 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 9",
+          },
+          {
+            src: "assets/images/Photo/10.png",
+            alt: "Photograph 10 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 10",
+          },
+          {
+            src: "assets/images/Photo/11.png",
+            alt: "Photograph 11 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 11",
+          },
+          {
+            src: "assets/images/Photo/12.png",
+            alt: "Photograph 12 from the AIU South Zone Conference on AI in Higher Education at NITK, Surathkal",
+            caption: "Conference photograph 12",
+          }
+        ],
       },
       {
         id: "aiu",
